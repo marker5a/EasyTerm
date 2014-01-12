@@ -725,6 +725,60 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>connect_button</tabstop>
+  <tabstop>rescan_button</tabstop>
+  <tabstop>help_button</tabstop>
+  <tabstop>about_button</tabstop>
+  <tabstop>quit_button</tabstop>
+  <tabstop>com_port_combo</tabstop>
+  <tabstop>baud_600_radio</tabstop>
+  <tabstop>baud_1200_radio</tabstop>
+  <tabstop>baud_2400_radio</tabstop>
+  <tabstop>baud_4800_radio</tabstop>
+  <tabstop>baud_9600_radio</tabstop>
+  <tabstop>baud_14400_radio</tabstop>
+  <tabstop>baud_19200_radio</tabstop>
+  <tabstop>baud_38400_radio</tabstop>
+  <tabstop>baud_56000_radio</tabstop>
+  <tabstop>baud_57600_radio</tabstop>
+  <tabstop>baud_115200_radio</tabstop>
+  <tabstop>baud_128000_radio</tabstop>
+  <tabstop>baud_256000_radio</tabstop>
+  <tabstop>data_bits_5_radio</tabstop>
+  <tabstop>data_bits_6_radio</tabstop>
+  <tabstop>data_bits_7_radio</tabstop>
+  <tabstop>data_bits_8_radio</tabstop>
+  <tabstop>stop_bits_1_radio</tabstop>
+  <tabstop>stop_bits_1_1_2_radio</tabstop>
+  <tabstop>stop_bits_2_radio</tabstop>
+  <tabstop>parity_none_radio</tabstop>
+  <tabstop>parity_odd_radio</tabstop>
+  <tabstop>parity_even_radio</tabstop>
+  <tabstop>parity_mark_radio</tabstop>
+  <tabstop>parity_space_radio</tabstop>
+  <tabstop>clear_button</tabstop>
+  <tabstop>autoscroll_check</tabstop>
+  <tabstop>hex_radio</tabstop>
+  <tabstop>ascii_radio</tabstop>
+  <tabstop>receive_text</tabstop>
+  <tabstop>set_macro_button</tabstop>
+  <tabstop>m1_button</tabstop>
+  <tabstop>m2_button</tabstop>
+  <tabstop>m3_button</tabstop>
+  <tabstop>m4_button</tabstop>
+  <tabstop>m5_button</tabstop>
+  <tabstop>m6_button</tabstop>
+  <tabstop>m7_button</tabstop>
+  <tabstop>m8_button</tabstop>
+  <tabstop>m9_button</tabstop>
+  <tabstop>m10_button</tabstop>
+  <tabstop>m11_button</tabstop>
+  <tabstop>m12_button</tabstop>
+  <tabstop>transmit_field</tabstop>
+  <tabstop>send_button</tabstop>
+  <tabstop>transmit_text</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
