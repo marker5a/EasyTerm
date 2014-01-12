@@ -6,113 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>278</width>
-    <height>396</height>
+    <width>391</width>
+    <height>398</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Macro Editor</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="3" column="1">
-    <widget class="QLineEdit" name="macro_4_content"/>
-   </item>
-   <item row="4" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_5">
-     <item>
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>#5</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="macro_5_name"/>
-     </item>
-    </layout>
-   </item>
-   <item row="9" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_11">
-     <item>
-      <widget class="QLabel" name="label_10">
-       <property name="text">
-        <string>#10</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="macro_10_name"/>
-     </item>
-    </layout>
-   </item>
-   <item row="6" column="1">
-    <widget class="QLineEdit" name="macro_7_content"/>
-   </item>
-   <item row="5" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_7">
-     <item>
-      <widget class="QLabel" name="label_6">
-       <property name="text">
-        <string>#6</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="macro_6_name"/>
-     </item>
-    </layout>
-   </item>
-   <item row="5" column="1">
-    <widget class="QLineEdit" name="macro_6_content"/>
-   </item>
-   <item row="6" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_6">
-     <item>
-      <widget class="QLabel" name="label_7">
-       <property name="text">
-        <string>#7</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="macro_7_name"/>
-     </item>
-    </layout>
-   </item>
-   <item row="7" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_8">
-     <item>
-      <widget class="QLabel" name="label_8">
-       <property name="text">
-        <string>#8</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="macro_8_name"/>
-     </item>
-    </layout>
-   </item>
-   <item row="7" column="1">
-    <widget class="QLineEdit" name="macro_8_content"/>
-   </item>
-   <item row="8" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_9">
-     <item>
-      <widget class="QLabel" name="label_9">
-       <property name="text">
-        <string>#9</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="macro_9_name"/>
-     </item>
-    </layout>
-   </item>
-   <item row="8" column="1">
-    <widget class="QLineEdit" name="macro_9_content"/>
-   </item>
    <item row="0" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -130,40 +31,21 @@
    <item row="0" column="1">
     <widget class="QLineEdit" name="macro_1_content"/>
    </item>
-   <item row="2" column="1">
-    <widget class="QLineEdit" name="macro_3_content"/>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLineEdit" name="macro_2_content"/>
-   </item>
-   <item row="2" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
+   <item row="0" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_13">
      <item>
-      <widget class="QLabel" name="label_3">
+      <widget class="QRadioButton" name="macro_1_hex">
        <property name="text">
-        <string>#3</string>
+        <string>Hex</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_3_name"/>
-     </item>
-    </layout>
-   </item>
-   <item row="4" column="1">
-    <widget class="QLineEdit" name="macro_5_content"/>
-   </item>
-   <item row="3" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <widget class="QLabel" name="label_4">
+      <widget class="QRadioButton" name="macro_1_ascii">
        <property name="text">
-        <string>#4</string>
+        <string>ASCII</string>
        </property>
       </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="macro_4_name"/>
      </item>
     </layout>
    </item>
@@ -181,10 +63,308 @@
      </item>
     </layout>
    </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="macro_2_content"/>
+   </item>
+   <item row="1" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_14">
+     <item>
+      <widget class="QRadioButton" name="macro_2_hex">
+       <property name="text">
+        <string>Hex</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro_2_ascii">
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>#3</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="macro_3_name"/>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="macro_3_content"/>
+   </item>
+   <item row="2" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_15">
+     <item>
+      <widget class="QRadioButton" name="macro_3_hex">
+       <property name="text">
+        <string>Hex</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro_3_ascii">
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>#4</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="macro_4_name"/>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="1">
+    <widget class="QLineEdit" name="macro_4_content"/>
+   </item>
+   <item row="3" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_16">
+     <item>
+      <widget class="QRadioButton" name="macro_4_hex">
+       <property name="text">
+        <string>Hex</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro_4_ascii">
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="0" rowspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>#5</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="macro_5_name"/>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="1" rowspan="2">
+    <widget class="QLineEdit" name="macro_5_content"/>
+   </item>
+   <item row="4" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_17">
+     <item>
+      <widget class="QRadioButton" name="macro_5_hex">
+       <property name="text">
+        <string>Hex</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro_5_ascii">
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="5" column="2" rowspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_18">
+     <item>
+      <widget class="QRadioButton" name="macro_6_hex">
+       <property name="text">
+        <string>Hex</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro_6_ascii">
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="6" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_7">
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>#6</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="macro_6_name"/>
+     </item>
+    </layout>
+   </item>
+   <item row="6" column="1">
+    <widget class="QLineEdit" name="macro_6_content"/>
+   </item>
+   <item row="7" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <item>
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>#7</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="macro_7_name"/>
+     </item>
+    </layout>
+   </item>
+   <item row="7" column="1">
+    <widget class="QLineEdit" name="macro_7_content"/>
+   </item>
+   <item row="7" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_19">
+     <item>
+      <widget class="QRadioButton" name="macro_7_hex">
+       <property name="text">
+        <string>Hex</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro_7_ascii">
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="8" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_8">
+     <item>
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>#8</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="macro_8_name"/>
+     </item>
+    </layout>
+   </item>
+   <item row="8" column="1">
+    <widget class="QLineEdit" name="macro_8_content"/>
+   </item>
+   <item row="8" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_20">
+     <item>
+      <widget class="QRadioButton" name="macro_8_hex">
+       <property name="text">
+        <string>Hex</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro_8_ascii">
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="9" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_9">
+     <item>
+      <widget class="QLabel" name="label_9">
+       <property name="text">
+        <string>#9</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="macro_9_name"/>
+     </item>
+    </layout>
+   </item>
    <item row="9" column="1">
-    <widget class="QLineEdit" name="macro_10_content"/>
+    <widget class="QLineEdit" name="macro_9_content"/>
+   </item>
+   <item row="9" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_21">
+     <item>
+      <widget class="QRadioButton" name="macro_9_hex">
+       <property name="text">
+        <string>Hex</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro_9_ascii">
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item row="10" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_11">
+     <item>
+      <widget class="QLabel" name="label_10">
+       <property name="text">
+        <string>#10</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="macro_10_name"/>
+     </item>
+    </layout>
+   </item>
+   <item row="10" column="1">
+    <widget class="QLineEdit" name="macro_10_content"/>
+   </item>
+   <item row="10" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_22">
+     <item>
+      <widget class="QRadioButton" name="macro_10_hex">
+       <property name="text">
+        <string>Hex</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro_10_ascii">
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="11" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_10">
      <item>
       <widget class="QLabel" name="label_11">
@@ -198,10 +378,28 @@
      </item>
     </layout>
    </item>
-   <item row="10" column="1">
+   <item row="11" column="1">
     <widget class="QLineEdit" name="macro_11_content"/>
    </item>
-   <item row="11" column="0">
+   <item row="11" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_23">
+     <item>
+      <widget class="QRadioButton" name="macro_11_hex">
+       <property name="text">
+        <string>Hex</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro_11_ascii">
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="12" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_12">
      <item>
       <widget class="QLabel" name="label_12">
@@ -215,36 +413,90 @@
      </item>
     </layout>
    </item>
-   <item row="11" column="1">
+   <item row="12" column="1">
     <widget class="QLineEdit" name="macro_12_content"/>
    </item>
+   <item row="12" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_24">
+     <item>
+      <widget class="QRadioButton" name="macro_12_hex">
+       <property name="text">
+        <string>Hex</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro_12_ascii">
+       <property name="text">
+        <string>ASCII</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
   </layout>
+  <zorder>macro_4_content</zorder>
+  <zorder>macro_7_content</zorder>
+  <zorder>macro_6_content</zorder>
+  <zorder>macro_8_content</zorder>
+  <zorder>macro_9_content</zorder>
+  <zorder>macro_1_content</zorder>
+  <zorder>macro_3_content</zorder>
+  <zorder>macro_2_content</zorder>
+  <zorder>macro_5_content</zorder>
+  <zorder>macro_10_content</zorder>
+  <zorder>macro_11_content</zorder>
+  <zorder>macro_12_content</zorder>
  </widget>
  <tabstops>
   <tabstop>macro_1_name</tabstop>
   <tabstop>macro_1_content</tabstop>
+  <tabstop>macro_1_hex</tabstop>
+  <tabstop>macro_1_ascii</tabstop>
   <tabstop>macro_2_name</tabstop>
   <tabstop>macro_2_content</tabstop>
+  <tabstop>macro_2_hex</tabstop>
+  <tabstop>macro_2_ascii</tabstop>
   <tabstop>macro_3_name</tabstop>
   <tabstop>macro_3_content</tabstop>
+  <tabstop>macro_3_hex</tabstop>
+  <tabstop>macro_3_ascii</tabstop>
   <tabstop>macro_4_name</tabstop>
   <tabstop>macro_4_content</tabstop>
+  <tabstop>macro_4_hex</tabstop>
+  <tabstop>macro_4_ascii</tabstop>
   <tabstop>macro_5_name</tabstop>
   <tabstop>macro_5_content</tabstop>
+  <tabstop>macro_5_hex</tabstop>
+  <tabstop>macro_5_ascii</tabstop>
   <tabstop>macro_6_name</tabstop>
   <tabstop>macro_6_content</tabstop>
+  <tabstop>macro_6_hex</tabstop>
+  <tabstop>macro_6_ascii</tabstop>
   <tabstop>macro_7_name</tabstop>
   <tabstop>macro_7_content</tabstop>
+  <tabstop>macro_7_hex</tabstop>
+  <tabstop>macro_7_ascii</tabstop>
   <tabstop>macro_8_name</tabstop>
   <tabstop>macro_8_content</tabstop>
+  <tabstop>macro_8_hex</tabstop>
+  <tabstop>macro_8_ascii</tabstop>
   <tabstop>macro_9_name</tabstop>
   <tabstop>macro_9_content</tabstop>
+  <tabstop>macro_9_hex</tabstop>
+  <tabstop>macro_9_ascii</tabstop>
   <tabstop>macro_10_name</tabstop>
   <tabstop>macro_10_content</tabstop>
+  <tabstop>macro_10_hex</tabstop>
+  <tabstop>macro_10_ascii</tabstop>
   <tabstop>macro_11_name</tabstop>
   <tabstop>macro_11_content</tabstop>
+  <tabstop>macro_11_hex</tabstop>
+  <tabstop>macro_11_ascii</tabstop>
   <tabstop>macro_12_name</tabstop>
   <tabstop>macro_12_content</tabstop>
+  <tabstop>macro_12_hex</tabstop>
+  <tabstop>macro_12_ascii</tabstop>
  </tabstops>
  <resources/>
  <connections/>
