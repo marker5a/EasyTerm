@@ -4,7 +4,9 @@
 #include <qextserialport.h>
 #include <QStringList>
 #include <QButtonGroup>
-#include <QMutex>
+#include <QSettings>
+#include <QAbstractButton>
+#include <QList>
 
 terminal_app::terminal_app(QMainWindow *parent)
 {
@@ -16,11 +18,41 @@ terminal_app::terminal_app(QMainWindow *parent)
 	
 	group_radio_buttons();	// group the radio buttons together
 	
+	load_settings();		// load preferences for the gui
+	
 	// initialize variables
 	this->port = 0;	
 	this->comPortConnected = 0;
 	
 	statusbar->showMessage("Disconnected");
+}
+
+void terminal_app::load_settings()
+{
+	// load the settings
+		// create the handle to the settings	
+		this->settings = new QSettings("Hammy Circuits", "Terminal");
+		
+		// load up settings with default settings if configuration is not set
+		if( !this->settings->allKeys().size() )
+		{
+			this->settings->setValue("baud_rate" , "9600");
+			this->settings->setValue("data_bits" , "8");
+			this->settings->setValue("stop_bits" , "1");
+			this->settings->setValue("parity" , "none");
+			this->settings->setValue("com_port" , "/dev/ttyS0");
+			this->settings->sync();
+		}
+		// if config is set, load up everything
+		else
+		{
+			set_checked_radio(this->baud_rate_group,this->settings->value("baud_rate").toString());
+			set_checked_radio(this->data_bits_group,this->settings->value("data_bits").toString());
+			set_checked_radio(this->stop_bits_group,this->settings->value("stop_bits").toString());
+			set_checked_radio(this->parity_group,this->settings->value("parity").toString());
+		}
+		
+		return;
 }
 
 void terminal_app::group_radio_buttons(void)
@@ -62,10 +94,15 @@ void terminal_app::group_radio_buttons(void)
 	this->parity_group->addButton(this->parity_mark_radio);
 	this->parity_group->addButton(this->parity_space_radio);
 	
-	// hex/ascii group
-	this->hex_ascii = new QButtonGroup;
-	this->hex_ascii->addButton(this->hex_radio);
-	this->hex_ascii->addButton(this->ascii_radio);
+	// rx hex/ascii group
+	this->hex_ascii_rx = new QButtonGroup;
+	this->hex_ascii_rx->addButton(this->hex_rx_radio);
+	this->hex_ascii_rx->addButton(this->ascii_rx_radio);
+	
+	// tx hex/ascii group
+	this->hex_ascii_tx = new QButtonGroup;
+	this->hex_ascii_tx->addButton(this->hex_tx_radio);
+	this->hex_ascii_tx->addButton(this->ascii_tx_radio);
 
 }
 
@@ -90,10 +127,10 @@ void terminal_app::populateComPort()
 
 void terminal_app::connect_widgets()
 {
-	connect(this->connect_button,SIGNAL( clicked() ),this,SLOT( connect_serial_port() ));		
-	connect(this->rescan_button,SIGNAL( clicked() ),this,SLOT( populateComPort() ));		
-	connect(this->clear_button,SIGNAL( clicked() ),this->receive_text,SLOT( clear() ));		
-	connect(this->send_button,SIGNAL( clicked() ),this,SLOT( write_to_port() ));		
+	connect(this->connect_button,SIGNAL( clicked() ),this,SLOT( connect_serial_port() ));
+	connect(this->rescan_button,SIGNAL( clicked() ),this,SLOT( populateComPort() ));
+	connect(this->clear_button,SIGNAL( clicked() ),this->receive_text,SLOT( clear() ));
+	connect(this->send_button,SIGNAL( clicked() ),this,SLOT( write_to_port() ));
 }
 
 void terminal_app::connect_serial_port()
@@ -192,11 +229,29 @@ void terminal_app::connect_serial_port()
 
 void terminal_app::write_to_port()
 {
+	// only allow sending when com port is connected
 	if( this->comPortConnected )
 	{
-		this->port->write(this->transmit_field->text().toStdString().c_str(),this->transmit_field->text().size());
-		this->transmit_text->insertPlainText(this->transmit_field->text());
-		this->transmit_field->clear();
+		// translate text field if based on decision to do ascii or hex
+		if( get_checked_radio(this->hex_ascii_tx) == "ASCII" )
+		{
+			this->port->write(this->transmit_field->text().toStdString().c_str(),this->transmit_field->text().size());
+			this->transmit_text->insertPlainText(this->transmit_field->text());
+			this->transmit_field->clear();
+		}
+	}
+}
+
+void terminal_app::set_checked_radio(QButtonGroup *group,QString name)
+{
+	QList<QAbstractButton *> buttonList = group->buttons();
+	for( int i = 0 ; i < buttonList.size(); i++ )
+	{
+		if( buttonList[i]->text() == name )
+		{
+			buttonList[i]->setChecked(true);
+			return;
+		}
 	}
 }
 
@@ -207,15 +262,11 @@ QString terminal_app::get_checked_radio(QButtonGroup *group)
 
 void terminal_app::onReadyRead()
 {   
-	QMutexLocker locker(&this->mutex);
 	QByteArray bytes;
     int a = port->bytesAvailable();
     bytes.resize(a);
     this->port->read(bytes.data(), bytes.size());
-    //this->mutex.lock();
-    //for(int  i = 0 ; i < a; i++ )
-		this->receive_text->insertPlainText(bytes);
-	//this->mutex.unlock();
+	this->receive_text->insertPlainText(bytes);
 }
 
 void terminal_app::toggle_com_port_fields(bool disable)

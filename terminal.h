@@ -3,7 +3,7 @@
 
 #include <qextserialport.h>
 #include "ui_terminal.h"
-#include <QMutex>
+#include <QSettings>
 
 class terminal_app : public QMainWindow, public Ui::Terminal
 {
@@ -15,8 +15,9 @@ public:
     QString get_checked_radio(QButtonGroup *);
     void group_radio_buttons(void);
     void toggle_com_port_fields(bool disable);
-   
-	
+    void load_settings();
+    void set_checked_radio(QButtonGroup *group,QString name);
+   	
 public slots:
 	void connect_serial_port();
 	void onReadyRead();
@@ -31,8 +32,9 @@ private:
 	QButtonGroup *data_bits_group;
 	QButtonGroup *stop_bits_group;
 	QButtonGroup *parity_group;
-	QButtonGroup *hex_ascii;
-	QMutex mutex;
+	QButtonGroup *hex_ascii_rx;
+	QButtonGroup *hex_ascii_tx;
+	QSettings *settings;
 }; 
 
 #endif
