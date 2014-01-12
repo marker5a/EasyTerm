@@ -3,6 +3,7 @@
 
 #include <qextserialport.h>
 #include "ui_terminal.h"
+#include "macro_editor.h"
 #include <QMutex>
 
 class terminal_app : public QMainWindow, public Ui::Terminal
@@ -22,6 +23,7 @@ public slots:
 	void onReadyRead();
 	void populateComPort(void);
 	void write_to_port();
+	void open_macro_editor();
 	
 private:
 	QextSerialPort *port;
@@ -32,7 +34,7 @@ private:
 	QButtonGroup *stop_bits_group;
 	QButtonGroup *parity_group;
 	QButtonGroup *hex_ascii;
-	QMutex mutex;
+	class macro_editor *editor;
 }; 
 
 #endif

@@ -5,21 +5,23 @@
 #include <QStringList>
 #include <QButtonGroup>
 #include <QMutex>
+#include "macro_editor.h"
 
 terminal_app::terminal_app(QMainWindow *parent)
 {
     setupUi(this); 			// this sets up GUI
+    
+    // initialize variables
+	this->port = 0;	
+	this->comPortConnected = 0;
+	this->editor = new macro_editor;
     
     populateComPort();		// fill in the com port combo box
     
 	connect_widgets();		// connect widgets with callbacks
 	
 	group_radio_buttons();	// group the radio buttons together
-	
-	// initialize variables
-	this->port = 0;	
-	this->comPortConnected = 0;
-	
+		
 	statusbar->showMessage("Disconnected");
 }
 
@@ -88,12 +90,20 @@ void terminal_app::populateComPort()
     }	
 }
 
+void terminal_app::open_macro_editor()
+{
+	this->setDisabled(1);
+	this->editor->exec();
+	this->setDisabled(0);
+}
+
 void terminal_app::connect_widgets()
 {
 	connect(this->connect_button,SIGNAL( clicked() ),this,SLOT( connect_serial_port() ));		
 	connect(this->rescan_button,SIGNAL( clicked() ),this,SLOT( populateComPort() ));		
 	connect(this->clear_button,SIGNAL( clicked() ),this->receive_text,SLOT( clear() ));		
-	connect(this->send_button,SIGNAL( clicked() ),this,SLOT( write_to_port() ));		
+	connect(this->send_button,SIGNAL( clicked() ),this,SLOT( write_to_port() ));
+	connect(this->set_macro_button,SIGNAL( clicked() ),this,SLOT( open_macro_editor() ) );
 }
 
 void terminal_app::connect_serial_port()
@@ -207,15 +217,14 @@ QString terminal_app::get_checked_radio(QButtonGroup *group)
 
 void terminal_app::onReadyRead()
 {   
-	QMutexLocker locker(&this->mutex);
+	
 	QByteArray bytes;
     int a = port->bytesAvailable();
     bytes.resize(a);
     this->port->read(bytes.data(), bytes.size());
-    //this->mutex.lock();
-    //for(int  i = 0 ; i < a; i++ )
+    
 		this->receive_text->insertPlainText(bytes);
-	//this->mutex.unlock();
+	
 }
 
 void terminal_app::toggle_com_port_fields(bool disable)
