@@ -6,79 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>380</width>
-    <height>435</height>
+    <width>278</width>
+    <height>396</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Macro Editor</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>#1</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="macro_1_name"/>
-     </item>
-    </layout>
-   </item>
-   <item row="0" column="1">
-    <widget class="QLineEdit" name="macro_1_content"/>
-   </item>
-   <item row="1" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>#2</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="macro_2_name"/>
-     </item>
-    </layout>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLineEdit" name="macro_2_content"/>
-   </item>
-   <item row="2" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>#3</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="macro_3_name"/>
-     </item>
-    </layout>
-   </item>
-   <item row="2" column="1">
-    <widget class="QLineEdit" name="macro_3_content"/>
-   </item>
-   <item row="3" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>#4</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="macro_4_name"/>
-     </item>
-    </layout>
-   </item>
    <item row="3" column="1">
     <widget class="QLineEdit" name="macro_4_content"/>
    </item>
@@ -96,8 +31,22 @@
      </item>
     </layout>
    </item>
-   <item row="4" column="1">
-    <widget class="QLineEdit" name="macro_5_content"/>
+   <item row="9" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_11">
+     <item>
+      <widget class="QLabel" name="label_10">
+       <property name="text">
+        <string>#10</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="macro_10_name"/>
+     </item>
+    </layout>
+   </item>
+   <item row="6" column="1">
+    <widget class="QLineEdit" name="macro_7_content"/>
    </item>
    <item row="5" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -129,9 +78,6 @@
       <widget class="QLineEdit" name="macro_7_name"/>
      </item>
     </layout>
-   </item>
-   <item row="6" column="1">
-    <widget class="QLineEdit" name="macro_7_content"/>
    </item>
    <item row="7" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_8">
@@ -167,17 +113,71 @@
    <item row="8" column="1">
     <widget class="QLineEdit" name="macro_9_content"/>
    </item>
-   <item row="9" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_11">
+   <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="label_10">
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string>#10</string>
+        <string>#1</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_10_name"/>
+      <widget class="QLineEdit" name="macro_1_name"/>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLineEdit" name="macro_1_content"/>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="macro_3_content"/>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="macro_2_content"/>
+   </item>
+   <item row="2" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>#3</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="macro_3_name"/>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="1">
+    <widget class="QLineEdit" name="macro_5_content"/>
+   </item>
+   <item row="3" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>#4</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="macro_4_name"/>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>#2</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="macro_2_name"/>
      </item>
     </layout>
    </item>
@@ -218,28 +218,34 @@
    <item row="11" column="1">
     <widget class="QLineEdit" name="macro_12_content"/>
    </item>
-   <item row="12" column="0">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>175</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="12" column="1">
-    <widget class="QDialogButtonBox" name="button_box">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>macro_1_name</tabstop>
+  <tabstop>macro_1_content</tabstop>
+  <tabstop>macro_2_name</tabstop>
+  <tabstop>macro_2_content</tabstop>
+  <tabstop>macro_3_name</tabstop>
+  <tabstop>macro_3_content</tabstop>
+  <tabstop>macro_4_name</tabstop>
+  <tabstop>macro_4_content</tabstop>
+  <tabstop>macro_5_name</tabstop>
+  <tabstop>macro_5_content</tabstop>
+  <tabstop>macro_6_name</tabstop>
+  <tabstop>macro_6_content</tabstop>
+  <tabstop>macro_7_name</tabstop>
+  <tabstop>macro_7_content</tabstop>
+  <tabstop>macro_8_name</tabstop>
+  <tabstop>macro_8_content</tabstop>
+  <tabstop>macro_9_name</tabstop>
+  <tabstop>macro_9_content</tabstop>
+  <tabstop>macro_10_name</tabstop>
+  <tabstop>macro_10_content</tabstop>
+  <tabstop>macro_11_name</tabstop>
+  <tabstop>macro_11_content</tabstop>
+  <tabstop>macro_12_name</tabstop>
+  <tabstop>macro_12_content</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
