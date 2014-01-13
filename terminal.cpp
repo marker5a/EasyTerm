@@ -14,7 +14,6 @@ terminal_app::terminal_app(QMainWindow *parent)
     // initialize variables
 	this->port = 0;	
 	this->comPortConnected = 0;
-	this->editor = new macro_editor;
     
     populateComPort();		// fill in the com port combo box
     
@@ -23,6 +22,10 @@ terminal_app::terminal_app(QMainWindow *parent)
 	group_radio_buttons();	// group the radio buttons together
 		
 	statusbar->showMessage("Disconnected");
+	
+	load_settings();		// load the settings
+	
+	this->editor = new macro_editor(this);	// create instance of macro gui
 }
 
 void terminal_app::load_settings()
@@ -39,6 +42,23 @@ void terminal_app::load_settings()
 			this->settings->setValue("stop_bits" , "1");
 			this->settings->setValue("parity" , "none");
 			this->settings->setValue("com_port" , "/dev/ttyS0");
+			this->settings->setValue("hex_ascii_rx" , "Hex");
+			this->settings->setValue("hex_ascii_tx" , "Hex");
+			
+			// handle the dialog window defaults for macro editing
+			this->settings->setValue("macro_1_hex_ascii"  , "Hex" );
+			this->settings->setValue("macro_2_hex_ascii"  , "Hex" );
+			this->settings->setValue("macro_3_hex_ascii"  , "Hex" );
+			this->settings->setValue("macro_4_hex_ascii"  , "Hex" );
+			this->settings->setValue("macro_5_hex_ascii"  , "Hex" );
+			this->settings->setValue("macro_6_hex_ascii"  , "Hex" );
+			this->settings->setValue("macro_7_hex_ascii"  , "Hex" );
+			this->settings->setValue("macro_8_hex_ascii"  , "Hex" );
+			this->settings->setValue("macro_9_hex_ascii"  , "Hex" );
+			this->settings->setValue("macro_10_hex_ascii" , "Hex" );
+			this->settings->setValue("macro_11_hex_ascii" , "Hex" );
+			this->settings->setValue("macro_12_hex_ascii" , "Hex" );
+						
 			this->settings->sync();
 		}
 		// if config is set, load up everything
@@ -48,6 +68,8 @@ void terminal_app::load_settings()
 			set_checked_radio(this->data_bits_group,this->settings->value("data_bits").toString());
 			set_checked_radio(this->stop_bits_group,this->settings->value("stop_bits").toString());
 			set_checked_radio(this->parity_group,this->settings->value("parity").toString());
+			set_checked_radio(this->hex_ascii_rx,this->settings->value("hex_ascii_rx").toString());
+			set_checked_radio(this->hex_ascii_tx,this->settings->value("hex_ascii_tx").toString());
 		}
 		
 		return;
@@ -132,11 +154,15 @@ void terminal_app::open_macro_editor()
 
 void terminal_app::connect_widgets()
 {
+	// basic widget connections to specific actions
 	connect(this->connect_button,SIGNAL( clicked() ),this,SLOT( connect_serial_port() ));		
 	connect(this->rescan_button,SIGNAL( clicked() ),this,SLOT( populateComPort() ));		
 	connect(this->clear_button,SIGNAL( clicked() ),this->receive_text,SLOT( clear() ));		
 	connect(this->send_button,SIGNAL( clicked() ),this,SLOT( write_to_port() ));
 	connect(this->set_macro_button,SIGNAL( clicked() ),this,SLOT( open_macro_editor() ) );
+	
+	// connect all buttons to update config
+	
 }
 
 void terminal_app::connect_serial_port()
@@ -200,7 +226,7 @@ void terminal_app::connect_serial_port()
 		if (!this->port->isOpen())
 		{
 			qDebug("Error connecting to com port");
-			statusbar->showMessage("COM Port Error! " + this->port->errorString() );
+			statusbar->showMessage("Disconnected: COM Port Error! " + this->port->errorString() );
 			this->comPortConnected = 0;
 		}
 		else

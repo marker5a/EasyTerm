@@ -6,6 +6,7 @@
 #include <QSettings>
 #include "macro_editor.h"
 
+
 class terminal_app : public QMainWindow, public Ui::Terminal
 {
     Q_OBJECT
@@ -18,6 +19,7 @@ public:
     void toggle_com_port_fields(bool disable);
     void load_settings();
     void set_checked_radio(QButtonGroup *group,QString name);
+   	QSettings *settings;
    	
 public slots:
 	void connect_serial_port();
@@ -36,7 +38,6 @@ private:
 	QButtonGroup *parity_group;
 	QButtonGroup *hex_ascii_rx;
 	QButtonGroup *hex_ascii_tx;
-	QSettings *settings;
 	class macro_editor *editor;
 }; 
 
