@@ -63,7 +63,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_2_name"/>
+      <widget class="QLineEdit" name="macro_2_name">
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -98,7 +102,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_3_name"/>
+      <widget class="QLineEdit" name="macro_3_name">
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -133,7 +141,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_4_name"/>
+      <widget class="QLineEdit" name="macro_4_name">
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -168,7 +180,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_5_name"/>
+      <widget class="QLineEdit" name="macro_5_name">
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -203,7 +219,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_6_name"/>
+      <widget class="QLineEdit" name="macro_6_name">
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -238,7 +258,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_7_name"/>
+      <widget class="QLineEdit" name="macro_7_name">
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -273,7 +297,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_8_name"/>
+      <widget class="QLineEdit" name="macro_8_name">
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -308,7 +336,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_9_name"/>
+      <widget class="QLineEdit" name="macro_9_name">
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -343,7 +375,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_10_name"/>
+      <widget class="QLineEdit" name="macro_10_name">
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -378,7 +414,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_11_name"/>
+      <widget class="QLineEdit" name="macro_11_name">
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -413,7 +453,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_12_name"/>
+      <widget class="QLineEdit" name="macro_12_name">
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -471,18 +515,6 @@
   <zorder>macro_10_content</zorder>
   <zorder>macro_11_content</zorder>
   <zorder>macro_12_content</zorder>
-  <zorder></zorder>
-  <zorder></zorder>
-  <zorder></zorder>
-  <zorder></zorder>
-  <zorder></zorder>
-  <zorder></zorder>
-  <zorder></zorder>
-  <zorder></zorder>
-  <zorder></zorder>
-  <zorder></zorder>
-  <zorder></zorder>
-  <zorder></zorder>
   <zorder>button_box</zorder>
   <zorder>horizontalSpacer</zorder>
  </widget>
