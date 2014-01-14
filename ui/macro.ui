@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>391</width>
-    <height>396</height>
+    <width>392</width>
+    <height>435</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,10 +32,10 @@
      </item>
     </layout>
    </item>
-   <item row="0" column="1">
+   <item row="0" column="1" colspan="2">
     <widget class="QLineEdit" name="macro_1_content"/>
    </item>
-   <item row="0" column="2">
+   <item row="0" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_13">
      <item>
       <widget class="QRadioButton" name="macro_1_hex">
@@ -63,17 +63,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_2_name">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget></item>
+      <widget class="QLineEdit" name="macro_2_name"/>
+     </item>
     </layout>
    </item>
-   <item row="1" column="1">
+   <item row="1" column="1" colspan="2">
     <widget class="QLineEdit" name="macro_2_content"/>
    </item>
-   <item row="1" column="2">
+   <item row="1" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_14">
      <item>
       <widget class="QRadioButton" name="macro_2_hex">
@@ -101,17 +98,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_3_name">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget></item>
+      <widget class="QLineEdit" name="macro_3_name"/>
+     </item>
     </layout>
    </item>
-   <item row="2" column="1">
+   <item row="2" column="1" colspan="2">
     <widget class="QLineEdit" name="macro_3_content"/>
    </item>
-   <item row="2" column="2">
+   <item row="2" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_15">
      <item>
       <widget class="QRadioButton" name="macro_3_hex">
@@ -139,17 +133,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_4_name">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget></item>
+      <widget class="QLineEdit" name="macro_4_name"/>
+     </item>
     </layout>
    </item>
-   <item row="3" column="1">
+   <item row="3" column="1" colspan="2">
     <widget class="QLineEdit" name="macro_4_content"/>
    </item>
-   <item row="3" column="2">
+   <item row="3" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_16">
      <item>
       <widget class="QRadioButton" name="macro_4_hex">
@@ -177,17 +168,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_5_name">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget></item>
+      <widget class="QLineEdit" name="macro_5_name"/>
+     </item>
     </layout>
    </item>
-   <item row="4" column="1">
+   <item row="4" column="1" colspan="2">
     <widget class="QLineEdit" name="macro_5_content"/>
    </item>
-   <item row="4" column="2">
+   <item row="4" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_17">
      <item>
       <widget class="QRadioButton" name="macro_5_hex">
@@ -215,17 +203,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_6_name">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget></item>
+      <widget class="QLineEdit" name="macro_6_name"/>
+     </item>
     </layout>
    </item>
-   <item row="5" column="1">
+   <item row="5" column="1" colspan="2">
     <widget class="QLineEdit" name="macro_6_content"/>
    </item>
-   <item row="5" column="2">
+   <item row="5" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_18">
      <item>
       <widget class="QRadioButton" name="macro_6_hex">
@@ -253,17 +238,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_7_name">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget></item>
+      <widget class="QLineEdit" name="macro_7_name"/>
+     </item>
     </layout>
    </item>
-   <item row="6" column="1">
+   <item row="6" column="1" colspan="2">
     <widget class="QLineEdit" name="macro_7_content"/>
    </item>
-   <item row="6" column="2">
+   <item row="6" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_19">
      <item>
       <widget class="QRadioButton" name="macro_7_hex">
@@ -291,17 +273,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_8_name">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget></item>
+      <widget class="QLineEdit" name="macro_8_name"/>
+     </item>
     </layout>
    </item>
-   <item row="7" column="1">
+   <item row="7" column="1" colspan="2">
     <widget class="QLineEdit" name="macro_8_content"/>
    </item>
-   <item row="7" column="2">
+   <item row="7" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_20">
      <item>
       <widget class="QRadioButton" name="macro_8_hex">
@@ -329,17 +308,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_9_name">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget></item>
+      <widget class="QLineEdit" name="macro_9_name"/>
+     </item>
     </layout>
    </item>
-   <item row="8" column="1">
+   <item row="8" column="1" colspan="2">
     <widget class="QLineEdit" name="macro_9_content"/>
    </item>
-   <item row="8" column="2">
+   <item row="8" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_21">
      <item>
       <widget class="QRadioButton" name="macro_9_hex">
@@ -367,17 +343,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_10_name">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget></item>
+      <widget class="QLineEdit" name="macro_10_name"/>
+     </item>
     </layout>
    </item>
-   <item row="9" column="1">
+   <item row="9" column="1" colspan="2">
     <widget class="QLineEdit" name="macro_10_content"/>
    </item>
-   <item row="9" column="2">
+   <item row="9" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_22">
      <item>
       <widget class="QRadioButton" name="macro_10_hex">
@@ -405,17 +378,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_11_name">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget></item>
+      <widget class="QLineEdit" name="macro_11_name"/>
+     </item>
     </layout>
    </item>
-   <item row="10" column="1">
+   <item row="10" column="1" colspan="2">
     <widget class="QLineEdit" name="macro_11_content"/>
    </item>
-   <item row="10" column="2">
+   <item row="10" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_23">
      <item>
       <widget class="QRadioButton" name="macro_11_hex">
@@ -443,17 +413,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="macro_12_name">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget></item>
+      <widget class="QLineEdit" name="macro_12_name"/>
+     </item>
     </layout>
    </item>
-   <item row="11" column="1">
+   <item row="11" column="1" colspan="2">
     <widget class="QLineEdit" name="macro_12_content"/>
    </item>
-   <item row="11" column="2">
+   <item row="11" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_24">
      <item>
       <widget class="QRadioButton" name="macro_12_hex">
@@ -470,6 +437,26 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item row="12" column="0" colspan="2">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>199</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="12" column="2" colspan="2">
+    <widget class="QDialogButtonBox" name="button_box">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
    </item>
   </layout>
   <zorder>macro_4_content</zorder>
@@ -496,6 +483,8 @@
   <zorder></zorder>
   <zorder></zorder>
   <zorder></zorder>
+  <zorder>button_box</zorder>
+  <zorder>horizontalSpacer</zorder>
  </widget>
  <tabstops>
   <tabstop>macro_1_name</tabstop>
