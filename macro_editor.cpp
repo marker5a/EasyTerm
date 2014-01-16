@@ -61,6 +61,7 @@ macro_editor::macro_editor(terminal_app *parent)
 	parent->set_checked_radio(this->macro_11_hex_ascii,parent->settings->value("macro_11_hex_ascii").toString());
 	parent->set_checked_radio(this->macro_12_hex_ascii,parent->settings->value("macro_12_hex_ascii").toString());
 	
+	// set macro names from settings
 	this->macro_1_name->setText(	parent->settings->value("macro_1_name").toString());
 	this->macro_2_name->setText(	parent->settings->value("macro_2_name").toString());
 	this->macro_3_name->setText(	parent->settings->value("macro_3_name").toString());
@@ -74,6 +75,7 @@ macro_editor::macro_editor(terminal_app *parent)
 	this->macro_11_name->setText(	parent->settings->value("macro_11_name").toString());
 	this->macro_12_name->setText(	parent->settings->value("macro_12_name").toString());
 	
+	// set macro content from settings
 	this->macro_1_content->setText(		parent->settings->value("macro_1_content").toString());
 	this->macro_2_content->setText(		parent->settings->value("macro_2_content").toString());
 	this->macro_3_content->setText(		parent->settings->value("macro_3_content").toString());
@@ -87,11 +89,13 @@ macro_editor::macro_editor(terminal_app *parent)
 	this->macro_11_content->setText(	parent->settings->value("macro_11_content").toString());
 	this->macro_12_content->setText(	parent->settings->value("macro_12_content").toString());
 	
+	// connect widgets
 	connect_widgets();
 }
 
 void macro_editor::save_macros()
 {
+	// save macro names into settings
 	this->parent->settings->setValue("macro_1_name",		this->macro_1_name->text());
 	this->parent->settings->setValue("macro_2_name",		this->macro_2_name->text());
 	this->parent->settings->setValue("macro_3_name",		this->macro_3_name->text());
@@ -105,6 +109,7 @@ void macro_editor::save_macros()
 	this->parent->settings->setValue("macro_11_name",		this->macro_11_name->text());
 	this->parent->settings->setValue("macro_12_name",		this->macro_12_name->text());		
 	
+	// save macro contents into settings
 	this->parent->settings->setValue("macro_1_content",	this->macro_1_content->text());
 	this->parent->settings->setValue("macro_2_content",	this->macro_2_content->text());
 	this->parent->settings->setValue("macro_3_content",	this->macro_3_content->text());
@@ -118,8 +123,10 @@ void macro_editor::save_macros()
 	this->parent->settings->setValue("macro_11_content",	this->macro_11_content->text());
 	this->parent->settings->setValue("macro_12_content",	this->macro_12_content->text());	
 	
+	// synchronize the settings
 	this->parent->settings->sync();
 	
+	// close the dialog
 	this->close();
 	
 }
