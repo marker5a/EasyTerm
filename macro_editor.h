@@ -10,8 +10,10 @@ class macro_editor : public QDialog, public Ui::Macro_Editor
  
 public:
     macro_editor(class terminal_app *parent = 0);    
+    void connect_widgets();
     
 public slots:
+	void save_macros();
 	
 private:	
 	QButtonGroup *macro_1_hex_ascii;
@@ -26,7 +28,7 @@ private:
 	QButtonGroup *macro_10_hex_ascii;
 	QButtonGroup *macro_11_hex_ascii;
 	QButtonGroup *macro_12_hex_ascii;
-	
+	class terminal_app *parent;
 }; 
 
 #endif
