@@ -4,6 +4,7 @@
 #include <qextserialport.h>
 #include <QStringList>
 #include <QButtonGroup>
+#include <QSignalMapper>
 #include <QMutex>
 #include "macro_editor.h"
 
@@ -15,7 +16,7 @@ terminal_app::terminal_app(QMainWindow *parent)
 	this->port = 0;	
 	this->comPortConnected = 0;
     
-    populateComPort();		// fill in the com port combo box
+    populate_com_port();		// fill in the com port combo box
     
 	connect_widgets();		// connect widgets with callbacks
 	
@@ -26,6 +27,9 @@ terminal_app::terminal_app(QMainWindow *parent)
 	load_settings();		// load the settings
 	
 	this->editor = new macro_editor(this);	// create instance of macro gui
+	
+	update_macro_button_names();
+
 }
 
 void terminal_app::load_settings()
@@ -126,7 +130,7 @@ void terminal_app::group_radio_buttons(void)
 
 }
 
-void terminal_app::populateComPort()
+void terminal_app::populate_com_port()
 {		
 	// clear the com port
 	this->com_port_combo->clear();    
@@ -149,19 +153,52 @@ void terminal_app::open_macro_editor()
 {
 	this->setDisabled(1);
 	this->editor->exec();
+	update_macro_button_names();
 	this->setDisabled(0);
+	
 }
 
 void terminal_app::connect_widgets()
 {
 	// basic widget connections to specific actions
 	connect(this->connect_button,SIGNAL( clicked() ),this,SLOT( connect_serial_port() ));		
-	connect(this->rescan_button,SIGNAL( clicked() ),this,SLOT( populateComPort() ));		
-	connect(this->clear_button,SIGNAL( clicked() ),this->receive_text,SLOT( clear() ));		
-	connect(this->send_button,SIGNAL( clicked() ),this,SLOT( write_to_port() ));
+	connect(this->rescan_button,SIGNAL( clicked() ),this,SLOT( populate_com_port() ));		
+	connect(this->tx_clear_button,SIGNAL( clicked() ),this->receive_text,SLOT( clear() ));		
+	connect(this->rx_clear_button,SIGNAL( clicked() ),this->transmit_text,SLOT( clear() ));		
+	connect(this->send_button,SIGNAL( clicked() ),this,SLOT( transmit() ));
 	connect(this->set_macro_button,SIGNAL( clicked() ),this,SLOT( open_macro_editor() ) );
 	
 	// connect all buttons to update config
+	QSignalMapper* signalMapper = new QSignalMapper(this);
+	connect(this->m1_button	,SIGNAL( clicked() ),signalMapper,SLOT( map() ) );
+	connect(this->m2_button	,SIGNAL( clicked() ),signalMapper,SLOT( map() ) );
+	connect(this->m3_button	,SIGNAL( clicked() ),signalMapper,SLOT( map() ) );
+	connect(this->m4_button	,SIGNAL( clicked() ),signalMapper,SLOT( map() ) );
+	connect(this->m5_button	,SIGNAL( clicked() ),signalMapper,SLOT( map() ) );
+	connect(this->m6_button	,SIGNAL( clicked() ),signalMapper,SLOT( map() ) );
+	connect(this->m7_button	,SIGNAL( clicked() ),signalMapper,SLOT( map() ) );
+	connect(this->m8_button	,SIGNAL( clicked() ),signalMapper,SLOT( map() ) );
+	connect(this->m9_button	,SIGNAL( clicked() ),signalMapper,SLOT( map() ) );
+	connect(this->m10_button,SIGNAL( clicked() ),signalMapper,SLOT( map() ) );
+	connect(this->m11_button,SIGNAL( clicked() ),signalMapper,SLOT( map() ) );
+	connect(this->m12_button,SIGNAL( clicked() ),signalMapper,SLOT( map() ) );
+	
+	// map macro names to consolidate into one routine call
+	signalMapper->setMapping(this->m1_button, "macro_1_");
+	signalMapper->setMapping(this->m2_button, "macro_2_");
+	signalMapper->setMapping(this->m3_button, "macro_3_");
+	signalMapper->setMapping(this->m4_button, "macro_4_");
+	signalMapper->setMapping(this->m5_button, "macro_5_");
+	signalMapper->setMapping(this->m6_button, "macro_6_");
+	signalMapper->setMapping(this->m7_button, "macro_7_");
+	signalMapper->setMapping(this->m8_button, "macro_8_");
+	signalMapper->setMapping(this->m9_button, "macro_9_");
+	signalMapper->setMapping(this->m10_button,"macro_10_");
+	signalMapper->setMapping(this->m11_button,"macro_11_");
+	signalMapper->setMapping(this->m12_button,"macro_12_");
+	
+	// one time connect of macro buttons
+	connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(press_macro_button(QString))) ;
 	
 }
 
@@ -217,8 +254,8 @@ void terminal_app::connect_serial_port()
 		this->port->setQueryMode(QextSerialPort::EventDriven);
 		this->port->flush();
 		
-		// connect receiver on serial port to onReadyRead
-		connect(this->port, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
+		// connect receiver on serial port to on_ready_read
+		connect(this->port, SIGNAL(readyRead()), this, SLOT(rx_data_available()));
 		
 		// check for error message
 		qDebug() << this->port->open(QIODevice::ReadWrite | QIODevice::Unbuffered);
@@ -259,7 +296,7 @@ void terminal_app::connect_serial_port()
 	this->connect_button->setText(this->comPortConnected?"Disconnect":"Connect");
 }
 
-void terminal_app::write_to_port()
+void terminal_app::write_to_port(QByteArray array)
 {
 	// only allow sending when com port is connected
 	if( this->comPortConnected )
@@ -272,6 +309,11 @@ void terminal_app::write_to_port()
 			this->transmit_field->clear();
 		}
 	}
+}
+
+void terminal_app::transmit()
+{
+	
 }
 
 void terminal_app::set_checked_radio(QButtonGroup *group,QString name)
@@ -292,9 +334,8 @@ QString terminal_app::get_checked_radio(QButtonGroup *group)
 	return group->checkedButton()->text();
 }
 
-void terminal_app::onReadyRead()
-{   
-	
+void terminal_app::rx_data_available(void)
+{	
 	QByteArray bytes;
     int a = port->bytesAvailable();
     bytes.resize(a);
@@ -332,4 +373,31 @@ void terminal_app::toggle_com_port_fields(bool disable)
 	this->parity_even_radio->setDisabled(disable);
 	this->parity_mark_radio->setDisabled(disable);
 	this->parity_space_radio->setDisabled(disable);
+}
+
+void terminal_app::press_macro_button(QString macro_name)
+{
+	QString tx_string = this->settings->value(macro_name + "content").toString();
+	
+	if( this->settings->value(macro_name + "hex_ascii") == "Hex" )
+	{
+	}
+	else{}
+		//this->
+}
+
+void terminal_app::update_macro_button_names(void)
+{
+	this->m1_button->setText(this->settings->value("macro_1_name").toString());
+	this->m2_button->setText(this->settings->value("macro_2_name").toString());
+	this->m3_button->setText(this->settings->value("macro_3_name").toString());
+	this->m4_button->setText(this->settings->value("macro_4_name").toString());
+	this->m5_button->setText(this->settings->value("macro_5_name").toString());
+	this->m6_button->setText(this->settings->value("macro_6_name").toString());
+	this->m7_button->setText(this->settings->value("macro_7_name").toString());
+	this->m8_button->setText(this->settings->value("macro_8_name").toString());
+	this->m9_button->setText(this->settings->value("macro_9_name").toString());
+	this->m10_button->setText(this->settings->value("macro_10_name").toString());
+	this->m11_button->setText(this->settings->value("macro_11_name").toString());
+	this->m12_button->setText(this->settings->value("macro_12_name").toString());
 }

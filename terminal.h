@@ -12,21 +12,26 @@ class terminal_app : public QMainWindow, public Ui::Terminal
     Q_OBJECT
  
 public:
-    terminal_app(QMainWindow *parent = 0);    
+    terminal_app(QMainWindow *parent = 0);
+      
     void connect_widgets();
-    QString get_checked_radio(QButtonGroup *);
     void group_radio_buttons(void);
     void toggle_com_port_fields(bool disable);
     void load_settings();
     void set_checked_radio(QButtonGroup *group,QString name);
+   	void update_macro_button_names(void);
+   	void write_to_port(QByteArray array);
+   	
+    QString get_checked_radio(QButtonGroup *);
    	QSettings *settings;
    	
 public slots:
-	void connect_serial_port();
-	void onReadyRead();
-	void populateComPort(void);
-	void write_to_port();
-	void open_macro_editor();
+	void connect_serial_port(void);
+	void rx_data_available(void);
+	void populate_com_port(void);
+	void transmit(void);
+	void open_macro_editor(void);
+	void press_macro_button(QString macro_name);
 	
 private:
 	QextSerialPort *port;
