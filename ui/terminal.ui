@@ -409,7 +409,7 @@
     <item row="2" column="0" colspan="3">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="clear_button">
+       <widget class="QPushButton" name="rx_clear_button">
         <property name="text">
          <string>Clear</string>
         </property>
@@ -626,6 +626,13 @@
         </property>
        </widget>
       </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="tx_clear_button">
+        <property name="text">
+         <string>Clear</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item row="6" column="8" colspan="2">
@@ -722,10 +729,8 @@
   <tabstop>parity_even_radio</tabstop>
   <tabstop>parity_mark_radio</tabstop>
   <tabstop>parity_space_radio</tabstop>
-  <tabstop>clear_button</tabstop>
+  <tabstop>rx_clear_button</tabstop>
   <tabstop>autoscroll_check</tabstop>
-  <tabstop>hex_radio</tabstop>
-  <tabstop>ascii_radio</tabstop>
   <tabstop>receive_text</tabstop>
   <tabstop>set_macro_button</tabstop>
   <tabstop>m1_button</tabstop>
