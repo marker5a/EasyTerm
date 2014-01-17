@@ -29,7 +29,9 @@ terminal_app::terminal_app(QMainWindow *parent)
 	this->editor = new macro_editor(this);	// create instance of macro gui
 	
 	update_macro_button_names();
-
+	
+	QByteArray result;
+	hex_qstring_to_hex_array("4648",&result);
 }
 
 void terminal_app::load_settings()
@@ -301,19 +303,22 @@ void terminal_app::write_to_port(QByteArray array)
 	// only allow sending when com port is connected
 	if( this->comPortConnected )
 	{
-		// translate text field if based on decision to do ascii or hex
-		if( get_checked_radio(this->hex_ascii_tx) == "ASCII" )
-		{
-			this->port->write(this->transmit_field->text().toStdString().c_str(),this->transmit_field->text().size());
-			this->transmit_text->insertPlainText(this->transmit_field->text());
-			this->transmit_field->clear();
-		}
+
 	}
 }
 
 void terminal_app::transmit()
 {
 	
+	QByteArray tx_array = this->transmit_field->text().toAscii();
+	
+	// translate text field if based on decision to do ascii or hex
+	if( get_checked_radio(this->hex_ascii_tx) == "ASCII" )
+	{
+		//this->port->write(.toStdString().c_str(),this->transmit_field->text().size());
+		//this->transmit_text->insertPlainText(this->transmit_field->text());
+		//this->transmit_field->clear();
+	}
 }
 
 void terminal_app::set_checked_radio(QButtonGroup *group,QString name)
@@ -384,6 +389,27 @@ void terminal_app::press_macro_button(QString macro_name)
 	}
 	else{}
 		//this->
+}
+
+int terminal_app::hex_qstring_to_hex_array(QString hex_qstring,QByteArray *result)
+{
+	// if the string does not contain an even number of characters, return failure
+	if( hex_qstring.size()%2 != 0 )
+		return 0;
+		
+	// iterate through each pair (byte) and alter
+	for( int i = 0 ; i < hex_qstring.size()/2; i++ )
+	{
+		bool error[2];
+		unsigned int byte = (QString(hex_qstring[2*i]).toAscii().toInt(&error[0],16))*16;
+		byte += QString(hex_qstring[(2*i)+1]).toAscii().toInt(&error[1],16);
+		
+		result->insert(i,(char)QByteArray::number(byte,10).toInt());
+	}
+	
+	// return success
+	return 1;
+	
 }
 
 void terminal_app::update_macro_button_names(void)
