@@ -425,7 +425,9 @@ QByteArray terminal_app::array_to_hex_array(QByteArray array_in)
 	
 	for( int i = 0; i < array_in.size(); i++ )
 	{
-		out.append(QString::number((char)array_in[i],16));
+		char string[3]="";
+		sprintf( string, "%.2X", (unsigned char)((char)array_in[i]) );
+		out.append(string);
 		out.append(" ");
 	}
 	
