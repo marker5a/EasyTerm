@@ -437,25 +437,32 @@ void terminal_app::press_macro_button(QString macro_name)
 	QString tx_string = this->settings->value(macro_name + "content").toString();
 	
 	// determine action based on hex or ascii
-	if( this->settings->value(macro_name + "hex_ascii") == "Hex" )
-	{
-		hex_error = this->hex_qstring_to_hex_array(tx_string,&tx_array);
-		
-		if( hex_error )
-			this->transmit_text->insertPlainText(array_to_hex_array(tx_array));
-	}
-	else
-	{
-		tx_array = tx_string.toAscii();
-		this->transmit_text->insertPlainText(tx_array);
-	}
+		// hex
+		if( this->settings->value(macro_name + "hex_ascii") == "Hex" )
+		{
+			// convert the string into a byte array as hex
+			hex_error = this->hex_qstring_to_hex_array(tx_string,&tx_array);
+			
+			// if the hex converted properly, show the hex in the tx field
+			if( hex_error )
+				this->transmit_text->insertPlainText(array_to_hex_array(tx_array));
+		}
+		// ascii
+		else
+		{
+			// just get byte array and send it out
+			tx_array = tx_string.toAscii();
+			this->transmit_text->insertPlainText(tx_array);
+		}
 	
+	// if there was an error with parsing the hex string, display it and quit
 	if( !hex_error )
 	{
 		this->status_bar->update_status_bar_error_status("Invalid Hex String for Macro \"" + this->settings->value(macro_name + "name").toString() +"\"");
 		return;
 	}
 	
+	// write it out on the serial port and clear the error
 	this->write_to_port(tx_array);
 	this->status_bar->clear_status_bar_error_status();	
 	this->transmit_field->clear();
