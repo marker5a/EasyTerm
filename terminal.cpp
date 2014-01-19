@@ -10,7 +10,7 @@
 
 terminal_app::terminal_app(QMainWindow *parent)
 {
-    setupUi(this); 			// this sets up GUI
+    setupUi(this); 												// this sets up GUI
     
     // setup version number in title
     this->setWindowTitle(this->windowTitle() + QString(_VERSION_NUMBER));
@@ -19,19 +19,19 @@ terminal_app::terminal_app(QMainWindow *parent)
 	this->port = 0;	
 	this->comPortConnected = 0;
     
-    populate_com_port();		// fill in the com port combo box
-    
-	connect_widgets();		// connect widgets with callbacks
+    populate_com_port();										// fill in the com port combo box
+									
+	connect_widgets();											// connect widgets with callbacks
 	
-	group_radio_buttons();	// group the radio buttons together
+	group_radio_buttons();										// group the radio buttons together
 		
-	this->status_bar = new class status_bar(this->statusbar);
+	this->status_bar = new class status_bar(this->statusbar);	// create and instance of the status_bar class
 	
-	load_settings();		// load the settings
+	load_settings();											// load the settings
+						
+	this->editor = new macro_editor(this);						// create instance of macro gui
 	
-	this->editor = new macro_editor(this);	// create instance of macro gui
-	
-	update_macro_button_names();
+	update_macro_button_names();								// load in the macro names from the settings and set the button names
 	
 	
 		
