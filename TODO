@@ -1,4 +1,3 @@
--Dont clear rx field when switching modes, just insert a space instead to seperate the two
 -Save Hex/ASCII settings for both tx and rx
 -Add bug reporting feature
 -Thread tx and rx operations

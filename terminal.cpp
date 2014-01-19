@@ -150,6 +150,20 @@ void terminal_app::populate_com_port()
 		#endif
     }	
 }
+void terminal_app::rx_ascii_hex()
+{
+	this->receive_text->insertPlainText("\n");
+	
+	// autoscroll receive field if checked
+	if( this->autoscroll_check->isChecked() )
+	{
+		QTextCursor c =  this->receive_text->textCursor();
+		c.movePosition(QTextCursor::End);
+		this->receive_text->setTextCursor(c);
+	}
+
+	return;
+}
 
 void terminal_app::open_macro_editor()
 {
@@ -157,7 +171,6 @@ void terminal_app::open_macro_editor()
 	this->editor->exec();
 	update_macro_button_names();
 	this->setDisabled(0);
-	
 }
 
 void terminal_app::connect_widgets()
@@ -166,8 +179,8 @@ void terminal_app::connect_widgets()
 	connect(this->connect_button,SIGNAL( clicked() ),this,SLOT( connect_serial_port() ));		
 	connect(this->rescan_button,SIGNAL( clicked() ),this,SLOT( populate_com_port() ));		
 	connect(this->rx_clear_button,SIGNAL( clicked() ),this->receive_text,SLOT( clear() ));		
-	connect(this->ascii_rx_radio,SIGNAL( clicked() ),this->receive_text,SLOT( clear() ));		
-	connect(this->hex_rx_radio,SIGNAL( clicked() ),this->receive_text,SLOT( clear() ));		
+	connect(this->ascii_rx_radio,SIGNAL( clicked() ),this,SLOT( rx_ascii_hex() ));		
+	connect(this->hex_rx_radio,SIGNAL( clicked() ),this,SLOT( rx_ascii_hex() ));		
 	connect(this->tx_clear_button,SIGNAL( clicked() ),this->transmit_text,SLOT( clear() ));		
 	connect(this->send_button,SIGNAL( clicked() ),this,SLOT( transmit() ));
 	connect(this->set_macro_button,SIGNAL( clicked() ),this,SLOT( open_macro_editor() ) );
