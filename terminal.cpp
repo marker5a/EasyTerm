@@ -425,13 +425,41 @@ void terminal_app::toggle_com_port_fields(bool disable)
 
 void terminal_app::press_macro_button(QString macro_name)
 {
+	
+	QByteArray tx_array;
+	int hex_error=1;
+	
+	// dont even try and do anything unless the com port is connected
+	if( !this->comPortConnected )
+		return;	
+	
+	// get the content of the macro and store it in a string
 	QString tx_string = this->settings->value(macro_name + "content").toString();
 	
+	// determine action based on hex or ascii
 	if( this->settings->value(macro_name + "hex_ascii") == "Hex" )
 	{
+		hex_error = this->hex_qstring_to_hex_array(tx_string,&tx_array);
+		
+		if( hex_error )
+			this->transmit_text->insertPlainText(array_to_hex_array(tx_array));
 	}
-	else{}
-		//this->
+	else
+	{
+		tx_array = tx_string.toAscii();
+		this->transmit_text->insertPlainText(tx_array);
+	}
+	
+	if( !hex_error )
+	{
+		this->status_bar->update_status_bar_error_status("Invalid Hex String for Macro \"" + this->settings->value(macro_name + "name").toString() +"\"");
+		return;
+	}
+	
+	this->write_to_port(tx_array);
+	this->status_bar->clear_status_bar_error_status();	
+	this->transmit_field->clear();
+		
 }
 
 QByteArray terminal_app::array_to_hex_array(QByteArray array_in)
