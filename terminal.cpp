@@ -30,8 +30,8 @@ terminal_app::terminal_app(QMainWindow *parent)
 	
 	update_macro_button_names();
 	
-	QByteArray result;
-	hex_qstring_to_hex_array("4648",&result);
+	
+		
 }
 
 void terminal_app::load_settings()
@@ -398,6 +398,20 @@ void terminal_app::press_macro_button(QString macro_name)
 	}
 	else{}
 		//this->
+}
+
+QByteArray terminal_app::array_to_hex_array(QByteArray array_in)
+{
+	
+	QByteArray out;
+	
+	for( int i = 0; i < array_in.size(); i++ )
+	{
+		out.append(QString::number((char)array_in[i],16));
+		out.append(" ");
+	}
+	
+	return out;
 }
 
 int terminal_app::hex_qstring_to_hex_array(QString hex_qstring,QByteArray *result)

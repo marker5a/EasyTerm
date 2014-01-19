@@ -23,6 +23,7 @@ public:
    	void update_macro_button_names(void);
    	void write_to_port(QByteArray array);
    	int hex_qstring_to_hex_array(QString hex_qstring,QByteArray *result);
+   	QByteArray array_to_hex_array(QByteArray array_in);
    	
     QString get_checked_radio(QButtonGroup *);
    	QSettings *settings;
