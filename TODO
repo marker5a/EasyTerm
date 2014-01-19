@@ -1,3 +1,4 @@
+-Consolidate rx functionality
 -Save Hex/ASCII settings for both tx and rx
 -Add bug reporting feature
 -Thread tx and rx operations
