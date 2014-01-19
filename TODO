@@ -5,3 +5,4 @@
 -Dont clear rx field when switching modes, just insert a space instead to seperate the two
 -Implement Help dialog
 -Implement About dialog
+-Consolidate tx functionality
