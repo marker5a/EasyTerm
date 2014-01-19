@@ -33,6 +33,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="help_button">
+		<property name="enabled">
+		 <bool>false</bool>
+		</property>
         <property name="text">
          <string>Help</string>
         </property>
@@ -40,6 +43,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="about_button">
+		<property name="enabled">
+		 <bool>false</bool>
+		</property>
         <property name="text">
          <string>About</string>
         </property>
