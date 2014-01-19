@@ -1,3 +1,4 @@
+-implement code where pressing enter when tx_line is active engages send button
 -Save Hex/ASCII settings for both tx and rx
 -Implement autoscroll functioanlity
 -Add bug reporting feature
