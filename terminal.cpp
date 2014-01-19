@@ -172,6 +172,7 @@ void terminal_app::connect_widgets()
 	connect(this->send_button,SIGNAL( clicked() ),this,SLOT( transmit() ));
 	connect(this->set_macro_button,SIGNAL( clicked() ),this,SLOT( open_macro_editor() ) );
 	connect(this->quit_button,SIGNAL( clicked() ),this,SLOT( close() ) );
+	connect(this->transmit_field,SIGNAL( returnPressed() ),this,SLOT( transmit() ) );
 	
 	// connect all buttons to update config
 	QSignalMapper* signalMapper = new QSignalMapper(this);
@@ -322,6 +323,10 @@ void terminal_app::transmit()
 	
 	QByteArray tx_array;
 	int hex_error=1;	
+	
+	// dont even try and do anything unless the com port is connected
+	if( !this->comPortConnected )
+		return;	
 		
 	// translate text field if based on decision to do ascii or hex
 	if( get_checked_radio(this->hex_ascii_tx) == "Hex" )
