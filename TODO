@@ -1,5 +1,4 @@
 -Save Hex/ASCII settings for both tx and rx
--Implement autoscroll functioanlity
 -Add bug reporting feature
 -Activate macro button presses
 -Each transmit button press should issue newline to transmit field

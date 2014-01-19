@@ -376,10 +376,19 @@ void terminal_app::rx_data_available(void)
     int a = port->bytesAvailable();
     bytes.resize(a);
     this->port->read(bytes.data(), bytes.size());
+    
 	if( this->get_checked_radio(this->hex_ascii_rx) == "ASCII" )
 		this->receive_text->insertPlainText(bytes);
 	else
 		this->receive_text->insertPlainText(array_to_hex_array(bytes));
+	
+	// autoscroll receive field if checked
+	if( this->autoscroll_check->isChecked() )
+	{
+		QTextCursor c =  this->receive_text->textCursor();
+		c.movePosition(QTextCursor::End);
+		this->receive_text->setTextCursor(c);
+	}
 }
 
 void terminal_app::toggle_com_port_fields(bool disable)
