@@ -7,6 +7,7 @@
 #include "macro_editor.h"
 #include "status_bar.h"
 
+#define _VERSION_NUMBER		"1.0"
 
 class terminal_app : public QMainWindow, public Ui::Terminal
 {

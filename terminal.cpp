@@ -12,6 +12,9 @@ terminal_app::terminal_app(QMainWindow *parent)
 {
     setupUi(this); 			// this sets up GUI
     
+    // setup version number in title
+    this->setWindowTitle(this->windowTitle() + QString(_VERSION_NUMBER));
+    
     // initialize variables
 	this->port = 0;	
 	this->comPortConnected = 0;
