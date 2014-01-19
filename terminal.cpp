@@ -166,6 +166,8 @@ void terminal_app::connect_widgets()
 	connect(this->connect_button,SIGNAL( clicked() ),this,SLOT( connect_serial_port() ));		
 	connect(this->rescan_button,SIGNAL( clicked() ),this,SLOT( populate_com_port() ));		
 	connect(this->rx_clear_button,SIGNAL( clicked() ),this->receive_text,SLOT( clear() ));		
+	connect(this->ascii_rx_radio,SIGNAL( clicked() ),this->receive_text,SLOT( clear() ));		
+	connect(this->hex_rx_radio,SIGNAL( clicked() ),this->receive_text,SLOT( clear() ));		
 	connect(this->tx_clear_button,SIGNAL( clicked() ),this->transmit_text,SLOT( clear() ));		
 	connect(this->send_button,SIGNAL( clicked() ),this,SLOT( transmit() ));
 	connect(this->set_macro_button,SIGNAL( clicked() ),this,SLOT( open_macro_editor() ) );
@@ -463,3 +465,4 @@ void terminal_app::update_macro_button_names(void)
 	this->m11_button->setText(this->settings->value("macro_11_name").toString());
 	this->m12_button->setText(this->settings->value("macro_12_name").toString());
 }
+
