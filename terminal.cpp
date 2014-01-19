@@ -165,10 +165,11 @@ void terminal_app::connect_widgets()
 	// basic widget connections to specific actions
 	connect(this->connect_button,SIGNAL( clicked() ),this,SLOT( connect_serial_port() ));		
 	connect(this->rescan_button,SIGNAL( clicked() ),this,SLOT( populate_com_port() ));		
-	connect(this->tx_clear_button,SIGNAL( clicked() ),this->receive_text,SLOT( clear() ));		
-	connect(this->rx_clear_button,SIGNAL( clicked() ),this->transmit_text,SLOT( clear() ));		
+	connect(this->rx_clear_button,SIGNAL( clicked() ),this->receive_text,SLOT( clear() ));		
+	connect(this->tx_clear_button,SIGNAL( clicked() ),this->transmit_text,SLOT( clear() ));		
 	connect(this->send_button,SIGNAL( clicked() ),this,SLOT( transmit() ));
 	connect(this->set_macro_button,SIGNAL( clicked() ),this,SLOT( open_macro_editor() ) );
+	connect(this->quit_button,SIGNAL( clicked() ),this,SLOT( close() ) );
 	
 	// connect all buttons to update config
 	QSignalMapper* signalMapper = new QSignalMapper(this);
