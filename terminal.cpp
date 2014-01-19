@@ -334,12 +334,28 @@ void terminal_app::transmit()
 		hex_error = this->hex_qstring_to_hex_array(this->transmit_field->text(),&tx_array);
 		
 		if( hex_error )
+		{
 			this->transmit_text->insertPlainText(array_to_hex_array(tx_array));
+			this->transmit_text->insertPlainText("\n");
+			
+			// autoscroll tx field
+			QTextCursor c =  this->transmit_text->textCursor();
+			c.movePosition(QTextCursor::End);
+			this->transmit_text->setTextCursor(c);
+			
+		}
 	}
 	else
 	{
 		tx_array = this->transmit_field->text().toAscii();
 		this->transmit_text->insertPlainText(tx_array);
+		this->transmit_text->insertPlainText("\n");
+		
+		// autoscroll tx field
+		QTextCursor c =  this->transmit_text->textCursor();
+		c.movePosition(QTextCursor::End);
+		this->transmit_text->setTextCursor(c);
+		
 	}
 	
 	if( !hex_error )
@@ -445,7 +461,16 @@ void terminal_app::press_macro_button(QString macro_name)
 			
 			// if the hex converted properly, show the hex in the tx field
 			if( hex_error )
+			{
 				this->transmit_text->insertPlainText(array_to_hex_array(tx_array));
+				this->transmit_text->insertPlainText("\n");
+				
+							
+				// autoscroll tx field
+				QTextCursor c =  this->transmit_text->textCursor();
+				c.movePosition(QTextCursor::End);
+				this->transmit_text->setTextCursor(c);
+			}
 		}
 		// ascii
 		else
@@ -453,6 +478,12 @@ void terminal_app::press_macro_button(QString macro_name)
 			// just get byte array and send it out
 			tx_array = tx_string.toAscii();
 			this->transmit_text->insertPlainText(tx_array);
+			this->transmit_text->insertPlainText("\n");
+			
+			// autoscroll tx field
+			QTextCursor c =  this->transmit_text->textCursor();
+			c.movePosition(QTextCursor::End);
+			this->transmit_text->setTextCursor(c);
 		}
 	
 	// if there was an error with parsing the hex string, display it and quit
