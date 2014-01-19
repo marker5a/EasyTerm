@@ -1,4 +1,3 @@
--Disable send button when disconnected from com port
 -Save Hex/ASCII settings for both tx and rx
 -Implement autoscroll functioanlity
 -Add bug reporting feature

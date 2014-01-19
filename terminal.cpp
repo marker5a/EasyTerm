@@ -272,6 +272,7 @@ void terminal_app::connect_serial_port()
 			this->status_bar->update_status_bar_error_status("COM Port Error! " + this->port->errorString());
 			
 			this->comPortConnected = 0;
+			this->send_button->setDisabled(true);
 		}
 		else
 		{
@@ -282,7 +283,8 @@ void terminal_app::connect_serial_port()
 			if( this->port->errorString() != "No Error has occurred"  )
 				this->status_bar->update_status_bar_error_status("WARNING: " + this->port->errorString());
 							
-			this->comPortConnected = 1;			
+			this->comPortConnected = 1;
+			this->send_button->setEnabled(true);
 		}		
 	}
 	// if we are disonnecting
@@ -292,6 +294,7 @@ void terminal_app::connect_serial_port()
 		delete this->port;
 		this->port = 0;
 		this->comPortConnected = 0;
+		this->send_button->setDisabled(true);
 		qDebug("COM port disconnected");
 		this->status_bar->update_status_bar_connection_status("Disconnected");
 		this->status_bar->clear_status_bar_error_status();
