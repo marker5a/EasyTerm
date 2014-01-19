@@ -307,6 +307,7 @@ void terminal_app::write_to_port(QByteArray array)
 	// only allow sending when com port is connected
 	if( this->comPortConnected )
 	{
+		this->port->write(array.data() , array.size() );
 
 	}
 }
@@ -314,21 +315,29 @@ void terminal_app::write_to_port(QByteArray array)
 void terminal_app::transmit()
 {
 	
-	QByteArray tx_array = this->transmit_field->text().toAscii();
-	
+	QByteArray tx_array;
+	int hex_error=1;	
+		
 	// translate text field if based on decision to do ascii or hex
-	if( get_checked_radio(this->hex_ascii_tx) == "ASCII" )
+	if( get_checked_radio(this->hex_ascii_tx) == "Hex" )
 	{
-		//this->port->write(.toStdString().c_str(),this->transmit_field->text().size());
-		//this->transmit_text->insertPlainText(this->transmit_field->text());
-		//this->transmit_field->clear();
+		hex_error = this->hex_qstring_to_hex_array(this->transmit_field->text(),&tx_array);
+		this->transmit_text->insertPlainText(array_to_hex_array(tx_array));
 	}
+	else
+	{
+		tx_array = this->transmit_field->text().toAscii();
+		this->transmit_text->insertPlainText(tx_array);
+	}
+	
 	if( !hex_error )
 	{
 		this->status_bar->update_status_bar_error_status("Invalid Hex String");
 		return;
 	}	
+	this->write_to_port(tx_array);
 	this->status_bar->clear_status_bar_error_status();	
+	this->transmit_field->clear();
 }
 
 void terminal_app::set_checked_radio(QButtonGroup *group,QString name)
@@ -355,7 +364,10 @@ void terminal_app::rx_data_available(void)
     int a = port->bytesAvailable();
     bytes.resize(a);
     this->port->read(bytes.data(), bytes.size());
-	this->receive_text->insertPlainText(bytes);
+	if( this->get_checked_radio(this->hex_ascii_rx) == "ASCII" )
+		this->receive_text->insertPlainText(bytes);
+	else
+		this->receive_text->insertPlainText(array_to_hex_array(bytes));
 }
 
 void terminal_app::toggle_com_port_fields(bool disable)
