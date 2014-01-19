@@ -121,7 +121,21 @@ void macro_editor::save_macros()
 	this->parent->settings->setValue("macro_9_content",	this->macro_9_content->text());
 	this->parent->settings->setValue("macro_10_content",	this->macro_10_content->text());
 	this->parent->settings->setValue("macro_11_content",	this->macro_11_content->text());
-	this->parent->settings->setValue("macro_12_content",	this->macro_12_content->text());	
+	this->parent->settings->setValue("macro_12_content",	this->macro_12_content->text());
+	
+	// save the hex ascii settings of the macros
+	this->parent->settings->setValue("macro_1_hex_ascii" , parent->get_checked_radio(this->macro_1_hex_ascii));
+	this->parent->settings->setValue("macro_2_hex_ascii" , parent->get_checked_radio(this->macro_2_hex_ascii));
+	this->parent->settings->setValue("macro_3_hex_ascii" , parent->get_checked_radio(this->macro_3_hex_ascii));
+	this->parent->settings->setValue("macro_4_hex_ascii" , parent->get_checked_radio(this->macro_4_hex_ascii));
+	this->parent->settings->setValue("macro_5_hex_ascii" , parent->get_checked_radio(this->macro_5_hex_ascii));
+	this->parent->settings->setValue("macro_6_hex_ascii" , parent->get_checked_radio(this->macro_6_hex_ascii));
+	this->parent->settings->setValue("macro_7_hex_ascii" , parent->get_checked_radio(this->macro_7_hex_ascii));
+	this->parent->settings->setValue("macro_8_hex_ascii" , parent->get_checked_radio(this->macro_8_hex_ascii));
+	this->parent->settings->setValue("macro_9_hex_ascii" , parent->get_checked_radio(this->macro_9_hex_ascii));
+	this->parent->settings->setValue("macro_10_hex_ascii", parent->get_checked_radio(this->macro_10_hex_ascii));
+	this->parent->settings->setValue("macro_11_hex_ascii", parent->get_checked_radio(this->macro_11_hex_ascii));
+	this->parent->settings->setValue("macro_12_hex_ascii", parent->get_checked_radio(this->macro_12_hex_ascii));
 	
 	// synchronize the settings
 	this->parent->settings->sync();
