@@ -5,6 +5,7 @@
 #include "ui_terminal.h"
 #include <QSettings>
 #include "macro_editor.h"
+#include "status_bar.h"
 
 
 class terminal_app : public QMainWindow, public Ui::Terminal
@@ -25,6 +26,8 @@ public:
    	
     QString get_checked_radio(QButtonGroup *);
    	QSettings *settings;
+   	class status_bar *status_bar;
+   	
    	
 public slots:
 	void connect_serial_port(void);

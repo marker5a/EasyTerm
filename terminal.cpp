@@ -22,7 +22,7 @@ terminal_app::terminal_app(QMainWindow *parent)
 	
 	group_radio_buttons();	// group the radio buttons together
 		
-	statusbar->showMessage("Disconnected");
+	this->status_bar = new class status_bar(this->statusbar);
 	
 	load_settings();		// load the settings
 	
@@ -265,17 +265,19 @@ void terminal_app::connect_serial_port()
 		if (!this->port->isOpen())
 		{
 			qDebug("Error connecting to com port");
-			statusbar->showMessage("Disconnected: COM Port Error! " + this->port->errorString() );
+			
+			this->status_bar->update_status_bar_error_status("COM Port Error! " + this->port->errorString());
+			
 			this->comPortConnected = 0;
 		}
 		else
 		{
 			qDebug("COM port connected");
-			statusbar->showMessage("Connected to " + comPort );
+			this->status_bar->update_status_bar_connection_status("Connected to " + comPort );
 			
 			// if a warning is present, show it
 			if( this->port->errorString() != "No Error has occurred"  )
-				statusbar->showMessage(QString(statusbar->currentMessage() + " WARNING: " + this->port->errorString()));
+				this->status_bar->update_status_bar_error_status("WARNING: " + this->port->errorString());
 							
 			this->comPortConnected = 1;			
 		}		
@@ -288,7 +290,8 @@ void terminal_app::connect_serial_port()
 		this->port = 0;
 		this->comPortConnected = 0;
 		qDebug("COM port disconnected");
-		statusbar->showMessage("Disconnected");
+		this->status_bar->update_status_bar_connection_status("Disconnected");
+		this->status_bar->clear_status_bar_error_status();
 	}
 	
 	// disable the com port fields if we are connected or enable if disconnected
@@ -319,6 +322,12 @@ void terminal_app::transmit()
 		//this->transmit_text->insertPlainText(this->transmit_field->text());
 		//this->transmit_field->clear();
 	}
+	if( !hex_error )
+	{
+		this->status_bar->update_status_bar_error_status("Invalid Hex String");
+		return;
+	}	
+	this->status_bar->clear_status_bar_error_status();	
 }
 
 void terminal_app::set_checked_radio(QButtonGroup *group,QString name)

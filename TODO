@@ -1,0 +1,10 @@
+-Disable send button when disconnected from com port
+-Save Hex/ASCII settings for both tx and rx
+-Implement autoscroll functioanlity
+-Add bug reporting feature
+-Activate macro button presses
+-Each transmit button press should issue newline to transmit field
+-Thread tx and rx operations
+-Dont clear rx field when switching modes, just insert a space instead to seperate the two
+-Implement Help dialog
+-Implement About dialog

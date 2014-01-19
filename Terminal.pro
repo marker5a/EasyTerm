@@ -11,6 +11,6 @@ include(qextserialport/src/qextserialport.pri)
 CONFIG += debug
 
 # Input
-HEADERS += terminal.h macro_editor.h
+HEADERS += terminal.h macro_editor.h status_bar.h
 FORMS += ui/terminal.ui ui/macro.ui
-SOURCES += main.cpp terminal.cpp macro_editor.cpp
+SOURCES += main.cpp terminal.cpp macro_editor.cpp status_bar.cpp
