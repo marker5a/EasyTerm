@@ -327,7 +327,9 @@ void terminal_app::transmit()
 	if( get_checked_radio(this->hex_ascii_tx) == "Hex" )
 	{
 		hex_error = this->hex_qstring_to_hex_array(this->transmit_field->text(),&tx_array);
-		this->transmit_text->insertPlainText(array_to_hex_array(tx_array));
+		
+		if( hex_error )
+			this->transmit_text->insertPlainText(array_to_hex_array(tx_array));
 	}
 	else
 	{
@@ -443,11 +445,14 @@ int terminal_app::hex_qstring_to_hex_array(QString hex_qstring,QByteArray *resul
 	// iterate through each pair (byte) and alter
 	for( int i = 0 ; i < hex_qstring.size()/2; i++ )
 	{
-		bool error[2];
-		unsigned int byte = (QString(hex_qstring[2*i]).toAscii().toInt(&error[0],16))*16;
+		bool error[2]={true,true};
+		unsigned char byte = (unsigned char)(QString(hex_qstring[2*i]).toAscii().toInt(&error[0],16))*16;
 		byte += QString(hex_qstring[(2*i)+1]).toAscii().toInt(&error[1],16);
 		
-		result->insert(i,(char)QByteArray::number(byte,10).toInt());
+		result->insert(i,(unsigned char)QByteArray::number(byte,10).toInt()&0xFF);
+		
+		if( (!error[0]) | (!error[1]) )
+			return 0;
 	}
 	
 	// return success
