@@ -1,5 +1,6 @@
 -Consolidate rx functionality
--Save Hex/ASCII settings for both tx and rx
+-Save com port setting and recall at startup if com port is available
+-Try and catch a force closed event on the serial port
 -Add bug reporting feature
 -Thread tx and rx operations
 -Implement Help dialog
