@@ -79,6 +79,7 @@ void terminal_app::load_settings()
 			set_checked_radio(this->parity_group,this->settings->value("parity").toString());
 			set_checked_radio(this->hex_ascii_rx,this->settings->value("hex_ascii_rx").toString());
 			set_checked_radio(this->hex_ascii_tx,this->settings->value("hex_ascii_tx").toString());
+			this->autoscroll_check->setChecked(this->settings->value("autoscroll").toBool());
 		}
 		
 		return;
@@ -132,7 +133,17 @@ void terminal_app::group_radio_buttons(void)
 	this->hex_ascii_tx = new QButtonGroup;
 	this->hex_ascii_tx->addButton(this->hex_tx_radio);
 	this->hex_ascii_tx->addButton(this->ascii_tx_radio);
-
+	
+	// connect radio buttons to updating settings
+	connect(this->baud_rate_group	, SIGNAL(buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
+	connect(this->baud_rate_group   , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
+	connect(this->data_bits_group   , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
+	connect(this->stop_bits_group   , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
+	connect(this->parity_group	    , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
+	connect(this->hex_ascii_rx      , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
+	connect(this->hex_ascii_tx		, SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
+	connect(this->autoscroll_check 	, SIGNAL( stateChanged(int))	,	this, SLOT(save_gui_settings()));
+	
 }
 
 void terminal_app::populate_com_port()
@@ -572,3 +583,17 @@ void terminal_app::update_macro_button_names(void)
 	this->m12_button->setText(this->settings->value("macro_12_name").toString());
 }
 
+void terminal_app::save_gui_settings()
+{
+	
+	this->settings->setValue("baud_rate" 	, this->get_checked_radio(this->baud_rate_group));
+	this->settings->setValue("data_bits" 	, this->get_checked_radio(this->data_bits_group));
+	this->settings->setValue("stop_bits" 	, this->get_checked_radio(this->stop_bits_group));
+	this->settings->setValue("parity" 		, this->get_checked_radio(this->parity_group));
+	this->settings->setValue("com_port" 	, this->com_port_combo->currentText());
+	this->settings->setValue("hex_ascii_rx" , this->get_checked_radio(this->hex_ascii_rx));
+	this->settings->setValue("hex_ascii_tx" , this->get_checked_radio(this->hex_ascii_tx));
+	this->settings->setValue("autoscroll"	, this->autoscroll_check->isChecked() );
+
+	this->settings->sync();
+}

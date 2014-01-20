@@ -39,6 +39,7 @@ public slots:
 	void open_macro_editor(void);
 	void press_macro_button(QString macro_name);
 	void rx_ascii_hex();
+	void save_gui_settings();
 	
 private:
 	QextSerialPort *port;
