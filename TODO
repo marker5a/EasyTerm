@@ -7,3 +7,4 @@
 -Implement About dialog
 -Consolidate tx functionality
 -Cleanup QSettings logic
+-Dont allow unfilled macros to be sent
