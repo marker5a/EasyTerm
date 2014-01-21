@@ -3,13 +3,13 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = 
-DEPENDPATH += . ui
+DEPENDPATH += .
 INCLUDEPATH += .
 QT += core gui
-include(qextserialport/src/qextserialport.pri)
-CONFIG += debug
+QT += widgets
 RESOURCES = resources.qrc
+QT += serialport
+LIBS += -L/home/marker5a/Desktop/Terminal/lib
 
 # Input
 HEADERS += terminal.h macro_editor.h status_bar.h

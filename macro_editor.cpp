@@ -1,4 +1,4 @@
-#include <QtGui> 
+#include <QtWidgets> 
 #include "macro_editor.h"
 
 macro_editor::macro_editor(terminal_app *parent)
