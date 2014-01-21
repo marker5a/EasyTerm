@@ -450,7 +450,7 @@ void terminal_app::transmit()
 	}	
 	this->write_to_port(tx_array);
 	this->status_bar->clear_status_bar_error_status();	
-	this->transmit_field->clear();
+	
 }
 
 void terminal_app::set_checked_radio(QButtonGroup *group,QString name)
