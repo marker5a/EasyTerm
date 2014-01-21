@@ -9,6 +9,7 @@ INCLUDEPATH += .
 QT += core gui
 include(qextserialport/src/qextserialport.pri)
 CONFIG += debug
+RESOURCES = resources.qrc
 
 # Input
 HEADERS += terminal.h macro_editor.h status_bar.h

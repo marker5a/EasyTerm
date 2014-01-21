@@ -2,6 +2,10 @@
 <ui version="4.0">
  <class>Terminal</class>
  <widget class="QMainWindow" name="Terminal">
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/resources/logo.png</normaloff>:/resources/logo.png</iconset>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
