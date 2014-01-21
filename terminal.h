@@ -1,7 +1,7 @@
 #ifndef TERMINAL_H
 #define TERMINAL_H
 
-#include <QtSerialPort/QtSerialPort>
+#include <QSerialPort>
 #include "ui_terminal.h"
 #include <QSettings>
 #include "macro_editor.h"
