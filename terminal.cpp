@@ -2,10 +2,12 @@
 #include "terminal.h"
 #include <QStringList>
 #include <QSerialPortInfo>
-#include <QtSerialPort/QtSerialPort>
+#include <QSerialPort>
 #include <QButtonGroup>
 #include <QSignalMapper>
 #include <QMutex>
+#include <QKeySequence>
+#include <QShortcut>
 #include "macro_editor.h"
 
 terminal_app::terminal_app(QMainWindow *parent)
@@ -31,10 +33,56 @@ terminal_app::terminal_app(QMainWindow *parent)
 						
 	this->editor = new macro_editor(this);						// create instance of macro gui
 	
-	update_macro_button_names();								// load in the macro names from the settings and set the button names
+	update_macro_button_names();								// load in the macro names from the settings and set the button names		
 	
+	setup_keybindings();
+}
+
+void terminal_app::setup_keybindings(void)
+{
+	QShortcut *m1 = new QShortcut(QKeySequence("F1"),this);
+	QShortcut *m2 = new QShortcut(QKeySequence("F2"),this);
+	QShortcut *m3 = new QShortcut(QKeySequence("F3"),this);
+	QShortcut *m4 = new QShortcut(QKeySequence("F4"),this);
+	QShortcut *m5 = new QShortcut(QKeySequence("F5"),this);
+	QShortcut *m6 = new QShortcut(QKeySequence("F6"),this);
+	QShortcut *m7 = new QShortcut(QKeySequence("F7"),this);
+	QShortcut *m8 = new QShortcut(QKeySequence("F8"),this);
+	QShortcut *m9 = new QShortcut(QKeySequence("F9"),this);
+	QShortcut *m10 = new QShortcut(QKeySequence("F10"),this);
+	QShortcut *m11 = new QShortcut(QKeySequence("F11"),this);
+	QShortcut *m12 = new QShortcut(QKeySequence("F12"),this);
 	
-		
+	QSignalMapper* signalMapper = new QSignalMapper(this);
+	connect(m1 ,SIGNAL( activated() ),signalMapper,SLOT( map() ) );
+	connect(m2 ,SIGNAL( activated() ),signalMapper,SLOT( map() ) );
+	connect(m3 ,SIGNAL( activated() ),signalMapper,SLOT( map() ) );
+	connect(m4 ,SIGNAL( activated() ),signalMapper,SLOT( map() ) );
+	connect(m5 ,SIGNAL( activated() ),signalMapper,SLOT( map() ) );
+	connect(m6 ,SIGNAL( activated() ),signalMapper,SLOT( map() ) );
+	connect(m7 ,SIGNAL( activated() ),signalMapper,SLOT( map() ) );
+	connect(m8 ,SIGNAL( activated() ),signalMapper,SLOT( map() ) );
+	connect(m9 ,SIGNAL( activated() ),signalMapper,SLOT( map() ) );
+	connect(m10,SIGNAL( activated() ),signalMapper,SLOT( map() ) );
+	connect(m11,SIGNAL( activated() ),signalMapper,SLOT( map() ) );
+	connect(m12,SIGNAL( activated() ),signalMapper,SLOT( map() ) );
+	
+	// map macro names to consolidate into one routine call
+	signalMapper->setMapping(m1,  "macro_1_");
+	signalMapper->setMapping(m2,  "macro_2_");
+	signalMapper->setMapping(m3,  "macro_3_");
+	signalMapper->setMapping(m4,  "macro_4_");
+	signalMapper->setMapping(m5,  "macro_5_");
+	signalMapper->setMapping(m6,  "macro_6_");
+	signalMapper->setMapping(m7,  "macro_7_");
+	signalMapper->setMapping(m8,  "macro_8_");
+	signalMapper->setMapping(m9,  "macro_9_");
+	signalMapper->setMapping(m10,"macro_10_");
+	signalMapper->setMapping(m11,"macro_11_");
+	signalMapper->setMapping(m12,"macro_12_");
+	
+	// one time connect of macro buttons
+	connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(press_macro_button(QString))) ;
 }
 
 void terminal_app::load_settings()

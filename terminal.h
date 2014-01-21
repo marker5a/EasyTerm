@@ -4,6 +4,7 @@
 #include <QSerialPort>
 #include "ui_terminal.h"
 #include <QSettings>
+#include <QShortcut>
 #include "macro_editor.h"
 #include "status_bar.h"
 
@@ -25,6 +26,8 @@ public:
    	void write_to_port(QByteArray array);
    	int hex_qstring_to_hex_array(QString hex_qstring,QByteArray *result);
    	QByteArray array_to_hex_array(QByteArray array_in);
+   	void setup_keybindings(void);
+   	QShortcut *act1;
    	
     QString get_checked_radio(QButtonGroup *);
    	QSettings *settings;
