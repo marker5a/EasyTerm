@@ -1,8 +1,8 @@
-#include <QtGui> 
+#include <QtWidgets> 
 #include "terminal.h"
-#include "qextserialenumerator.h"
-#include <qextserialport.h>
 #include <QStringList>
+#include <QSerialPortInfo>
+#include <QtSerialPort/QtSerialPort>
 #include <QButtonGroup>
 #include <QSignalMapper>
 #include <QMutex>
@@ -46,6 +46,9 @@ void terminal_app::load_settings()
 		// load up settings with default settings if configuration is not set
 		if( !this->settings->allKeys().size() )
 		{
+			
+			qDebug() << "Loading default settings";
+			
 			this->settings->setValue("baud_rate" , "9600");
 			this->settings->setValue("data_bits" , "8");
 			this->settings->setValue("stop_bits" , "1");
@@ -73,6 +76,9 @@ void terminal_app::load_settings()
 		// if config is set, load up everything
 		else
 		{
+			
+			qDebug() << "Loading saved settings";
+			
 			set_checked_radio(this->baud_rate_group,this->settings->value("baud_rate").toString());
 			set_checked_radio(this->data_bits_group,this->settings->value("data_bits").toString());
 			set_checked_radio(this->stop_bits_group,this->settings->value("stop_bits").toString());
@@ -146,24 +152,27 @@ void terminal_app::group_radio_buttons(void)
 	
 }
 
+
 void terminal_app::populate_com_port()
 {		
 	// clear the com port
 	this->com_port_combo->clear();    
 	
 	// grab the list and fill them in
-	QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();    
+	QList<QSerialPortInfo> ports = QSerialPortInfo::availablePorts();    
 	
 	for (int i = 0; i < ports.size(); i++)
 	{
-		this->com_port_combo->insertItems(0, QStringList()
+		this->com_port_combo->addItem( 
 		#ifdef __unix__
-			<< QApplication::translate("MainWindow", ports.at(i).physName.toStdString().c_str(), 0, QApplication::UnicodeUTF8) );
+			ports[i].systemLocation() );
 		#else
-			<< QApplication::translate("MainWindow", ports.at(i).portName.toStdString().c_str(), 0, QApplication::UnicodeUTF8) );
+			ports[i].portName() );
 		#endif
     }	
 }
+
+
 void terminal_app::rx_ascii_hex()
 {
 	this->receive_text->insertPlainText("\n");
@@ -232,7 +241,7 @@ void terminal_app::connect_widgets()
 	
 	// one time connect of macro buttons
 	connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(press_macro_button(QString))) ;
-	
+
 }
 
 void terminal_app::connect_serial_port()
@@ -244,54 +253,54 @@ void terminal_app::connect_serial_port()
 		
 		// create com port if it doesnt exist
 		if( !this->port )
-			this->port = new QextSerialPort(comPort);
+			this->port = new QSerialPort(comPort);
 		
 		this->comPortName = comPort.toStdString();		
-				
+		
+		// check for error message
+		qDebug() << this->port->open(QIODevice::ReadWrite);
+		
 		// configure the port
 		this->port->setPortName(this->comPortName.c_str());
-		this->port->setBaudRate((enum BaudRateType)(get_checked_radio(this->baud_rate_group).toInt()));
-		this->port->setFlowControl(FLOW_OFF);
+		this->port->setBaudRate(get_checked_radio(this->baud_rate_group).toInt());
+		this->port->setFlowControl(QSerialPort::NoFlowControl);
 		
 		// get the acutal enum for parity
-			enum ParityType parity;
+			enum QSerialPort::Parity parity;
 			if( get_checked_radio(this->parity_group) == "none" )
-				parity = PAR_NONE;
+				parity = QSerialPort::NoParity;
 			if( get_checked_radio(this->parity_group) == "odd" )
-				parity = PAR_ODD;
+				parity = QSerialPort::OddParity;
 			if( get_checked_radio(this->parity_group) == "even" )
-				parity = PAR_EVEN;		
+				parity = QSerialPort::EvenParity;		
 			#if defined(Q_OS_WIN) || defined(qdoc)
 			if( get_checked_radio(this->parity_group) == "mark" )
-				parity = PAR_MARK;
+				parity = QSerialPort::MarkParity;
 			#endif
 			if( get_checked_radio(this->parity_group) == "space" )
-				parity = PAR_SPACE;
+				parity = QSerialPort::SpaceParity;
 			this->port->setParity(parity);
 		
-		this->port->setDataBits((enum DataBitsType)(get_checked_radio(this->data_bits_group).toInt()));
+		this->port->setDataBits((QSerialPort::DataBits)get_checked_radio(this->data_bits_group).toInt());
 		
 		// get the acutal stop bits
-			enum StopBitsType stop_bits;
+			enum QSerialPort::StopBits stop_bits;
 			if( get_checked_radio(this->stop_bits_group) == "1" )
-				stop_bits = STOP_1;
+				stop_bits = QSerialPort::OneStop;
 			if( get_checked_radio(this->stop_bits_group) == "2" )
-				stop_bits = STOP_2;
+				stop_bits = QSerialPort::TwoStop;
 			#if defined(Q_OS_WIN) || defined(qdoc)
 			if( get_checked_radio(this->stop_bits_group) == "1.5" )
-				stop_bits = STOP_1_5;
+				stop_bits = QSerialPort::OneAndHalfStop;
 			#endif
 			this->port->setStopBits(stop_bits);
-			
-		this->port->setTimeout(500);
-		this->port->setQueryMode(QextSerialPort::EventDriven);
+
 		this->port->flush();
 		
 		// connect receiver on serial port to on_ready_read
 		connect(this->port, SIGNAL(readyRead()), this, SLOT(rx_data_available()));
 		
-		// check for error message
-		qDebug() << this->port->open(QIODevice::ReadWrite | QIODevice::Unbuffered);
+
 		
 		if (!this->port->isOpen())
 		{
@@ -306,6 +315,7 @@ void terminal_app::connect_serial_port()
 		{
 			qDebug("COM port connected");
 			this->status_bar->update_status_bar_connection_status("Connected to " + comPort );
+			
 			
 			// if a warning is present, show it
 			if( this->port->errorString() != "No Error has occurred"  )
@@ -350,7 +360,7 @@ void terminal_app::transmit()
 	
 	QByteArray tx_array;
 	int hex_error=1;	
-	
+		
 	// dont even try and do anything unless the com port is connected
 	if( !this->comPortConnected )
 		return;	
@@ -374,7 +384,7 @@ void terminal_app::transmit()
 	}
 	else
 	{
-		tx_array = this->transmit_field->text().toAscii();
+		tx_array = this->transmit_field->text().toLatin1();
 		this->transmit_text->insertPlainText(tx_array);
 		this->transmit_text->insertPlainText("\n");
 		
@@ -416,7 +426,7 @@ QString terminal_app::get_checked_radio(QButtonGroup *group)
 void terminal_app::rx_data_available(void)
 {	
 	QByteArray bytes;
-    int a = port->bytesAvailable();
+    int a = this->port->bytesAvailable();
     bytes.resize(a);
     this->port->read(bytes.data(), bytes.size());
     
@@ -503,7 +513,7 @@ void terminal_app::press_macro_button(QString macro_name)
 		else
 		{
 			// just get byte array and send it out
-			tx_array = tx_string.toAscii();
+			tx_array = tx_string.toLatin1();
 			this->transmit_text->insertPlainText(tx_array);
 			this->transmit_text->insertPlainText("\n");
 			
@@ -553,8 +563,8 @@ int terminal_app::hex_qstring_to_hex_array(QString hex_qstring,QByteArray *resul
 	for( int i = 0 ; i < hex_qstring.size()/2; i++ )
 	{
 		bool error[2]={true,true};
-		unsigned char byte = (unsigned char)(QString(hex_qstring[2*i]).toAscii().toInt(&error[0],16))*16;
-		byte += QString(hex_qstring[(2*i)+1]).toAscii().toInt(&error[1],16);
+		unsigned char byte = (unsigned char)(QString(hex_qstring[2*i]).toLatin1().toInt(&error[0],16))*16;
+		byte += QString(hex_qstring[(2*i)+1]).toLatin1().toInt(&error[1],16);
 		
 		result->insert(i,(unsigned char)QByteArray::number(byte,10).toInt()&0xFF);
 		

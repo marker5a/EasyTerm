@@ -1,7 +1,7 @@
 #ifndef TERMINAL_H
 #define TERMINAL_H
 
-#include <qextserialport.h>
+#include <QtSerialPort/QtSerialPort>
 #include "ui_terminal.h"
 #include <QSettings>
 #include "macro_editor.h"
@@ -42,7 +42,7 @@ public slots:
 	void save_gui_settings();
 	
 private:
-	QextSerialPort *port;
+	QSerialPort *port;
 	bool comPortConnected;
 	std::string comPortName;	
 	QButtonGroup *baud_rate_group;
