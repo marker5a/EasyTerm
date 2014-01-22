@@ -580,8 +580,7 @@ void terminal_app::press_macro_button(QString macro_name)
 	
 	// write it out on the serial port and clear the error
 	this->write_to_port(tx_array);
-	this->status_bar->clear_status_bar_error_status();	
-	this->transmit_field->clear();
+	this->status_bar->clear_status_bar_error_status();
 		
 }
 
