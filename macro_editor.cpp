@@ -61,6 +61,32 @@ macro_editor::macro_editor(terminal_app *parent)
 	parent->set_checked_radio(this->macro_11_hex_ascii,parent->settings->value("macro_11_hex_ascii").toString());
 	parent->set_checked_radio(this->macro_12_hex_ascii,parent->settings->value("macro_12_hex_ascii").toString());
 	
+	// set default macro names if not defined in settings yet
+	if( !parent->settings->contains("macro_1_name") )
+		parent->settings->setValue("macro_1_name","M1");
+	if( !parent->settings->contains("macro_2_name") )
+		parent->settings->setValue("macro_2_name","M2");
+	if( !parent->settings->contains("macro_3_name") )
+		parent->settings->setValue("macro_3_name","M3");
+	if( !parent->settings->contains("macro_4_name") )
+		parent->settings->setValue("macro_4_name","M4");
+	if( !parent->settings->contains("macro_5_name") )
+		parent->settings->setValue("macro_5_name","M5");
+	if( !parent->settings->contains("macro_6_name") )
+		parent->settings->setValue("macro_6_name","M6");
+	if( !parent->settings->contains("macro_7_name") )
+		parent->settings->setValue("macro_7_name","M7");
+	if( !parent->settings->contains("macro_8_name") )
+		parent->settings->setValue("macro_8_name","M8");
+	if( !parent->settings->contains("macro_9_name") )
+		parent->settings->setValue("macro_9_name","M9");
+	if( !parent->settings->contains("macro_10_name") )
+		parent->settings->setValue("macro_10_name","M10");
+	if( !parent->settings->contains("macro_11_name") )
+		parent->settings->setValue("macro_11_name","M11");
+	if( !parent->settings->contains("macro_12_name") )
+		parent->settings->setValue("macro_12_name","M12");
+	
 	// set macro names from settings
 	this->macro_1_name->setText(	parent->settings->value("macro_1_name").toString());
 	this->macro_2_name->setText(	parent->settings->value("macro_2_name").toString());
