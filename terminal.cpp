@@ -35,11 +35,12 @@ terminal_app::terminal_app(QMainWindow *parent)
 	
 	update_macro_button_names();								// load in the macro names from the settings and set the button names		
 	
-	setup_keybindings();
+	setup_keybindings();										// link F1-F12 buttons to macro buttons
 }
 
 void terminal_app::setup_keybindings(void)
 {
+	// create the keybinding shortcuts
 	QShortcut *m1 = new QShortcut(QKeySequence("F1"),this);
 	QShortcut *m2 = new QShortcut(QKeySequence("F2"),this);
 	QShortcut *m3 = new QShortcut(QKeySequence("F3"),this);
@@ -53,6 +54,7 @@ void terminal_app::setup_keybindings(void)
 	QShortcut *m11 = new QShortcut(QKeySequence("F11"),this);
 	QShortcut *m12 = new QShortcut(QKeySequence("F12"),this);
 	
+	// create a signalmapper to consolidate some of the function calls
 	QSignalMapper* signalMapper = new QSignalMapper(this);
 	connect(m1 ,SIGNAL( activated() ),signalMapper,SLOT( map() ) );
 	connect(m2 ,SIGNAL( activated() ),signalMapper,SLOT( map() ) );
