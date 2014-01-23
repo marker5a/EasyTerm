@@ -1,4 +1,6 @@
 -Consolidate rx functionality
+-Receive function is misinterpretting some characters if the string is the first to be dsplayed
+-Don't insert newline into rx field if the field is empty or has not accrued anymore data
 -Save com port setting and recall at startup if com port is available
 -Try and catch a force closed event on the serial port
 -Add bug reporting feature
@@ -7,4 +9,3 @@
 -Implement About dialog
 -Consolidate tx functionality
 -Cleanup QSettings logic
--Dont allow unfilled macros to be sent

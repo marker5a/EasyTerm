@@ -532,10 +532,20 @@ void terminal_app::press_macro_button(QString macro_name)
 	
 	// dont even try and do anything unless the com port is connected
 	if( !this->comPortConnected )
-		return;	
+		return;
 	
 	// get the content of the macro and store it in a string
 	QString tx_string = this->settings->value(macro_name + "content").toString();
+	
+	// if macro is empty, ignore and display warning
+	if( !tx_string.size() )
+	{
+		// show warning message
+		this->status_bar->update_status_bar_error_status("WARNING: Macro '" + this->settings->value(macro_name + "name").toString() + "' is empty");
+		
+		// just quit
+		return;
+	}	
 	
 	// determine action based on hex or ascii
 		// hex
