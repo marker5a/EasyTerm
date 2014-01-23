@@ -22,7 +22,7 @@ terminal_app::terminal_app(QMainWindow *parent)
 	this->comPortConnected = 0;
 	this->pending_receive_text_newline=false;
     
-    populate_com_port();										// fill in the com port combo box
+    
 									
 	connect_widgets();											// connect widgets with callbacks
 	
@@ -31,6 +31,8 @@ terminal_app::terminal_app(QMainWindow *parent)
 	this->status_bar = new class status_bar(this->statusbar);	// create and instance of the status_bar class
 	
 	load_settings();											// load the settings
+	
+	populate_com_port();										// fill in the com port combo box
 						
 	this->editor = new macro_editor(this);						// create instance of macro gui
 	
@@ -104,7 +106,6 @@ void terminal_app::load_settings()
 			this->settings->setValue("data_bits" , "8");
 			this->settings->setValue("stop_bits" , "1");
 			this->settings->setValue("parity" , "none");
-			this->settings->setValue("com_port" , "/dev/ttyS0");
 			this->settings->setValue("hex_ascii_rx" , "Hex");
 			this->settings->setValue("hex_ascii_tx" , "Hex");
 			
@@ -192,8 +193,7 @@ void terminal_app::group_radio_buttons(void)
 	this->hex_ascii_tx->addButton(this->ascii_tx_radio);
 	
 	// connect radio buttons to updating settings
-	connect(this->baud_rate_group	, SIGNAL(buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
-	connect(this->baud_rate_group   , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
+	connect(this->baud_rate_group	, SIGNAL(buttonClicked(int))	, 	this, SLOT(save_gui_settings()));	
 	connect(this->data_bits_group   , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
 	connect(this->stop_bits_group   , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
 	connect(this->parity_group	    , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
@@ -220,7 +220,14 @@ void terminal_app::populate_com_port()
 		#else
 			ports[i].portName() );
 		#endif
-    }	
+    }
+    
+    // try and set the com port last used
+    int com_port_index = this->com_port_combo->findText(this->settings->value("com_port").toString());
+    
+    // if the com port is found in the current menu, select it, otherwise ignore
+    if( com_port_index != -1 )
+		this->com_port_combo->setCurrentIndex(com_port_index);	
 }
 
 
@@ -359,6 +366,8 @@ void terminal_app::connect_serial_port()
 			qDebug("COM port connected");
 			this->status_bar->update_status_bar_connection_status("Connected to " + comPort );
 			
+			// save the gui settings
+			save_gui_settings();
 			
 			// if a warning is present, show it
 			if( this->port->errorString() != "No Error has occurred"  )

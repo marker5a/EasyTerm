@@ -1,6 +1,5 @@
 -Consolidate rx functionality
 -Receive function is misinterpretting some characters if the string is the first to be dsplayed (only in linux)
--Save com port setting and recall at startup if com port is available
 -Try and catch a force closed event on the serial port
 -Add bug reporting feature
 -Thread tx and rx operations
