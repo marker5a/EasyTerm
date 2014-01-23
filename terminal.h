@@ -55,6 +55,7 @@ private:
 	QButtonGroup *hex_ascii_rx;
 	QButtonGroup *hex_ascii_tx;
 	class macro_editor *editor;
+	bool pending_receive_text_newline;
 }; 
 
 #endif

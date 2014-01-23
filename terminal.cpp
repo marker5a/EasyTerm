@@ -20,6 +20,7 @@ terminal_app::terminal_app(QMainWindow *parent)
     // initialize variables
 	this->port = 0;	
 	this->comPortConnected = 0;
+	this->pending_receive_text_newline=false;
     
     populate_com_port();										// fill in the com port combo box
 									
@@ -224,16 +225,8 @@ void terminal_app::populate_com_port()
 
 
 void terminal_app::rx_ascii_hex()
-{
-	this->receive_text->insertPlainText("\n");
-	
-	// autoscroll receive field if checked
-	if( this->autoscroll_check->isChecked() )
-	{
-		QTextCursor c =  this->receive_text->textCursor();
-		c.movePosition(QTextCursor::End);
-		this->receive_text->setTextCursor(c);
-	}
+{	
+	this->pending_receive_text_newline = true;
 
 	return;
 }
@@ -480,6 +473,19 @@ void terminal_app::rx_data_available(void)
     bytes.resize(a);
     this->port->read(bytes.data(), bytes.size());
     
+    // if request for newline in receive field, try and process it
+    if( this->pending_receive_text_newline )    
+    {
+		// clear the flag
+		this->pending_receive_text_newline = false;
+		
+		// only insert the newline if content currently exists in the receive field
+		if( this->receive_text->toPlainText().size() > 0 )
+			this->receive_text->insertPlainText("\n");
+	}
+		
+    
+    // interpret incoming data as hex or ascii
 	if( this->get_checked_radio(this->hex_ascii_rx) == "ASCII" )
 		this->receive_text->insertPlainText(bytes);
 	else
