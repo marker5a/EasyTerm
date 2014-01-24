@@ -10,6 +10,12 @@
 #include <QShortcut>
 #include "macro_editor.h"
 
+terminal_app::~terminal_app()
+{
+	this->port->flush();
+	delete this->port;
+}
+
 terminal_app::terminal_app(QMainWindow *parent)
 {
     setupUi(this); 												// this sets up GUI

@@ -16,7 +16,7 @@ class terminal_app : public QMainWindow, public Ui::Terminal
  
 public:
     terminal_app(QMainWindow *parent = 0);
-      
+	~terminal_app();
     void connect_widgets();
     void group_radio_buttons(void);
     void toggle_com_port_fields(bool disable);
