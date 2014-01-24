@@ -15,8 +15,7 @@ class terminal_app : public QMainWindow, public Ui::Terminal
     Q_OBJECT
  
 public:
-    terminal_app(QMainWindow *parent = 0);
-	~terminal_app();
+    terminal_app(QApplication *parent = 0);
     void connect_widgets();
     void group_radio_buttons(void);
     void toggle_com_port_fields(bool disable);
@@ -43,6 +42,7 @@ public slots:
 	void press_macro_button(QString macro_name);
 	void rx_ascii_hex();
 	void save_gui_settings();
+	void close_terminal_app();
 	
 private:
 	QSerialPort *port;

@@ -10,15 +10,22 @@
 #include <QShortcut>
 #include "macro_editor.h"
 
-terminal_app::~terminal_app()
+void terminal_app::close_terminal_app()
 {
-	this->port->flush();
-	delete this->port;
+	// if com port is created, clean house
+	if( this->port )
+	{
+		this->port->flush();
+		delete this->port;
+	}
 }
 
-terminal_app::terminal_app(QMainWindow *parent)
+terminal_app::terminal_app(QApplication *parent)
 {
     setupUi(this); 												// this sets up GUI
+    
+    // connect closing event of window to cleanup
+    connect(parent,SIGNAL(lastWindowClosed()),this,SLOT(close_terminal_app()));
     
     // setup version number in title
     this->setWindowTitle(this->windowTitle() + QString(_VERSION_NUMBER));
@@ -26,9 +33,7 @@ terminal_app::terminal_app(QMainWindow *parent)
     // initialize variables
 	this->port = 0;	
 	this->comPortConnected = 0;
-	this->pending_receive_text_newline=false;
-    
-    
+	this->pending_receive_text_newline=false;    
 									
 	connect_widgets();											// connect widgets with callbacks
 	
