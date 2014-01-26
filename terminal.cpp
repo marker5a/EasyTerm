@@ -50,6 +50,7 @@ terminal_app::terminal_app(QApplication *parent)
 	update_macro_button_names();								// load in the macro names from the settings and set the button names		
 	
 	setup_keybindings();										// link F1-F12 buttons to macro buttons
+		connect(this->clear_settings_button,SIGNAL( clicked() ),this,SLOT( clear_settings() ) );
 }
 
 void terminal_app::setup_keybindings(void)
@@ -303,6 +304,10 @@ void terminal_app::connect_widgets()
 	// one time connect of macro buttons
 	connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(press_macro_button(QString))) ;
 
+}
+void terminal_app::clear_settings()
+{
+		this->settings->clear();
 }
 
 void terminal_app::connect_serial_port()

@@ -43,6 +43,7 @@ public slots:
 	void rx_ascii_hex();
 	void save_gui_settings();
 	void close_terminal_app();
+	void clear_settings();
 	
 private:
 	QSerialPort *port;

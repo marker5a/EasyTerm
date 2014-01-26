@@ -7,3 +7,5 @@
 -Implement About dialog
 -Consolidate tx functionality
 -Cleanup QSettings logic
+-Add socket interface
+-Add scripting engine
