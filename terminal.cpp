@@ -243,17 +243,26 @@ void terminal_app::populate_com_port()
 	this->com_port_combo->clear();    
 	
 	// grab the list and fill them in
-	QList<QSerialPortInfo> ports = QSerialPortInfo::availablePorts();    
+	QList<QSerialPortInfo> ports = QSerialPortInfo::availablePorts();
+	QStringList com_port_names;
 	
+	// put com port names into a qstringlist for sorting
 	for (int i = 0; i < ports.size(); i++)
 	{
-		this->com_port_combo->addItem( 
+		com_port_names <<  
 		#ifdef __unix__
-			ports[i].systemLocation() );
+			ports[i].systemLocation();
 		#else
-			ports[i].portName() );
+			ports[i].portName();
 		#endif
     }
+    
+    // sort the list of com ports by name
+    com_port_names.sort();
+    
+    // iteratively insert into the com port combo box
+    for (int i = 0; i < ports.size(); i++)
+		this->com_port_combo->addItem(com_port_names[i]);
     
     // try and set the com port last used
     int com_port_index = this->com_port_combo->findText(this->settings->value("com_port").toString());

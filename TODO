@@ -9,4 +9,3 @@
 -Cleanup QSettings logic
 -Add socket interface
 -Add scripting engine
--Alphabateize the com port selection menu
