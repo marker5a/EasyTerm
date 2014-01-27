@@ -6,8 +6,69 @@ macro_editor::macro_editor(terminal_app *parent)
     setupUi(this); 			// this sets up the dialog window
     
     this->parent = parent;
-    
-    // allocate memory for the qbuttongroup
+}
+
+void macro_editor::save_macros()
+{
+	// save macro names into settings
+	this->parent->settings->setValue("macro_1_name",		this->macro_1_name->text());
+	this->parent->settings->setValue("macro_2_name",		this->macro_2_name->text());
+	this->parent->settings->setValue("macro_3_name",		this->macro_3_name->text());
+	this->parent->settings->setValue("macro_4_name",		this->macro_4_name->text());
+	this->parent->settings->setValue("macro_5_name",		this->macro_5_name->text());
+	this->parent->settings->setValue("macro_6_name",		this->macro_6_name->text());
+	this->parent->settings->setValue("macro_7_name",		this->macro_7_name->text());
+	this->parent->settings->setValue("macro_8_name",		this->macro_8_name->text());
+	this->parent->settings->setValue("macro_9_name",		this->macro_9_name->text());
+	this->parent->settings->setValue("macro_10_name",		this->macro_10_name->text());
+	this->parent->settings->setValue("macro_11_name",		this->macro_11_name->text());
+	this->parent->settings->setValue("macro_12_name",		this->macro_12_name->text());		
+	
+	// save macro contents into settings
+	this->parent->settings->setValue("macro_1_content",	this->macro_1_content->text());
+	this->parent->settings->setValue("macro_2_content",	this->macro_2_content->text());
+	this->parent->settings->setValue("macro_3_content",	this->macro_3_content->text());
+	this->parent->settings->setValue("macro_4_content",	this->macro_4_content->text());
+	this->parent->settings->setValue("macro_5_content",	this->macro_5_content->text());
+	this->parent->settings->setValue("macro_6_content",	this->macro_6_content->text());
+	this->parent->settings->setValue("macro_7_content",	this->macro_7_content->text());
+	this->parent->settings->setValue("macro_8_content",	this->macro_8_content->text());
+	this->parent->settings->setValue("macro_9_content",	this->macro_9_content->text());
+	this->parent->settings->setValue("macro_10_content",	this->macro_10_content->text());
+	this->parent->settings->setValue("macro_11_content",	this->macro_11_content->text());
+	this->parent->settings->setValue("macro_12_content",	this->macro_12_content->text());
+	
+	// save the hex ascii settings of the macros
+	this->parent->settings->setValue("macro_1_hex_ascii" , parent->get_checked_radio(this->macro_1_hex_ascii));
+	this->parent->settings->setValue("macro_2_hex_ascii" , parent->get_checked_radio(this->macro_2_hex_ascii));
+	this->parent->settings->setValue("macro_3_hex_ascii" , parent->get_checked_radio(this->macro_3_hex_ascii));
+	this->parent->settings->setValue("macro_4_hex_ascii" , parent->get_checked_radio(this->macro_4_hex_ascii));
+	this->parent->settings->setValue("macro_5_hex_ascii" , parent->get_checked_radio(this->macro_5_hex_ascii));
+	this->parent->settings->setValue("macro_6_hex_ascii" , parent->get_checked_radio(this->macro_6_hex_ascii));
+	this->parent->settings->setValue("macro_7_hex_ascii" , parent->get_checked_radio(this->macro_7_hex_ascii));
+	this->parent->settings->setValue("macro_8_hex_ascii" , parent->get_checked_radio(this->macro_8_hex_ascii));
+	this->parent->settings->setValue("macro_9_hex_ascii" , parent->get_checked_radio(this->macro_9_hex_ascii));
+	this->parent->settings->setValue("macro_10_hex_ascii", parent->get_checked_radio(this->macro_10_hex_ascii));
+	this->parent->settings->setValue("macro_11_hex_ascii", parent->get_checked_radio(this->macro_11_hex_ascii));
+	this->parent->settings->setValue("macro_12_hex_ascii", parent->get_checked_radio(this->macro_12_hex_ascii));
+	
+	// synchronize the settings
+	this->parent->settings->sync();
+	
+	// close the dialog
+	this->close();
+	
+}
+
+void macro_editor::connect_widgets()
+{
+	connect(this->button_box,SIGNAL( accepted() ) , this , SLOT( save_macros() ) );
+	connect(this->button_box,SIGNAL( rejected() ) , this , SLOT( close() ) );
+}
+
+void macro_editor::group_radio_buttons(void)
+{
+	// allocate memory for the qbuttongroup
     this->macro_1_hex_ascii  = new QButtonGroup;
     this->macro_2_hex_ascii  = new QButtonGroup;
 	this->macro_3_hex_ascii  = new QButtonGroup;
@@ -46,7 +107,10 @@ macro_editor::macro_editor(terminal_app *parent)
 	this->macro_11_hex_ascii->addButton( this->macro_11_ascii 	);
 	this->macro_12_hex_ascii->addButton( this->macro_12_hex 	);
 	this->macro_12_hex_ascii->addButton( this->macro_12_ascii 	);
-	
+}
+
+void macro_editor::load_settings()
+{
 	// check the hex/ascii buttons
 	parent->set_checked_radio(this->macro_1_hex_ascii,parent->settings->value("macro_1_hex_ascii").toString());
 	parent->set_checked_radio(this->macro_2_hex_ascii,parent->settings->value("macro_2_hex_ascii").toString());
@@ -114,65 +178,4 @@ macro_editor::macro_editor(terminal_app *parent)
 	this->macro_10_content->setText(	parent->settings->value("macro_10_content").toString());
 	this->macro_11_content->setText(	parent->settings->value("macro_11_content").toString());
 	this->macro_12_content->setText(	parent->settings->value("macro_12_content").toString());
-	
-	// connect widgets
-	connect_widgets();
-}
-
-void macro_editor::save_macros()
-{
-	// save macro names into settings
-	this->parent->settings->setValue("macro_1_name",		this->macro_1_name->text());
-	this->parent->settings->setValue("macro_2_name",		this->macro_2_name->text());
-	this->parent->settings->setValue("macro_3_name",		this->macro_3_name->text());
-	this->parent->settings->setValue("macro_4_name",		this->macro_4_name->text());
-	this->parent->settings->setValue("macro_5_name",		this->macro_5_name->text());
-	this->parent->settings->setValue("macro_6_name",		this->macro_6_name->text());
-	this->parent->settings->setValue("macro_7_name",		this->macro_7_name->text());
-	this->parent->settings->setValue("macro_8_name",		this->macro_8_name->text());
-	this->parent->settings->setValue("macro_9_name",		this->macro_9_name->text());
-	this->parent->settings->setValue("macro_10_name",		this->macro_10_name->text());
-	this->parent->settings->setValue("macro_11_name",		this->macro_11_name->text());
-	this->parent->settings->setValue("macro_12_name",		this->macro_12_name->text());		
-	
-	// save macro contents into settings
-	this->parent->settings->setValue("macro_1_content",	this->macro_1_content->text());
-	this->parent->settings->setValue("macro_2_content",	this->macro_2_content->text());
-	this->parent->settings->setValue("macro_3_content",	this->macro_3_content->text());
-	this->parent->settings->setValue("macro_4_content",	this->macro_4_content->text());
-	this->parent->settings->setValue("macro_5_content",	this->macro_5_content->text());
-	this->parent->settings->setValue("macro_6_content",	this->macro_6_content->text());
-	this->parent->settings->setValue("macro_7_content",	this->macro_7_content->text());
-	this->parent->settings->setValue("macro_8_content",	this->macro_8_content->text());
-	this->parent->settings->setValue("macro_9_content",	this->macro_9_content->text());
-	this->parent->settings->setValue("macro_10_content",	this->macro_10_content->text());
-	this->parent->settings->setValue("macro_11_content",	this->macro_11_content->text());
-	this->parent->settings->setValue("macro_12_content",	this->macro_12_content->text());
-	
-	// save the hex ascii settings of the macros
-	this->parent->settings->setValue("macro_1_hex_ascii" , parent->get_checked_radio(this->macro_1_hex_ascii));
-	this->parent->settings->setValue("macro_2_hex_ascii" , parent->get_checked_radio(this->macro_2_hex_ascii));
-	this->parent->settings->setValue("macro_3_hex_ascii" , parent->get_checked_radio(this->macro_3_hex_ascii));
-	this->parent->settings->setValue("macro_4_hex_ascii" , parent->get_checked_radio(this->macro_4_hex_ascii));
-	this->parent->settings->setValue("macro_5_hex_ascii" , parent->get_checked_radio(this->macro_5_hex_ascii));
-	this->parent->settings->setValue("macro_6_hex_ascii" , parent->get_checked_radio(this->macro_6_hex_ascii));
-	this->parent->settings->setValue("macro_7_hex_ascii" , parent->get_checked_radio(this->macro_7_hex_ascii));
-	this->parent->settings->setValue("macro_8_hex_ascii" , parent->get_checked_radio(this->macro_8_hex_ascii));
-	this->parent->settings->setValue("macro_9_hex_ascii" , parent->get_checked_radio(this->macro_9_hex_ascii));
-	this->parent->settings->setValue("macro_10_hex_ascii", parent->get_checked_radio(this->macro_10_hex_ascii));
-	this->parent->settings->setValue("macro_11_hex_ascii", parent->get_checked_radio(this->macro_11_hex_ascii));
-	this->parent->settings->setValue("macro_12_hex_ascii", parent->get_checked_radio(this->macro_12_hex_ascii));
-	
-	// synchronize the settings
-	this->parent->settings->sync();
-	
-	// close the dialog
-	this->close();
-	
-}
-
-void macro_editor::connect_widgets()
-{
-	connect(this->button_box,SIGNAL( accepted() ) , this , SLOT( save_macros() ) );
-	connect(this->button_box,SIGNAL( rejected() ) , this , SLOT( close() ) );
 }

@@ -33,25 +33,25 @@ terminal_app::terminal_app(QApplication *parent)
     // initialize variables
 	this->port = 0;	
 	this->comPortConnected = 0;
-	this->pending_receive_text_newline=false;    
-									
-	connect_widgets();											// connect widgets with callbacks
-	
-	group_radio_buttons();										// group the radio buttons together
+	this->pending_receive_text_newline=false;	
 		
-	this->status_bar = new class status_bar(this->statusbar);	// create and instance of the status_bar class
-	
-	load_settings();											// load the settings
-	
-	populate_com_port();										// fill in the com port combo box
-						
-	this->editor = new macro_editor(this);						// create instance of macro gui
-	
-	update_macro_button_names();								// load in the macro names from the settings and set the button names		
-	
-	setup_keybindings();										// link F1-F12 buttons to macro buttons
-	
-	connect(this->clear_settings_button,SIGNAL( clicked() ),this,SLOT( clear_settings() ) );
+	// allocate memory for dynamic memory content
+	this->status_bar = new class status_bar(this->statusbar);		// create and instance of the status_bar class
+	this->settings = new QSettings("Hammy Circuits", "Terminal");	// create instance of settings container
+	this->editor = new macro_editor(this);							// create instance of macro gui
+
+	group_radio_buttons();											// group the radio buttons together
+		
+	load_settings();												// load the settings
+										
+	connect_widgets();												// connect widgets with callbacks
+		
+	setup_keybindings();											// link F1-F12 buttons to macro buttons
+			
+	populate_com_port();											// fill in the com port combo box	
+		
+	update_macro_button_names();									// load in the macro names from the settings and set the button names	
+
 }
 
 void terminal_app::setup_keybindings(void)
@@ -105,55 +105,72 @@ void terminal_app::setup_keybindings(void)
 
 void terminal_app::load_settings()
 {
-	// load the settings
-		// create the handle to the settings	
-		this->settings = new QSettings("Hammy Circuits", "Terminal");
+	// load up settings with default settings if configuration is not set
+	if( !this->settings->allKeys().size() )
+	{
 		
-		// load up settings with default settings if configuration is not set
-		if( !this->settings->allKeys().size() )
-		{
-			
-			qDebug() << "Loading default settings";
-			
-			this->settings->setValue("baud_rate" , "9600");
-			this->settings->setValue("data_bits" , "8");
-			this->settings->setValue("stop_bits" , "1");
-			this->settings->setValue("parity" , "none");
-			this->settings->setValue("hex_ascii_rx" , "Hex");
-			this->settings->setValue("hex_ascii_tx" , "Hex");
-			
-			// handle the dialog window defaults for macro editing
-			this->settings->setValue("macro_1_hex_ascii"  , "Hex" );
-			this->settings->setValue("macro_2_hex_ascii"  , "Hex" );
-			this->settings->setValue("macro_3_hex_ascii"  , "Hex" );
-			this->settings->setValue("macro_4_hex_ascii"  , "Hex" );
-			this->settings->setValue("macro_5_hex_ascii"  , "Hex" );
-			this->settings->setValue("macro_6_hex_ascii"  , "Hex" );
-			this->settings->setValue("macro_7_hex_ascii"  , "Hex" );
-			this->settings->setValue("macro_8_hex_ascii"  , "Hex" );
-			this->settings->setValue("macro_9_hex_ascii"  , "Hex" );
-			this->settings->setValue("macro_10_hex_ascii" , "Hex" );
-			this->settings->setValue("macro_11_hex_ascii" , "Hex" );
-			this->settings->setValue("macro_12_hex_ascii" , "Hex" );
-						
-			this->settings->sync();
-		}
-		// if config is set, load up everything
-		else
-		{
-			
-			qDebug() << "Loading saved settings";
-			
-			set_checked_radio(this->baud_rate_group,this->settings->value("baud_rate").toString());
-			set_checked_radio(this->data_bits_group,this->settings->value("data_bits").toString());
-			set_checked_radio(this->stop_bits_group,this->settings->value("stop_bits").toString());
-			set_checked_radio(this->parity_group,this->settings->value("parity").toString());
-			set_checked_radio(this->hex_ascii_rx,this->settings->value("hex_ascii_rx").toString());
-			set_checked_radio(this->hex_ascii_tx,this->settings->value("hex_ascii_tx").toString());
-			this->autoscroll_check->setChecked(this->settings->value("autoscroll").toBool());
-		}
+		qDebug() << "Loading default settings";
 		
-		return;
+		// set default com port settings
+		this->settings->setValue("baud_rate" , "9600");
+		this->settings->setValue("data_bits" , "8");
+		this->settings->setValue("stop_bits" , "1");
+		this->settings->setValue("parity" , "none");
+		
+		this->settings->setValue("hex_ascii_rx" , "Hex");
+		this->settings->setValue("hex_ascii_tx" , "Hex");
+		this->settings->setValue("autoscroll" , true);
+		
+		// handle the dialog window defaults for macro editing
+		this->settings->setValue("macro_1_hex_ascii"  , "Hex" );
+		this->settings->setValue("macro_2_hex_ascii"  , "Hex" );
+		this->settings->setValue("macro_3_hex_ascii"  , "Hex" );
+		this->settings->setValue("macro_4_hex_ascii"  , "Hex" );
+		this->settings->setValue("macro_5_hex_ascii"  , "Hex" );
+		this->settings->setValue("macro_6_hex_ascii"  , "Hex" );
+		this->settings->setValue("macro_7_hex_ascii"  , "Hex" );
+		this->settings->setValue("macro_8_hex_ascii"  , "Hex" );
+		this->settings->setValue("macro_9_hex_ascii"  , "Hex" );
+		this->settings->setValue("macro_10_hex_ascii" , "Hex" );
+		this->settings->setValue("macro_11_hex_ascii" , "Hex" );
+		this->settings->setValue("macro_12_hex_ascii" , "Hex" );
+					
+		this->settings->sync();
+	}
+	// if config is set, load up everything
+	else
+	{
+		
+		qDebug() << "Loading saved settings";
+		
+		set_checked_radio(this->baud_rate_group,this->settings->value("baud_rate").toString());
+		set_checked_radio(this->data_bits_group,this->settings->value("data_bits").toString());
+		set_checked_radio(this->stop_bits_group,this->settings->value("stop_bits").toString());
+		set_checked_radio(this->parity_group,this->settings->value("parity").toString());
+		set_checked_radio(this->hex_ascii_rx,this->settings->value("hex_ascii_rx").toString());
+		set_checked_radio(this->hex_ascii_tx,this->settings->value("hex_ascii_tx").toString());
+		this->autoscroll_check->setChecked(this->settings->value("autoscroll").toBool());
+		
+		// update the macro names
+		this->m1_button->setText(this->settings->value("macro_1_name").toString());
+		this->m2_button->setText(this->settings->value("macro_2_name").toString());
+		this->m3_button->setText(this->settings->value("macro_3_name").toString());
+		this->m4_button->setText(this->settings->value("macro_4_name").toString());
+		this->m5_button->setText(this->settings->value("macro_5_name").toString());
+		this->m6_button->setText(this->settings->value("macro_6_name").toString());
+		this->m7_button->setText(this->settings->value("macro_7_name").toString());
+		this->m8_button->setText(this->settings->value("macro_8_name").toString());
+		this->m9_button->setText(this->settings->value("macro_9_name").toString());
+		this->m10_button->setText(this->settings->value("macro_10_name").toString());
+		this->m11_button->setText(this->settings->value("macro_11_name").toString());
+		this->m12_button->setText(this->settings->value("macro_12_name").toString());
+		
+	}
+	
+	// load the macro editor settings
+	this->editor->load_settings();
+	
+	return;
 }
 
 void terminal_app::group_radio_buttons(void)
@@ -214,6 +231,9 @@ void terminal_app::group_radio_buttons(void)
 	connect(this->hex_ascii_tx		, SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
 	connect(this->autoscroll_check 	, SIGNAL( stateChanged(int))	,	this, SLOT(save_gui_settings()));
 	
+	// group up the radio buttons in the macro editor
+	this->editor->group_radio_buttons();
+	
 }
 
 
@@ -272,6 +292,7 @@ void terminal_app::connect_widgets()
 	connect(this->set_macro_button,SIGNAL( clicked() ),this,SLOT( open_macro_editor() ) );
 	connect(this->quit_button,SIGNAL( clicked() ),this,SLOT( close() ) );
 	connect(this->transmit_field,SIGNAL( returnPressed() ),this,SLOT( transmit() ) );
+	connect(this->clear_settings_button,SIGNAL( clicked() ),this,SLOT( clear_settings() ) );
 	
 	// connect all buttons to update config
 	QSignalMapper* signalMapper = new QSignalMapper(this);
@@ -304,6 +325,9 @@ void terminal_app::connect_widgets()
 	
 	// one time connect of macro buttons
 	connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(press_macro_button(QString))) ;
+	
+	// connect widgets for the macro editor
+	this->editor->connect_widgets();
 
 }
 void terminal_app::clear_settings()

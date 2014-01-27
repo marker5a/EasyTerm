@@ -11,6 +11,8 @@ class macro_editor : public QDialog, public Ui::Macro_Editor
 public:
     macro_editor(class terminal_app *parent = 0);    
     void connect_widgets();
+    void group_radio_buttons();
+    void load_settings();
     
 public slots:
 	void save_macros();

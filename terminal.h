@@ -26,7 +26,6 @@ public:
    	int hex_qstring_to_hex_array(QString hex_qstring,QByteArray *result);
    	QByteArray array_to_hex_array(QByteArray array_in);
    	void setup_keybindings(void);
-   	QShortcut *act1;
    	
     QString get_checked_radio(QButtonGroup *);
    	QSettings *settings;
