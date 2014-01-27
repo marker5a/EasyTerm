@@ -9,3 +9,4 @@
 -Cleanup QSettings logic
 -Add socket interface
 -Add scripting engine
+-Allow transmit field and macros to include space character as delimiter
