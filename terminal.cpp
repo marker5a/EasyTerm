@@ -58,7 +58,8 @@ terminal_app::terminal_app(QApplication *parent)
 	this->status_bar = new class status_bar(this->statusbar);		// create and instance of the status_bar class
 	this->settings = new QSettings("Hammy Circuits", "Terminal");	// create instance of settings container
 	this->editor = new macro_editor(this);							// create instance of macro gui
-	this->about = new about_dialog();							// create instance of about dialog
+	this->about = new about_dialog();								// create instance of about dialog
+	this->port = new QSerialPort();									// create instance of serial port
 
 	group_radio_buttons();											// group the radio buttons together
 		
@@ -256,7 +257,6 @@ void terminal_app::group_radio_buttons(void)
 	
 }
 
-
 void terminal_app::populate_com_port()
 {		
 	// clear the com port
@@ -374,22 +374,24 @@ void terminal_app::clear_settings()
 
 void terminal_app::connect_serial_port()
 {			
+	
+	connect(this->port,SIGNAL( error(QSerialPort::SerialPortError) ),this,SLOT( serial_port_error(QSerialPort::SerialPortError) ) );
+	
 	// check if we are already connected to the com port
 	if( !this->comPortConnected )
 	{	
 		QString comPort = this->com_port_combo->currentText();
 		
-		// create com port if it doesnt exist
-		if( !this->port )
-			this->port = new QSerialPort(comPort);
-		
 		this->comPortName = comPort.toStdString();		
+		qDebug() << comPort;
+		
+		this->port->setPortName(this->comPortName.c_str());
 		
 		// check for error message
 		qDebug() << this->port->open(QIODevice::ReadWrite);
 		
 		// configure the port
-		this->port->setPortName(this->comPortName.c_str());
+		
 		this->port->setBaudRate(get_checked_radio(this->baud_rate_group).toInt());
 		this->port->setFlowControl(QSerialPort::NoFlowControl);
 		
@@ -427,15 +429,9 @@ void terminal_app::connect_serial_port()
 		
 		// connect receiver on serial port to on_ready_read
 		connect(this->port, SIGNAL(readyRead()), this, SLOT(rx_data_available()));
-		
-
-		
+				
 		if (!this->port->isOpen())
 		{
-			qDebug("Error connecting to com port");
-			
-			this->status_bar->update_status_bar_error_status("COM Port Error! " + this->port->errorString());
-			
 			this->comPortConnected = 0;
 			this->send_button->setDisabled(true);
 		}
@@ -447,10 +443,8 @@ void terminal_app::connect_serial_port()
 			// save the gui settings
 			save_gui_settings();
 			
-			// if a warning is present, show it
-			if( this->port->errorString() != "No Error has occurred"  )
-				this->status_bar->update_status_bar_error_status("WARNING: " + this->port->errorString());
-							
+			
+						
 			this->comPortConnected = 1;
 			this->send_button->setEnabled(true);
 		}		
@@ -459,11 +453,11 @@ void terminal_app::connect_serial_port()
 	else
 	{
 		this->port->flush();
-		delete this->port;
-		this->port = 0;
+		this->port->close();
 		this->comPortConnected = 0;
 		this->send_button->setDisabled(true);
-		qDebug("COM port disconnected");
+		qDebug("COM port disconnected");		
+
 		this->status_bar->update_status_bar_connection_status("Disconnected");
 		this->status_bar->clear_status_bar_error_status();
 	}
@@ -758,4 +752,27 @@ void terminal_app::save_gui_settings()
 	this->settings->setValue("autoscroll"	, this->autoscroll_check->isChecked() );
 
 	this->settings->sync();
+}
+
+
+void terminal_app::serial_port_error(QSerialPort::SerialPortError error)
+{
+	QString error_string;
+	
+	// check all error conditions
+	switch(error)
+	{
+		case QSerialPort::NoError:							this->status_bar->clear_status_bar_error_status(); break;
+		case QSerialPort::DeviceNotFoundError:				this->status_bar->update_status_bar_error_status("Error: An error occurred while attempting to open an non-existing device.");break;
+		case QSerialPort::PermissionError:					this->status_bar->update_status_bar_error_status("Error: An error occurred while attempting to open an already opened device by another process or a user not having enough permission and credentials to open.");break;
+		case QSerialPort::OpenError:						this->status_bar->update_status_bar_error_status("Error: An error occurred while attempting to open an already opened device in this object.");break;
+		case QSerialPort::ParityError:						this->status_bar->update_status_bar_error_status("Error: Parity error detected by the hardware while reading data.");break;
+		case QSerialPort::FramingError:						this->status_bar->update_status_bar_error_status("Error: Framing error detected by the hardware while reading data.");break;
+		case QSerialPort::BreakConditionError:				this->status_bar->update_status_bar_error_status("Error: Break condition detected by the hardware on the input line.");break;
+		case QSerialPort::WriteError:						this->status_bar->update_status_bar_error_status("Error: An I/O error occurred while writing the data.");break;
+		case QSerialPort::ReadError:						this->status_bar->update_status_bar_error_status("Error: An I/O error occurred while reading the data.");break;
+		case QSerialPort::ResourceError:					this->status_bar->update_status_bar_error_status("Error: An I/O error occurred when a resource becomes unavailable, e.g. when the device is unexpectedly removed from the system.");break;
+		case QSerialPort::UnsupportedOperationError:		this->status_bar->update_status_bar_error_status("Error: The requested device operation is not supported or prohibited by the running operating system.");break;
+		default:											this->status_bar->update_status_bar_error_status("Error: An unidentified error occurred.");break;
+	}
 }

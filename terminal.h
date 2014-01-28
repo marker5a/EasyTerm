@@ -64,6 +64,7 @@ public slots:
 	void save_gui_settings();
 	void close_terminal_app();
 	void clear_settings();
+	void serial_port_error(QSerialPort::SerialPortError error);
 	
 private:
 	QSerialPort *port;
