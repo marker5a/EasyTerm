@@ -4,7 +4,6 @@
 -Add bug reporting feature
 -Thread tx and rx operations
 -Implement Help dialog
--Implement About dialog
 -Consolidate tx functionality
 -Cleanup QSettings logic
 -Add socket interface
