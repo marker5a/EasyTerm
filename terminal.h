@@ -20,15 +20,17 @@
 #define TERMINAL_H
 
 #include <QSerialPort>
-#include "ui_terminal.h"
 #include <QSettings>
 #include <QShortcut>
+#include "ui_terminal.h"
+#include "ui_about.h"
 #include "macro_editor.h"
+#include "about_dialog.h"
 #include "status_bar.h"
 
 #define _VERSION_NUMBER		"1.0"
 
-class terminal_app : public QMainWindow, public Ui::Terminal
+class terminal_app : public QMainWindow, public Ui::EasyTerm
 {
     Q_OBJECT
  
@@ -56,6 +58,7 @@ public slots:
 	void populate_com_port(void);
 	void transmit(void);
 	void open_macro_editor(void);
+	void open_about_dialog(void);
 	void press_macro_button(QString macro_name);
 	void rx_ascii_hex();
 	void save_gui_settings();
@@ -73,6 +76,7 @@ private:
 	QButtonGroup *hex_ascii_rx;
 	QButtonGroup *hex_ascii_tx;
 	class macro_editor *editor;
+	class about_dialog *about;
 	bool pending_receive_text_newline;
 }; 
 

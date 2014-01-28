@@ -27,6 +27,7 @@
 #include <QKeySequence>
 #include <QShortcut>
 #include "macro_editor.h"
+#include "about_dialog.h"
 
 void terminal_app::close_terminal_app()
 {
@@ -57,6 +58,7 @@ terminal_app::terminal_app(QApplication *parent)
 	this->status_bar = new class status_bar(this->statusbar);		// create and instance of the status_bar class
 	this->settings = new QSettings("Hammy Circuits", "Terminal");	// create instance of settings container
 	this->editor = new macro_editor(this);							// create instance of macro gui
+	this->about = new about_dialog();							// create instance of about dialog
 
 	group_radio_buttons();											// group the radio buttons together
 		
@@ -306,6 +308,13 @@ void terminal_app::open_macro_editor()
 	this->setDisabled(0);
 }
 
+void terminal_app::open_about_dialog()
+{
+	this->setDisabled(1);
+	this->about->exec();
+	this->setDisabled(0);
+}
+
 void terminal_app::connect_widgets()
 {
 	// basic widget connections to specific actions
@@ -320,6 +329,7 @@ void terminal_app::connect_widgets()
 	connect(this->quit_button,SIGNAL( clicked() ),this,SLOT( close() ) );
 	connect(this->transmit_field,SIGNAL( returnPressed() ),this,SLOT( transmit() ) );
 	connect(this->clear_settings_button,SIGNAL( clicked() ),this,SLOT( clear_settings() ) );
+	connect(this->about_button,SIGNAL( clicked() ),this,SLOT( open_about_dialog() ) );
 	
 	// connect all buttons to update config
 	QSignalMapper* signalMapper = new QSignalMapper(this);
