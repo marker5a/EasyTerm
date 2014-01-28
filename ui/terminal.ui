@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Terminal</class>
- <widget class="QMainWindow" name="Terminal">
+ <class>EasyTerm</class>
+ <widget class="QMainWindow" name="EasyTerm">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Terminal - by Chr1$ - Version V</string>
+   <string>EasyTerm - Version V</string>
   </property>
   <property name="windowIcon">
    <iconset>
