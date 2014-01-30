@@ -12,6 +12,6 @@ QT += serialport
 RC_FILE = icon.rc
 
 # Input
-HEADERS += terminal.h macro_editor.h status_bar.h about_dialog.h# tx_rx_thread.h
+HEADERS += src/terminal.h src/macro_editor.h src/status_bar.h src/about_dialog.h# tx_rx_thread.h
 FORMS += ui/terminal.ui ui/macro.ui ui/about.ui
-SOURCES += main.cpp terminal.cpp macro_editor.cpp status_bar.cpp about_dialog.cpp# tx_rx_thread.cpp
+SOURCES += src/main.cpp src/terminal.cpp src/macro_editor.cpp src/status_bar.cpp src/about_dialog.cpp# tx_rx_thread.cpp
