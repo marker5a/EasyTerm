@@ -303,6 +303,7 @@ void terminal_app::rx_ascii_hex()
 void terminal_app::open_macro_editor()
 {
 	this->setDisabled(1);
+	this->editor->reset_cursor_positions();
 	this->editor->exec();
 	update_macro_button_names();
 	this->setDisabled(0);

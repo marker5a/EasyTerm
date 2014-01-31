@@ -197,3 +197,21 @@ void macro_editor::load_settings()
 	this->macro_11_content->setText(	parent->settings->value("macro_11_content").toString());
 	this->macro_12_content->setText(	parent->settings->value("macro_12_content").toString());
 }
+
+void macro_editor::reset_cursor_positions()
+{	
+	// set cursor for macros back to zero
+	this->macro_1_content->setCursorPosition(0);
+	this->macro_2_content->setCursorPosition(0);
+	this->macro_3_content->setCursorPosition(0);
+	this->macro_4_content->setCursorPosition(0);
+	this->macro_5_content->setCursorPosition(0);
+	this->macro_6_content->setCursorPosition(0);
+	this->macro_7_content->setCursorPosition(0);
+	this->macro_8_content->setCursorPosition(0);
+	this->macro_9_content->setCursorPosition(0);
+	this->macro_10_content->setCursorPosition(0);
+	this->macro_11_content->setCursorPosition(0);
+	this->macro_12_content->setCursorPosition(0);
+	
+}

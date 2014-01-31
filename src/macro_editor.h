@@ -31,6 +31,7 @@ public:
     void connect_widgets();
     void group_radio_buttons();
     void load_settings();
+    void reset_cursor_positions();
     
 public slots:
 	void save_macros();
