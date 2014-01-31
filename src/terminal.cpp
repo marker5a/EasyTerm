@@ -56,7 +56,7 @@ terminal_app::terminal_app(QApplication *parent)
 		
 	// allocate memory for dynamic memory content
 	this->status_bar = new class status_bar(this->statusbar);		// create and instance of the status_bar class
-	this->settings = new QSettings("Hammy Circuits", "Terminal");	// create instance of settings container
+	this->settings = new QSettings("EasyTerm", "EasyTerm");			// create instance of settings container
 	this->editor = new macro_editor(this);							// create instance of macro gui
 	this->about = new about_dialog();								// create instance of about dialog
 	this->port = new QSerialPort();									// create instance of serial port
