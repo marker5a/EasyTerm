@@ -694,7 +694,11 @@
      </widget>
     </item>
     <item row="3" column="0" colspan="10">
-     <widget class="QTextEdit" name="receive_text"/>
+     <widget class="QTextEdit" name="receive_text">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
