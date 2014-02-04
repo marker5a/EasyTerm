@@ -269,19 +269,25 @@ void terminal_app::populate_com_port()
 	// put com port names into a qstringlist for sorting
 	for (int i = 0; i < ports.size(); i++)
 	{
-		com_port_names <<  
-		#ifdef __unix__
-			ports[i].systemLocation();
-		#else
-			ports[i].portName();
-		#endif
+	
+		qDebug() << "Com Port" << ports[i].portName() << " - Busy:" << (ports[i].isValid() ? QObject::tr("Yes") : QObject::tr("No"));
+	
+		if( ports[i].isValid() )
+		{	
+			com_port_names <<  
+			#ifdef __unix__
+				ports[i].systemLocation();
+			#else
+				ports[i].portName();
+			#endif
+		}
     }
     
     // sort the list of com ports by name
     com_port_names.sort();
     
     // iteratively insert into the com port combo box
-    for (int i = 0; i < ports.size(); i++)
+    for (int i = 0; i < com_port_names.size(); i++)
 		this->com_port_combo->addItem(com_port_names[i]);
     
     // try and set the com port last used
@@ -389,7 +395,8 @@ void terminal_app::connect_serial_port()
 		this->port->setPortName(this->comPortName.c_str());
 		
 		// check for error message
-		qDebug() << this->port->open(QIODevice::ReadWrite);
+		if( !this->port->open(QIODevice::ReadWrite) )
+			return;
 		
 		// configure the port
 		
