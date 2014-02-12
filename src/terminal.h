@@ -35,6 +35,23 @@ class terminal_app : public QMainWindow, public Ui::EasyTerm
     Q_OBJECT
  
 public:
+
+	enum Tx_Char_Type
+	{
+		TX_ASCII,
+		TX_HEX
+	};
+	
+	enum Tx_Error_Type
+	{
+		NO_ERROR,
+		PORT_NOT_CONNECTED,
+		INVALID_ASCII_STRING,
+		INVALID_HEX_STRING,
+		EMPTY_TX_STRING,
+		UNSPECIFIED_ERROR
+	};
+
     terminal_app(QApplication *parent = 0);
     void connect_widgets();
     void group_radio_buttons(void);
@@ -46,17 +63,19 @@ public:
    	int hex_qstring_to_hex_array(QString hex_qstring,QByteArray *result);
    	QByteArray array_to_hex_array(QByteArray array_in);
    	void setup_keybindings(void);
+   	Tx_Error_Type validate_and_send_tx_string(QString tx_string,Tx_Char_Type type);
    	
     QString get_checked_radio(QButtonGroup *);
    	QSettings *settings;
    	class status_bar *status_bar;
    	
    	
+   	
 public slots:
 	void connect_serial_port(void);
 	void rx_data_available(void);
 	void populate_com_port(void);
-	void transmit(void);
+	void press_transmit_button(void);
 	void open_macro_editor(void);
 	void open_about_dialog(void);
 	void press_macro_button(QString macro_name);
@@ -79,6 +98,9 @@ private:
 	class macro_editor *editor;
 	class about_dialog *about;
 	bool pending_receive_text_newline;
+	
+	
+	
 }; 
 
 #endif

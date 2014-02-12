@@ -298,7 +298,6 @@ void terminal_app::populate_com_port()
 		this->com_port_combo->setCurrentIndex(com_port_index);	
 }
 
-
 void terminal_app::rx_ascii_hex()
 {	
 	this->pending_receive_text_newline = true;
@@ -331,10 +330,10 @@ void terminal_app::connect_widgets()
 	connect(this->ascii_rx_radio,SIGNAL( clicked() ),this,SLOT( rx_ascii_hex() ));		
 	connect(this->hex_rx_radio,SIGNAL( clicked() ),this,SLOT( rx_ascii_hex() ));		
 	connect(this->tx_clear_button,SIGNAL( clicked() ),this->transmit_text,SLOT( clear() ));		
-	connect(this->send_button,SIGNAL( clicked() ),this,SLOT( transmit() ));
+	connect(this->send_button,SIGNAL( clicked() ),this,SLOT( press_transmit_button() ));
+	connect(this->transmit_field,SIGNAL( returnPressed() ),this,SLOT( press_transmit_button() ) );
 	connect(this->set_macro_button,SIGNAL( clicked() ),this,SLOT( open_macro_editor() ) );
 	connect(this->quit_button,SIGNAL( clicked() ),this,SLOT( close() ) );
-	connect(this->transmit_field,SIGNAL( returnPressed() ),this,SLOT( transmit() ) );
 	connect(this->clear_settings_button,SIGNAL( clicked() ),this,SLOT( clear_settings() ) );
 	connect(this->about_button,SIGNAL( clicked() ),this,SLOT( open_about_dialog() ) );
 	
@@ -374,6 +373,7 @@ void terminal_app::connect_widgets()
 	this->editor->connect_widgets();
 
 }
+
 void terminal_app::clear_settings()
 {
 	this->settings->clear();
@@ -487,56 +487,6 @@ void terminal_app::write_to_port(QByteArray array)
 	}
 }
 
-void terminal_app::transmit()
-{
-	
-	QByteArray tx_array;
-	int hex_error=1;	
-		
-	// dont even try and do anything unless the com port is connected
-	if( !this->comPortConnected )
-		return;	
-		
-	// translate text field if based on decision to do ascii or hex
-	if( get_checked_radio(this->hex_ascii_tx) == "Hex" )
-	{
-		hex_error = this->hex_qstring_to_hex_array(this->transmit_field->text(),&tx_array);
-		
-		if( hex_error )
-		{
-			this->transmit_text->insertPlainText(array_to_hex_array(tx_array));
-			this->transmit_text->insertPlainText("\n");
-			
-			// autoscroll tx field
-			QTextCursor c =  this->transmit_text->textCursor();
-			c.movePosition(QTextCursor::End);
-			this->transmit_text->setTextCursor(c);
-			
-		}
-	}
-	else
-	{
-		tx_array = this->transmit_field->text().toLatin1();
-		this->transmit_text->insertPlainText(tx_array);
-		this->transmit_text->insertPlainText("\n");
-		
-		// autoscroll tx field
-		QTextCursor c =  this->transmit_text->textCursor();
-		c.movePosition(QTextCursor::End);
-		this->transmit_text->setTextCursor(c);
-		
-	}
-	
-	if( !hex_error )
-	{
-		this->status_bar->update_status_bar_error_status("Invalid Hex String");
-		return;
-	}	
-	this->write_to_port(tx_array);
-	this->status_bar->clear_status_bar_error_status();	
-	
-}
-
 void terminal_app::set_checked_radio(QButtonGroup *group,QString name)
 {
 	QList<QAbstractButton *> buttonList = group->buttons();
@@ -621,48 +571,106 @@ void terminal_app::toggle_com_port_fields(bool disable)
 	this->parity_space_radio->setDisabled(disable);
 }
 
+void terminal_app::press_transmit_button()
+{
+	enum Tx_Char_Type tx_char_type;
+	QTextCursor c;
+
+	// set the tx string type (hex or ascii)
+	if( get_checked_radio(this->hex_ascii_tx) == "Hex" )
+		tx_char_type = TX_HEX;
+	else
+		tx_char_type = TX_ASCII;
+		
+	// try and validate the tx string and process any errors
+	switch( this->validate_and_send_tx_string( this->transmit_field->text() , tx_char_type ) )
+	{
+		case NO_ERROR:	
+			
+			// autoscroll tx field
+			c =  this->transmit_text->textCursor();
+			c.movePosition(QTextCursor::End);
+			this->transmit_text->setTextCursor(c);
+			
+			this->status_bar->clear_status_bar_error_status();
+			
+		break;
+		
+		case INVALID_HEX_STRING:				
+			this->status_bar->update_status_bar_error_status("Invalid Hex String");			
+		break;
+		
+		case EMPTY_TX_STRING:
+		case PORT_NOT_CONNECTED:
+		case INVALID_ASCII_STRING:		
+		case UNSPECIFIED_ERROR:
+		
+		break;
+	}		
+}
+
 void terminal_app::press_macro_button(QString macro_name)
 {
+
+	enum Tx_Char_Type tx_char_type;
 	
+	// set the tx string type (hex or ascii)
+	if( this->settings->value(macro_name + "hex_ascii") == "Hex" )
+		tx_char_type = TX_HEX;
+	else
+		tx_char_type = TX_ASCII;
+		
+	// try and validate the tx string and process any errors
+	switch( this->validate_and_send_tx_string( this->settings->value(macro_name + "content").toString() , tx_char_type ) )
+	{
+		case NO_ERROR:	
+			this->status_bar->clear_status_bar_error_status();
+		break;
+		
+		case INVALID_HEX_STRING:	
+			this->status_bar->update_status_bar_error_status("Invalid Hex String for Macro \"" + this->settings->value(macro_name + "name").toString() +"\"");
+		break;
+		
+		case EMPTY_TX_STRING:	
+			this->status_bar->update_status_bar_error_status("WARNING: Macro '" + this->settings->value(macro_name + "name").toString() + "' is empty");
+		break;
+		
+		case PORT_NOT_CONNECTED:
+		case INVALID_ASCII_STRING:		
+		case UNSPECIFIED_ERROR:
+		
+		break;
+	}	
+}
+
+terminal_app::Tx_Error_Type terminal_app::validate_and_send_tx_string(QString tx_string,terminal_app::Tx_Char_Type tx_char_type)
+{
 	QByteArray tx_array;
-	int hex_error=1;
-	
+	int hex_string_good=1;
+
 	// dont even try and do anything unless the com port is connected
 	if( !this->comPortConnected )
-		return;
+		return this->PORT_NOT_CONNECTED;
 	
-	// get the content of the macro and store it in a string
-	QString tx_string = this->settings->value(macro_name + "content").toString();
-	
-	// if macro is empty, ignore and display warning
+	// if transmit string is empty, ignore and return warning
 	if( !tx_string.size() )
-	{
-		// show warning message
-		this->status_bar->update_status_bar_error_status("WARNING: Macro '" + this->settings->value(macro_name + "name").toString() + "' is empty");
+		return terminal_app::EMPTY_TX_STRING;
 		
-		// just quit
-		return;
-	}	
-	
 	// determine action based on hex or ascii
 		// hex
-		if( this->settings->value(macro_name + "hex_ascii") == "Hex" )
+		if( tx_char_type == terminal_app::TX_HEX )
 		{
 			// convert the string into a byte array as hex
-			hex_error = this->hex_qstring_to_hex_array(tx_string,&tx_array);
+			hex_string_good = this->hex_qstring_to_hex_array(tx_string,&tx_array);
 			
 			// if the hex converted properly, show the hex in the tx field
-			if( hex_error )
+			if( hex_string_good )
 			{
 				this->transmit_text->insertPlainText(array_to_hex_array(tx_array));
 				this->transmit_text->insertPlainText("\n");
-				
-							
-				// autoscroll tx field
-				QTextCursor c =  this->transmit_text->textCursor();
-				c.movePosition(QTextCursor::End);
-				this->transmit_text->setTextCursor(c);
 			}
+			else				
+				return this->INVALID_HEX_STRING;
 		}
 		// ascii
 		else
@@ -671,24 +679,14 @@ void terminal_app::press_macro_button(QString macro_name)
 			tx_array = tx_string.toLatin1();
 			this->transmit_text->insertPlainText(tx_array);
 			this->transmit_text->insertPlainText("\n");
-			
-			// autoscroll tx field
-			QTextCursor c =  this->transmit_text->textCursor();
-			c.movePosition(QTextCursor::End);
-			this->transmit_text->setTextCursor(c);
 		}
-	
-	// if there was an error with parsing the hex string, display it and quit
-	if( !hex_error )
-	{
-		this->status_bar->update_status_bar_error_status("Invalid Hex String for Macro \"" + this->settings->value(macro_name + "name").toString() +"\"");
-		return;
-	}
 	
 	// write it out on the serial port and clear the error
 	this->write_to_port(tx_array);
-	this->status_bar->clear_status_bar_error_status();
-		
+	
+	// cleanly exit
+	return NO_ERROR;
+	
 }
 
 QByteArray terminal_app::array_to_hex_array(QByteArray array_in)
@@ -761,7 +759,6 @@ void terminal_app::save_gui_settings()
 
 	this->settings->sync();
 }
-
 
 void terminal_app::serial_port_error(QSerialPort::SerialPortError error)
 {
