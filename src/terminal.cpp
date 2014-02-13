@@ -613,6 +613,7 @@ void terminal_app::press_macro_button(QString macro_name)
 {
 
 	enum Tx_Char_Type tx_char_type;
+	QTextCursor c;
 	
 	// set the tx string type (hex or ascii)
 	if( this->settings->value(macro_name + "hex_ascii") == "Hex" )
@@ -624,7 +625,14 @@ void terminal_app::press_macro_button(QString macro_name)
 	switch( this->validate_and_send_tx_string( this->settings->value(macro_name + "content").toString() , tx_char_type ) )
 	{
 		case NO_ERROR:	
+			
+			// autoscroll tx field
+			c =  this->transmit_text->textCursor();
+			c.movePosition(QTextCursor::End);
+			this->transmit_text->setTextCursor(c);
+			
 			this->status_bar->clear_status_bar_error_status();
+			
 		break;
 		
 		case INVALID_HEX_STRING:	
