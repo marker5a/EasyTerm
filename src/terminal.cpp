@@ -327,9 +327,11 @@ void terminal_app::connect_widgets()
 	connect(this->connect_button,SIGNAL( clicked() ),this,SLOT( connect_serial_port() ));		
 	connect(this->rescan_button,SIGNAL( clicked() ),this,SLOT( populate_com_port() ));		
 	connect(this->rx_clear_button,SIGNAL( clicked() ),this->receive_text,SLOT( clear() ));		
+	connect(this->rx_clear_button,SIGNAL( clicked() ),this->status_bar,SLOT( clear_rx_counter() ));		
 	connect(this->ascii_rx_radio,SIGNAL( clicked() ),this,SLOT( rx_ascii_hex() ));		
 	connect(this->hex_rx_radio,SIGNAL( clicked() ),this,SLOT( rx_ascii_hex() ));		
 	connect(this->tx_clear_button,SIGNAL( clicked() ),this->transmit_text,SLOT( clear() ));		
+	connect(this->tx_clear_button,SIGNAL( clicked() ),this->status_bar,SLOT( clear_tx_counter() ));		
 	connect(this->send_button,SIGNAL( clicked() ),this,SLOT( press_transmit_button() ));
 	connect(this->transmit_field,SIGNAL( returnPressed() ),this,SLOT( press_transmit_button() ) );
 	connect(this->set_macro_button,SIGNAL( clicked() ),this,SLOT( open_macro_editor() ) );
@@ -508,9 +510,16 @@ QString terminal_app::get_checked_radio(QButtonGroup *group)
 void terminal_app::rx_data_available(void)
 {	
 	QByteArray bytes;
-    int a = this->port->bytesAvailable();
-    bytes.resize(a);
+	
+	// get count of bytes available for reading
+    int rx_byte_count = this->port->bytesAvailable();
+    bytes.resize(rx_byte_count);
+    
+    // resize the byte array buffer
     this->port->read(bytes.data(), bytes.size());
+    
+    // increment rx counter
+    this->status_bar->increment_rx_counter(rx_byte_count);
     
     // if request for newline in receive field, try and process it
     if( this->pending_receive_text_newline )    
@@ -692,6 +701,9 @@ terminal_app::Tx_Error_Type terminal_app::validate_and_send_tx_string(QString tx
 			this->transmit_text->insertPlainText(tx_array);
 			this->transmit_text->insertPlainText("\n");
 		}
+		
+	// increment the tx counter
+	this->status_bar->increment_tx_counter(tx_array.size());
 	
 	// write it out on the serial port and clear the error
 	this->write_to_port(tx_array);

@@ -22,7 +22,10 @@
 status_bar::status_bar(QStatusBar *status_bar_ptr)
 {
 	this->status_bar_ptr = status_bar_ptr;
+	this->tx_counter = 0;
+	this->rx_counter = 0;
 	
+	// initialize strings
 	this->status[0] = "Disconnected";
 	this->status[1] = "";
 	
@@ -47,13 +50,50 @@ void status_bar::update_status_bar_connection_status(QString com_port_connect_st
 void status_bar::update_status_bar()
 {
 	
-	QString comnbined_status = this->status[0];
+	QString combined_status = this->status[0];
 	
+	// combine error string with connection status
 	if( this->status[1] != "" )
-		comnbined_status += " : " + this->status[1]; 
+		combined_status += " : " + this->status[1];
+		
+	// insert some dead space and show counters
+	combined_status += "      ";	
+	combined_status += "Tx Count: ";
+	combined_status += QString::number(this->tx_counter);
+	combined_status += " Bytes  Rx Count: ";
+	combined_status += QString::number(this->rx_counter);
+	combined_status += " Bytes";	
 	
-	this->status_bar_ptr->showMessage(comnbined_status);
+	this->status_bar_ptr->showMessage(combined_status);
 
+}
+
+void status_bar::increment_tx_counter(unsigned int byte_increment)
+{	
+	this->tx_counter += byte_increment;
+	
+	this->update_status_bar();
+}
+
+void status_bar::increment_rx_counter(unsigned int byte_increment)
+{	
+	this->rx_counter += byte_increment;
+	
+	this->update_status_bar();
+}
+
+void status_bar::clear_tx_counter()
+{
+	this->tx_counter = 0;
+	
+	this->update_status_bar();
+}
+
+void status_bar::clear_rx_counter()
+{	
+	this->rx_counter = 0;
+	
+	this->update_status_bar();
 }
 
 void status_bar::clear_status_bar_error_status()

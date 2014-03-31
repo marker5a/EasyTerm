@@ -22,20 +22,28 @@
 #include <QStatusBar>
 #include <QString>
 
-class status_bar
+class status_bar : public QObject
 {
-
+      Q_OBJECT
 public:
 	status_bar(QStatusBar *status_bar_ptr);
 	void update_status_bar_error_status(QString error_status);
-	void clear_status_bar_error_status();
+	void clear_status_bar_error_status(void);
 	void update_status_bar_connection_status(QString com_port_connect_string);
-	void clear_status_bar_connection_status();
-	void update_status_bar();
+	void clear_status_bar_connection_status(void);
+	void update_status_bar(void);
+	void increment_tx_counter(unsigned int byte_increment);	
+	void increment_rx_counter(unsigned int byte_increment);
+	
+public slots:
+	void clear_tx_counter(void);
+	void clear_rx_counter(void);
 
 private:
 	QStatusBar *status_bar_ptr;
 	QString status[2];
+	unsigned long tx_counter;
+	unsigned long rx_counter;
 
 };
 
