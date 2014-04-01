@@ -678,8 +678,9 @@ terminal_app::Tx_Error_Type terminal_app::validate_and_send_tx_string(QString tx
 		if( tx_char_type == terminal_app::TX_HEX )
 		{
 			
-			// strip out all spaces from the hex tx string
+			// strip out all spaces and $ from the hex tx string
 			tx_string.replace(" ","");
+			tx_string.replace("$","");
 			
 			// convert the string into a byte array as hex
 			hex_string_good = this->hex_qstring_to_hex_array(tx_string,&tx_array);
