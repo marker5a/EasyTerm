@@ -28,7 +28,7 @@
 #include "about_dialog.h"
 #include "status_bar.h"
 
-#define _VERSION_NUMBER		"0.9 (beta)"
+#define _VERSION_NUMBER		"0.9.1 (beta)"
 
 class terminal_app : public QMainWindow, public Ui::EasyTerm
 {
@@ -44,7 +44,7 @@ public:
 	
 	enum Tx_Error_Type
 	{
-		NO_ERROR,
+		TX_NO_ERROR,
 		PORT_NOT_CONNECTED,
 		INVALID_ASCII_STRING,
 		INVALID_HEX_STRING,

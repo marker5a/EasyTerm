@@ -594,7 +594,7 @@ void terminal_app::press_transmit_button()
 	// try and validate the tx string and process any errors
 	switch( this->validate_and_send_tx_string( this->transmit_field->text() , tx_char_type ) )
 	{
-		case NO_ERROR:	
+		case TX_NO_ERROR:	
 			
 			// autoscroll tx field
 			c =  this->transmit_text->textCursor();
@@ -710,7 +710,7 @@ terminal_app::Tx_Error_Type terminal_app::validate_and_send_tx_string(QString tx
 	this->write_to_port(tx_array);
 	
 	// cleanly exit
-	return NO_ERROR;
+	return TX_NO_ERROR;
 	
 }
 
