@@ -633,7 +633,7 @@ void terminal_app::press_macro_button(QString macro_name)
 	// try and validate the tx string and process any errors
 	switch( this->validate_and_send_tx_string( this->settings->value(macro_name + "content").toString() , tx_char_type ) )
 	{
-		case NO_ERROR:	
+		case TX_NO_ERROR:	
 			
 			// autoscroll tx field
 			c =  this->transmit_text->textCursor();
