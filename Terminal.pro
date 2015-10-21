@@ -9,6 +9,11 @@ RC_FILE = icon.rc
 TARGET = EasyTerm
 CONFIG += Release
 
+target.path = /usr/local/bin
+target.files = release/EasyTerm
+INSTALLS += target
+
+
 # Input
 HEADERS += src/terminal.h src/macro_editor.h src/status_bar.h src/about_dialog.h# tx_rx_thread.h
 FORMS += ui/terminal.ui ui/macro.ui ui/about.ui
