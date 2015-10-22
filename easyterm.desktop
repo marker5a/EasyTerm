@@ -1,10 +1,10 @@
-Desktop Entry]
-Categories=Qt;KDE;Education;Utility;Engineering;
+[Desktop Entry]
+Categories=System;Qt;KDE;Utility;Engineering;
 Exec=EasyTerm
 Name=EasyTerm
 GenericName=Serial Port Terminal
 X-KDE-StartupNotify=true
-Icon=easyterm
+Icon=/usr/share/icons/hicolor/48x48/apps/easyterm.png
 Terminal=false
 Type=Application
 
