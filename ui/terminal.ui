@@ -113,6 +113,37 @@
       </layout>
      </widget>
     </item>
+    <item row="7" column="0" colspan="11">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLineEdit" name="transmit_field">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="newline_checkbox">
+        <property name="text">
+         <string>Newline</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="send_button">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Send</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
     <item row="0" column="3">
      <widget class="QGroupBox" name="groupBox">
       <property name="title">
@@ -334,7 +365,7 @@
       </layout>
      </widget>
     </item>
-    <item row="0" column="7" colspan="2">
+    <item row="0" column="7" colspan="3">
      <widget class="QGroupBox" name="groupBox_3">
       <property name="title">
        <string>Parity</string>
@@ -394,7 +425,7 @@
       </layout>
      </widget>
     </item>
-    <item row="0" column="9">
+    <item row="0" column="10">
      <spacer name="horizontalSpacer">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
@@ -420,7 +451,7 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="1" colspan="9">
+    <item row="1" column="1" colspan="10">
      <widget class="Line" name="line">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
@@ -478,7 +509,7 @@
       </item>
      </layout>
     </item>
-    <item row="2" column="3" colspan="7">
+    <item row="2" column="3" colspan="8">
      <spacer name="horizontalSpacer_2">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
@@ -504,7 +535,7 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="1" rowspan="2" colspan="9">
+    <item row="4" column="1" rowspan="2" colspan="10">
      <widget class="Line" name="line_2">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
@@ -540,6 +571,19 @@
        </item>
       </layout>
      </widget>
+    </item>
+    <item row="6" column="9" colspan="2">
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>196</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
     </item>
     <item row="6" column="0" colspan="6">
      <layout class="QGridLayout" name="gridLayout_2">
@@ -649,55 +693,52 @@
       </item>
      </layout>
     </item>
-    <item row="6" column="8" colspan="2">
-     <spacer name="horizontalSpacer_3">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>196</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="7" column="0" colspan="10">
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="QLineEdit" name="transmit_field">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="send_button">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>Send</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="8" column="0" colspan="10">
+    <item row="8" column="0" colspan="11">
      <widget class="QTextEdit" name="transmit_text">
       <property name="readOnly">
        <bool>true</bool>
       </property>
      </widget>
     </item>
-    <item row="3" column="0" colspan="10">
+    <item row="3" column="0" colspan="11">
      <widget class="QTextEdit" name="receive_text">
       <property name="readOnly">
        <bool>true</bool>
       </property>
+     </widget>
+    </item>
+    <item row="6" column="8">
+     <widget class="QGroupBox" name="verticalGroupBox">
+      <layout class="QGridLayout" name="gridLayout_10">
+       <item row="0" column="0">
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QRadioButton" name="cr_radio">
+           <property name="text">
+            <string>CR</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="cr_lf_radio">
+           <property name="text">
+            <string>CR+LF</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="lf_radio">
+           <property name="text">
+            <string>LF</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>

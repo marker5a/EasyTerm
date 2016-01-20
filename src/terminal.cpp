@@ -140,6 +140,7 @@ void terminal_app::load_settings()
 		
 		this->settings->setValue("hex_ascii_rx" , "Hex");
 		this->settings->setValue("hex_ascii_tx" , "Hex");
+		this->settings->setValue("newline_tx" , "CR+LF");
 		this->settings->setValue("autoscroll" , true);
 		
 		// handle the dialog window defaults for macro editing
@@ -170,6 +171,7 @@ void terminal_app::load_settings()
 		set_checked_radio(this->parity_group,this->settings->value("parity").toString());
 		set_checked_radio(this->hex_ascii_rx,this->settings->value("hex_ascii_rx").toString());
 		set_checked_radio(this->hex_ascii_tx,this->settings->value("hex_ascii_tx").toString());
+		set_checked_radio(this->newline_tx,this->settings->value("newline_tx").toString());
 		this->autoscroll_check->setChecked(this->settings->value("autoscroll").toBool());
 		
 		// update the macro names
@@ -243,6 +245,12 @@ void terminal_app::group_radio_buttons(void)
 	this->hex_ascii_tx->addButton(this->hex_tx_radio);
 	this->hex_ascii_tx->addButton(this->ascii_tx_radio);
 	
+	// tx newline group
+	this->newline_tx = new QButtonGroup;
+	this->newline_tx->addButton(this->cr_radio);
+	this->newline_tx->addButton(this->cr_lf_radio);
+	this->newline_tx->addButton(this->lf_radio);
+	
 	// connect radio buttons to updating settings
 	connect(this->baud_rate_group	, SIGNAL(buttonClicked(int))	, 	this, SLOT(save_gui_settings()));	
 	connect(this->data_bits_group   , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
@@ -250,6 +258,7 @@ void terminal_app::group_radio_buttons(void)
 	connect(this->parity_group	    , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
 	connect(this->hex_ascii_rx      , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
 	connect(this->hex_ascii_tx		, SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
+	connect(this->newline_tx		, SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
 	connect(this->autoscroll_check 	, SIGNAL( stateChanged(int))	,	this, SLOT(save_gui_settings()));
 	
 	// group up the radio buttons in the macro editor
@@ -481,9 +490,24 @@ void terminal_app::connect_serial_port()
 
 void terminal_app::write_to_port(QByteArray array)
 {
+	
+	// append cr and lf if indicated by gui
+	if( this->newline_checkbox->checkState() == Qt::Checked )
+	{
+		if( get_checked_radio(this->newline_tx) == "CR+LF" )
+			array.append("\r\n");
+		else if( get_checked_radio(this->newline_tx) == "CR" )
+			array.append("\r");
+		else if( get_checked_radio(this->newline_tx) == "LF" )
+			array.append("\n");
+	}
+	
 	// only allow sending when com port is connected
 	if( this->comPortConnected )
 	{
+		// increment the tx counter
+		this->status_bar->increment_tx_counter(array.size());
+		
 		this->port->write(array.data() , array.size() );
 
 	}
@@ -703,8 +727,7 @@ terminal_app::Tx_Error_Type terminal_app::validate_and_send_tx_string(QString tx
 			this->transmit_text->insertPlainText("\n");
 		}
 		
-	// increment the tx counter
-	this->status_bar->increment_tx_counter(tx_array.size());
+
 	
 	// write it out on the serial port and clear the error
 	this->write_to_port(tx_array);
@@ -780,6 +803,7 @@ void terminal_app::save_gui_settings()
 	this->settings->setValue("com_port" 	, this->com_port_combo->currentText());
 	this->settings->setValue("hex_ascii_rx" , this->get_checked_radio(this->hex_ascii_rx));
 	this->settings->setValue("hex_ascii_tx" , this->get_checked_radio(this->hex_ascii_tx));
+	this->settings->setValue("newline_tx" , this->get_checked_radio(this->newline_tx));
 	this->settings->setValue("autoscroll"	, this->autoscroll_check->isChecked() );
 
 	this->settings->sync();

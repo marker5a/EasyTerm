@@ -95,6 +95,7 @@ private:
 	QButtonGroup *parity_group;
 	QButtonGroup *hex_ascii_rx;
 	QButtonGroup *hex_ascii_tx;
+	QButtonGroup *newline_tx;
 	class macro_editor *editor;
 	class about_dialog *about;
 	bool pending_receive_text_newline;
