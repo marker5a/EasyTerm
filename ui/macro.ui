@@ -2,20 +2,20 @@
 <ui version="4.0">
  <class>Macro_Editor</class>
  <widget class="QDialog" name="Macro_Editor">
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>:/resources/logo.png</normaloff>:/resources/logo.png</iconset>
-  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>392</width>
-    <height>435</height>
+    <width>952</width>
+    <height>426</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Macro Editor</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/resources/logo.png</normaloff>:/resources/logo.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -29,6 +29,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="macro_1_name">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
@@ -36,10 +42,17 @@
      </item>
     </layout>
    </item>
-   <item row="0" column="1" colspan="2">
-    <widget class="QLineEdit" name="macro_1_content"/>
+   <item row="0" column="1">
+    <widget class="QLineEdit" name="macro_1_content">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
    </item>
-   <item row="0" column="3">
+   <item row="0" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_13">
      <item>
       <widget class="QRadioButton" name="macro_1_hex">
@@ -68,6 +81,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="macro_2_name">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
@@ -75,10 +94,17 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="1" colspan="2">
-    <widget class="QLineEdit" name="macro_2_content"/>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="macro_2_content">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
    </item>
-   <item row="1" column="3">
+   <item row="1" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_14">
      <item>
       <widget class="QRadioButton" name="macro_2_hex">
@@ -96,6 +122,54 @@
      </item>
     </layout>
    </item>
+   <item row="1" column="3" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_27">
+     <item>
+      <widget class="QCheckBox" name="macro_2_newline">
+       <property name="text">
+        <string>Newline</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro2_cr">
+       <property name="text">
+        <string>CR</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro2_lf">
+       <property name="text">
+        <string>LF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro2_crlf">
+       <property name="text">
+        <string>CRLF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
    <item row="2" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
@@ -107,6 +181,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="macro_3_name">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
@@ -114,10 +194,17 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="1" colspan="2">
-    <widget class="QLineEdit" name="macro_3_content"/>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="macro_3_content">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
    </item>
-   <item row="2" column="3">
+   <item row="2" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_15">
      <item>
       <widget class="QRadioButton" name="macro_3_hex">
@@ -135,6 +222,54 @@
      </item>
     </layout>
    </item>
+   <item row="2" column="3" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_28">
+     <item>
+      <widget class="QCheckBox" name="macro_3_newline">
+       <property name="text">
+        <string>Newline</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro3_cr">
+       <property name="text">
+        <string>CR</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro3_lf">
+       <property name="text">
+        <string>LF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro3_crlf">
+       <property name="text">
+        <string>CRLF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_6">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
    <item row="3" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
@@ -146,6 +281,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="macro_4_name">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
@@ -153,10 +294,17 @@
      </item>
     </layout>
    </item>
-   <item row="3" column="1" colspan="2">
-    <widget class="QLineEdit" name="macro_4_content"/>
+   <item row="3" column="1">
+    <widget class="QLineEdit" name="macro_4_content">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
    </item>
-   <item row="3" column="3">
+   <item row="3" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_16">
      <item>
       <widget class="QRadioButton" name="macro_4_hex">
@@ -174,6 +322,54 @@
      </item>
     </layout>
    </item>
+   <item row="3" column="3" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_29">
+     <item>
+      <widget class="QCheckBox" name="macro_4_newline">
+       <property name="text">
+        <string>Newline</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro4_cr">
+       <property name="text">
+        <string>CR</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro4_lf">
+       <property name="text">
+        <string>LF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro4_crlf">
+       <property name="text">
+        <string>CRLF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_7">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
    <item row="4" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
@@ -185,6 +381,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="macro_5_name">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
@@ -192,10 +394,17 @@
      </item>
     </layout>
    </item>
-   <item row="4" column="1" colspan="2">
-    <widget class="QLineEdit" name="macro_5_content"/>
+   <item row="4" column="1">
+    <widget class="QLineEdit" name="macro_5_content">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
    </item>
-   <item row="4" column="3">
+   <item row="4" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_17">
      <item>
       <widget class="QRadioButton" name="macro_5_hex">
@@ -213,6 +422,54 @@
      </item>
     </layout>
    </item>
+   <item row="4" column="3" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_31">
+     <item>
+      <widget class="QCheckBox" name="macro_5_newline">
+       <property name="text">
+        <string>Newline</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro5_cr">
+       <property name="text">
+        <string>CR</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro5_lf">
+       <property name="text">
+        <string>LF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro5_crlf">
+       <property name="text">
+        <string>CRLF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_8">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
    <item row="5" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_7">
      <item>
@@ -224,6 +481,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="macro_6_name">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
@@ -231,10 +494,17 @@
      </item>
     </layout>
    </item>
-   <item row="5" column="1" colspan="2">
-    <widget class="QLineEdit" name="macro_6_content"/>
+   <item row="5" column="1">
+    <widget class="QLineEdit" name="macro_6_content">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
    </item>
-   <item row="5" column="3">
+   <item row="5" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_18">
      <item>
       <widget class="QRadioButton" name="macro_6_hex">
@@ -252,6 +522,54 @@
      </item>
     </layout>
    </item>
+   <item row="5" column="3" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_33">
+     <item>
+      <widget class="QCheckBox" name="macro_6_newline">
+       <property name="text">
+        <string>Newline</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro6_cr">
+       <property name="text">
+        <string>CR</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro6_lf">
+       <property name="text">
+        <string>LF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro6_crlf">
+       <property name="text">
+        <string>CRLF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_9">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
    <item row="6" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_6">
      <item>
@@ -263,6 +581,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="macro_7_name">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
@@ -270,10 +594,17 @@
      </item>
     </layout>
    </item>
-   <item row="6" column="1" colspan="2">
-    <widget class="QLineEdit" name="macro_7_content"/>
+   <item row="6" column="1">
+    <widget class="QLineEdit" name="macro_7_content">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
    </item>
-   <item row="6" column="3">
+   <item row="6" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_19">
      <item>
       <widget class="QRadioButton" name="macro_7_hex">
@@ -291,6 +622,54 @@
      </item>
     </layout>
    </item>
+   <item row="6" column="3" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_30">
+     <item>
+      <widget class="QCheckBox" name="macro_7_newline">
+       <property name="text">
+        <string>Newline</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro7_cr">
+       <property name="text">
+        <string>CR</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro7_lf">
+       <property name="text">
+        <string>LF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro7_crlf">
+       <property name="text">
+        <string>CRLF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_10">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
    <item row="7" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_8">
      <item>
@@ -302,6 +681,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="macro_8_name">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
@@ -309,10 +694,17 @@
      </item>
     </layout>
    </item>
-   <item row="7" column="1" colspan="2">
-    <widget class="QLineEdit" name="macro_8_content"/>
+   <item row="7" column="1">
+    <widget class="QLineEdit" name="macro_8_content">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
    </item>
-   <item row="7" column="3">
+   <item row="7" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_20">
      <item>
       <widget class="QRadioButton" name="macro_8_hex">
@@ -330,6 +722,54 @@
      </item>
     </layout>
    </item>
+   <item row="7" column="3" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_32">
+     <item>
+      <widget class="QCheckBox" name="macro_8_newline">
+       <property name="text">
+        <string>Newline</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro8_cr">
+       <property name="text">
+        <string>CR</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro8_lf">
+       <property name="text">
+        <string>LF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro8_crlf">
+       <property name="text">
+        <string>CRLF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_11">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
    <item row="8" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_9">
      <item>
@@ -341,6 +781,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="macro_9_name">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
@@ -348,10 +794,17 @@
      </item>
     </layout>
    </item>
-   <item row="8" column="1" colspan="2">
-    <widget class="QLineEdit" name="macro_9_content"/>
+   <item row="8" column="1">
+    <widget class="QLineEdit" name="macro_9_content">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
    </item>
-   <item row="8" column="3">
+   <item row="8" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_21">
      <item>
       <widget class="QRadioButton" name="macro_9_hex">
@@ -369,6 +822,54 @@
      </item>
     </layout>
    </item>
+   <item row="8" column="3" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_35">
+     <item>
+      <widget class="QCheckBox" name="macro_9_newline">
+       <property name="text">
+        <string>Newline</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro9_cr">
+       <property name="text">
+        <string>CR</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro9_lf">
+       <property name="text">
+        <string>LF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro9_crlf">
+       <property name="text">
+        <string>CRLF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_12">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
    <item row="9" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_11">
      <item>
@@ -380,6 +881,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="macro_10_name">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
@@ -387,10 +894,17 @@
      </item>
     </layout>
    </item>
-   <item row="9" column="1" colspan="2">
-    <widget class="QLineEdit" name="macro_10_content"/>
+   <item row="9" column="1">
+    <widget class="QLineEdit" name="macro_10_content">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
    </item>
-   <item row="9" column="3">
+   <item row="9" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_22">
      <item>
       <widget class="QRadioButton" name="macro_10_hex">
@@ -408,6 +922,54 @@
      </item>
     </layout>
    </item>
+   <item row="9" column="3" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_37">
+     <item>
+      <widget class="QCheckBox" name="macro_10_newline">
+       <property name="text">
+        <string>Newline</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro10_cr">
+       <property name="text">
+        <string>CR</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro10_lf">
+       <property name="text">
+        <string>LF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro10_crlf">
+       <property name="text">
+        <string>CRLF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_13">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
    <item row="10" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_10">
      <item>
@@ -419,6 +981,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="macro_11_name">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
@@ -426,10 +994,17 @@
      </item>
     </layout>
    </item>
-   <item row="10" column="1" colspan="2">
-    <widget class="QLineEdit" name="macro_11_content"/>
+   <item row="10" column="1">
+    <widget class="QLineEdit" name="macro_11_content">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
    </item>
-   <item row="10" column="3">
+   <item row="10" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_23">
      <item>
       <widget class="QRadioButton" name="macro_11_hex">
@@ -447,6 +1022,54 @@
      </item>
     </layout>
    </item>
+   <item row="10" column="3" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_34">
+     <item>
+      <widget class="QCheckBox" name="macro_11_newline">
+       <property name="text">
+        <string>Newline</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro11_cr">
+       <property name="text">
+        <string>CR</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro11_lf">
+       <property name="text">
+        <string>LF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro11_crlf">
+       <property name="text">
+        <string>CRLF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_14">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
    <item row="11" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_12">
      <item>
@@ -458,6 +1081,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="macro_12_name">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
@@ -465,10 +1094,17 @@
      </item>
     </layout>
    </item>
-   <item row="11" column="1" colspan="2">
-    <widget class="QLineEdit" name="macro_12_content"/>
+   <item row="11" column="1">
+    <widget class="QLineEdit" name="macro_12_content">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
    </item>
-   <item row="11" column="3">
+   <item row="11" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_24">
      <item>
       <widget class="QRadioButton" name="macro_12_hex">
@@ -486,7 +1122,55 @@
      </item>
     </layout>
    </item>
-   <item row="12" column="0" colspan="2">
+   <item row="11" column="3" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_36">
+     <item>
+      <widget class="QCheckBox" name="macro_12_newline">
+       <property name="text">
+        <string>Newline</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro12_cr">
+       <property name="text">
+        <string>CR</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro12_lf">
+       <property name="text">
+        <string>LF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro12_crlf">
+       <property name="text">
+        <string>CRLF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_15">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="12" column="0">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -499,12 +1183,86 @@
      </property>
     </spacer>
    </item>
-   <item row="12" column="2" colspan="2">
+   <item row="12" column="1" colspan="2">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>171</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="12" column="3">
+    <spacer name="horizontalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>190</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="12" column="4">
     <widget class="QDialogButtonBox" name="button_box">
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
+   </item>
+   <item row="0" column="3" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_26">
+     <item>
+      <widget class="QCheckBox" name="macro_1_newline">
+       <property name="text">
+        <string>Newline</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro1_cr">
+       <property name="text">
+        <string>CR</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro1_lf">
+       <property name="text">
+        <string>LF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="macro1_crlf">
+       <property name="text">
+        <string>CRLF</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
    </item>
   </layout>
   <zorder>macro_4_content</zorder>
@@ -521,6 +1279,8 @@
   <zorder>macro_12_content</zorder>
   <zorder>button_box</zorder>
   <zorder>horizontalSpacer</zorder>
+  <zorder>horizontalSpacer_2</zorder>
+  <zorder>horizontalSpacer_3</zorder>
  </widget>
  <tabstops>
   <tabstop>macro_1_name</tabstop>

@@ -528,7 +528,10 @@ void terminal_app::set_checked_radio(QButtonGroup *group,QString name)
 
 QString terminal_app::get_checked_radio(QButtonGroup *group)
 {
-	return group->checkedButton()->text();
+	if( group->checkedButton() )
+		return group->checkedButton()->text();
+	else 
+		return "";
 }
 
 void terminal_app::rx_data_available(void)
@@ -659,9 +662,22 @@ void terminal_app::press_macro_button(QString macro_name)
 		tx_char_type = TX_HEX;
 	else
 		tx_char_type = TX_ASCII;
-		
+	
+	
+	QString newline_str="";	
+	
+	if( this->settings->value(macro_name + "newline") == "true" )
+	{
+		if( this->settings->value(macro_name + "crlf") == "CR" )
+			newline_str = "\r";
+		else if( this->settings->value(macro_name + "crlf") == "LF" )
+			newline_str = "\n";
+		else if( this->settings->value(macro_name + "crlf") == "CRLF" )
+			newline_str = "\r\n";
+	}
+	
 	// try and validate the tx string and process any errors
-	switch( this->validate_and_send_tx_string( this->settings->value(macro_name + "content").toString() , tx_char_type ) )
+	switch( this->validate_and_send_tx_string( this->settings->value(macro_name + "content").toString() + newline_str , tx_char_type ) )
 	{
 		case TX_NO_ERROR:	
 			

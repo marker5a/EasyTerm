@@ -49,6 +49,18 @@ private:
 	QButtonGroup *macro_10_hex_ascii;
 	QButtonGroup *macro_11_hex_ascii;
 	QButtonGroup *macro_12_hex_ascii;
+	QButtonGroup *macro_1_crlf;
+	QButtonGroup *macro_2_crlf;
+	QButtonGroup *macro_3_crlf;
+	QButtonGroup *macro_4_crlf;
+	QButtonGroup *macro_5_crlf;
+	QButtonGroup *macro_6_crlf;
+	QButtonGroup *macro_7_crlf;
+	QButtonGroup *macro_8_crlf;
+	QButtonGroup *macro_9_crlf;
+	QButtonGroup *macro_10_crlf;
+	QButtonGroup *macro_11_crlf;
+	QButtonGroup *macro_12_crlf;
 	class terminal_app *parent;
 }; 
 
