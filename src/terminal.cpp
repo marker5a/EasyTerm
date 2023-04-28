@@ -41,15 +41,15 @@ void terminal_app::close_terminal_app()
 
 terminal_app::terminal_app(QApplication *parent)
 {
-    setupUi(this); 												// this sets up GUI
-    
-    // connect closing event of window to cleanup
-    connect(parent,SIGNAL(lastWindowClosed()),this,SLOT(close_terminal_app()));
-    
-    // setup version number in title
-    this->setWindowTitle(this->windowTitle() + QString(_VERSION_NUMBER));
-    
-    // initialize variables
+	setupUi(this); 												// this sets up GUI
+	
+	// connect closing event of window to cleanup
+	connect(parent,SIGNAL(lastWindowClosed()),this,SLOT(close_terminal_app()));
+	
+	// setup version number in title
+	this->setWindowTitle(this->windowTitle() + QString(_VERSION_NUMBER));
+	
+	// initialize variables
 	this->port = 0;	
 	this->comPortConnected = 0;
 	this->pending_receive_text_newline=false;	
@@ -212,7 +212,7 @@ void terminal_app::group_radio_buttons(void)
 	this->baud_rate_group->addButton(this->baud_115200_radio);
 	this->baud_rate_group->addButton(this->baud_2400_radio);
 	this->baud_rate_group->addButton(this->baud_128000_radio);
-	this->baud_rate_group->addButton(this->baud_38400_radio);    
+	this->baud_rate_group->addButton(this->baud_38400_radio);	
 	
 	// data bits group
 	this->data_bits_group = new QButtonGroup;
@@ -255,8 +255,8 @@ void terminal_app::group_radio_buttons(void)
 	connect(this->baud_rate_group	, SIGNAL(buttonClicked(int))	, 	this, SLOT(save_gui_settings()));	
 	connect(this->data_bits_group   , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
 	connect(this->stop_bits_group   , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
-	connect(this->parity_group	    , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
-	connect(this->hex_ascii_rx      , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
+	connect(this->parity_group		, SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
+	connect(this->hex_ascii_rx	  , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
 	connect(this->hex_ascii_tx		, SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
 	connect(this->newline_tx		, SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
 	connect(this->autoscroll_check 	, SIGNAL( stateChanged(int))	,	this, SLOT(save_gui_settings()));
@@ -269,7 +269,7 @@ void terminal_app::group_radio_buttons(void)
 void terminal_app::populate_com_port()
 {		
 	// clear the com port
-	this->com_port_combo->clear();    
+	this->com_port_combo->clear();	
 	
 	// grab the list and fill them in
 	QList<QSerialPortInfo> ports = QSerialPortInfo::availablePorts();
@@ -290,20 +290,20 @@ void terminal_app::populate_com_port()
 				ports[i].portName();
 			#endif
 		}
-    }
-    
-    // sort the list of com ports by name
-    com_port_names.sort();
-    
-    // iteratively insert into the com port combo box
-    for (int i = 0; i < com_port_names.size(); i++)
+	}
+	
+	// sort the list of com ports by name
+	com_port_names.sort();
+	
+	// iteratively insert into the com port combo box
+	for (int i = 0; i < com_port_names.size(); i++)
 		this->com_port_combo->addItem(com_port_names[i]);
-    
-    // try and set the com port last used
-    int com_port_index = this->com_port_combo->findText(this->settings->value("com_port").toString());
-    
-    // if the com port is found in the current menu, select it, otherwise ignore
-    if( com_port_index != -1 )
+	
+	// try and set the com port last used
+	int com_port_index = this->com_port_combo->findText(this->settings->value("com_port").toString());
+	
+	// if the com port is found in the current menu, select it, otherwise ignore
+	if( com_port_index != -1 )
 		this->com_port_combo->setCurrentIndex(com_port_index);	
 }
 
@@ -536,18 +536,24 @@ void terminal_app::rx_data_available(void)
 	QByteArray bytes;
 	
 	// get count of bytes available for reading
-    int rx_byte_count = this->port->bytesAvailable();
-    bytes.resize(rx_byte_count);
-    
-    // resize the byte array buffer
-    this->port->read(bytes.data(), bytes.size());
-    
-    // increment rx counter
-    this->status_bar->increment_rx_counter(rx_byte_count);
-    
-    // if request for newline in receive field, try and process it
-    if( this->pending_receive_text_newline )    
-    {
+	int rx_byte_count = this->port->bytesAvailable();
+	bytes.resize(rx_byte_count);
+	
+	// resize the byte array buffer
+	this->port->read(bytes.data(), bytes.size());
+	
+	// increment rx counter
+	this->status_bar->increment_rx_counter(rx_byte_count);
+	
+	QTextCursor cursor = this->receive_text->textCursor();
+	cursor.clearSelection();
+	cursor.movePosition(QTextCursor::End);
+	this->receive_text->setTextCursor(cursor);
+	
+	
+	// if request for newline in receive field, try and process it
+	if( this->pending_receive_text_newline )	
+	{
 		// clear the flag
 		this->pending_receive_text_newline = false;
 		
@@ -556,8 +562,8 @@ void terminal_app::rx_data_available(void)
 			this->receive_text->insertPlainText("\n");
 	}
 		
-    
-    // interpret incoming data as hex or ascii
+	
+	// interpret incoming data as hex or ascii
 	if( this->get_checked_radio(this->hex_ascii_rx) == "ASCII" )
 		this->receive_text->insertPlainText(bytes);
 	else
@@ -589,7 +595,7 @@ void terminal_app::toggle_com_port_fields(bool disable)
 	this->baud_115200_radio->setDisabled(disable);
 	this->baud_2400_radio->setDisabled(disable);
 	this->baud_128000_radio->setDisabled(disable);
-	this->baud_38400_radio->setDisabled(disable);    
+	this->baud_38400_radio->setDisabled(disable);	
 	this->data_bits_5_radio->setDisabled(disable);
 	this->data_bits_6_radio->setDisabled(disable);
 	this->data_bits_7_radio->setDisabled(disable);
