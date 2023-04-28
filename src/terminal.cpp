@@ -545,11 +545,11 @@ void terminal_app::rx_data_available(void)
 	// increment rx counter
 	this->status_bar->increment_rx_counter(rx_byte_count);
 	
+	// force cursor to end of textbox
 	QTextCursor cursor = this->receive_text->textCursor();
 	cursor.clearSelection();
 	cursor.movePosition(QTextCursor::End);
 	this->receive_text->setTextCursor(cursor);
-	
 	
 	// if request for newline in receive field, try and process it
 	if( this->pending_receive_text_newline )	
@@ -702,6 +702,12 @@ terminal_app::Tx_Error_Type terminal_app::validate_and_send_tx_string(QString tx
 	// if transmit string is empty, ignore and return warning
 	if( !tx_string.size() )
 		return terminal_app::EMPTY_TX_STRING;
+	
+	// force cursor to end of textbox
+	QTextCursor cursor = this->transmit_text->textCursor();
+	cursor.clearSelection();
+	cursor.movePosition(QTextCursor::End);
+	this->transmit_text->setTextCursor(cursor);
 		
 	// determine action based on hex or ascii
 		// hex
