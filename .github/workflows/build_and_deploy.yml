@@ -1,28 +1,28 @@
-# Publish GitHub workflow artifacts tutorial example
-name: Publish GitHub Actions Artifacts Example
+name: Compile Windows Exe
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
        
   archive-build-artifacts:
-    runs-on: marker5a/mxe:latest
+    runs-on: ubuntu-latest
+    container: marker5a/mxe:latest
     steps:
-
-      - name: Step 1 - Create a temporary artifact downloads folder
-        run: mkdir downloads
-        
-      - name: step 2 - Add artifacts to publish to the temp folder
-        run: |
-          cd downloads
-          echo 'alpha'    > alpha.html
-          echo 'bravo'    > bravo.html
-          echo 'charlie'  > charlie.html
-          cd ..
     
-      - name: Step 3 - Use the Upload Artifact GitHub Action
+      - name: Get that code
+        uses: actions/checkout@v3
+        
+      - name: Compile the code and strip it out
+        run: |
+          cmake .
+          make -j32
+          strip EasyTerm.exe
+          mkdir downloads
+          mv EasyTerm.exe downloads
+    
+      - name: Upload to artifacts
         uses: actions/upload-artifact@v2
         with: 
           name: assets-for-download
