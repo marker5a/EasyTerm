@@ -9,7 +9,7 @@ jobs:
        
   archive-build-artifacts:
     runs-on: ubuntu-latest
-    container: marker5a/mxe:latest
+#    container: marker5a/mxe:latest
     steps:
 
       - name: Step 1 - Create a temporary artifact downloads folder
@@ -17,12 +17,11 @@ jobs:
         
       - name: step 2 - Add artifacts to publish to the temp folder
         run: |
+          ls
           cd downloads
           echo 'alpha'    > alpha.html
           echo 'bravo'    > bravo.html
           echo 'charlie'  > charlie.html
-          cd ..
-          ls /root/mxe
     
       - name: Step 3 - Use the Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
