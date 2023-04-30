@@ -18,7 +18,7 @@ jobs:
       - name: step 2 - Add artifacts to publish to the temp folder
         run: |
           export PATH=/root/mxe/usr/bin:$PATH
-          cmake .
+          /root/mxe/usr/bin/i686-w64-mingw32.static-cmake .
           make -j32
           strip EasyTerm.exe
           mkdir downloads
