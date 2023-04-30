@@ -8,7 +8,8 @@ on:
 jobs:
        
   archive-build-artifacts:
-    runs-on: marker5a/mxe:latest
+    runs-on: ubuntu-latest
+    container: marker5a/mxe:latest
     steps:
 
       - name: Step 1 - Create a temporary artifact downloads folder
