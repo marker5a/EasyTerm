@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 #    container: marker5a/mxe:latest
     steps:
+    
+      - name: Get that code
+        uses: actions/checkout@v3
 
       - name: Step 1 - Create a temporary artifact downloads folder
         run: mkdir downloads
