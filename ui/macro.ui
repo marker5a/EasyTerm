@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>952</width>
-    <height>426</height>
+    <width>876</width>
+    <height>470</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <iconset>
     <normaloff>:/resources/logo.png</normaloff>:/resources/logo.png</iconset>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QGridLayout" name="gridLayout_13">
    <item row="0" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -66,6 +66,72 @@
        <property name="text">
         <string>ASCII</string>
        </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="3">
+    <layout class="QHBoxLayout" name="horizontalLayout_26">
+     <item>
+      <widget class="QCheckBox" name="macro_1_newline">
+       <property name="text">
+        <string>Newline</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QFrame" name="frame">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QGridLayout" name="gridLayout">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>5</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_38">
+          <item>
+           <widget class="QRadioButton" name="macro1_cr">
+            <property name="text">
+             <string>CR</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro1_lf">
+            <property name="text">
+             <string>LF</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro1_crlf">
+            <property name="text">
+             <string>CRLF</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
      </item>
     </layout>
@@ -122,7 +188,7 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="3" colspan="2">
+   <item row="1" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_27">
      <item>
       <widget class="QCheckBox" name="macro_2_newline">
@@ -132,41 +198,59 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="macro2_cr">
-       <property name="text">
-        <string>CR</string>
+      <widget class="QFrame" name="frame_3">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
        </property>
-       <property name="checked">
-        <bool>true</bool>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
        </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>5</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_39">
+          <item>
+           <widget class="QRadioButton" name="macro2_cr">
+            <property name="text">
+             <string>CR</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro2_lf">
+            <property name="text">
+             <string>LF</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro2_crlf">
+            <property name="text">
+             <string>CRLF</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro2_lf">
-       <property name="text">
-        <string>LF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro2_crlf">
-       <property name="text">
-        <string>CRLF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_5">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -222,7 +306,7 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="3" colspan="2">
+   <item row="2" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_28">
      <item>
       <widget class="QCheckBox" name="macro_3_newline">
@@ -232,41 +316,59 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="macro3_cr">
-       <property name="text">
-        <string>CR</string>
+      <widget class="QFrame" name="frame_4">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
        </property>
-       <property name="checked">
-        <bool>true</bool>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
        </property>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>5</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_40">
+          <item>
+           <widget class="QRadioButton" name="macro3_cr">
+            <property name="text">
+             <string>CR</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro3_lf">
+            <property name="text">
+             <string>LF</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro3_crlf">
+            <property name="text">
+             <string>CRLF</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro3_lf">
-       <property name="text">
-        <string>LF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro3_crlf">
-       <property name="text">
-        <string>CRLF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_6">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -322,7 +424,7 @@
      </item>
     </layout>
    </item>
-   <item row="3" column="3" colspan="2">
+   <item row="3" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_29">
      <item>
       <widget class="QCheckBox" name="macro_4_newline">
@@ -332,41 +434,59 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="macro4_cr">
-       <property name="text">
-        <string>CR</string>
+      <widget class="QFrame" name="frame_5">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
        </property>
-       <property name="checked">
-        <bool>true</bool>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
        </property>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>5</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_41">
+          <item>
+           <widget class="QRadioButton" name="macro4_cr">
+            <property name="text">
+             <string>CR</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro4_lf">
+            <property name="text">
+             <string>LF</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro4_crlf">
+            <property name="text">
+             <string>CRLF</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro4_lf">
-       <property name="text">
-        <string>LF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro4_crlf">
-       <property name="text">
-        <string>CRLF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_7">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -422,7 +542,7 @@
      </item>
     </layout>
    </item>
-   <item row="4" column="3" colspan="2">
+   <item row="4" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_31">
      <item>
       <widget class="QCheckBox" name="macro_5_newline">
@@ -432,41 +552,59 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="macro5_cr">
-       <property name="text">
-        <string>CR</string>
+      <widget class="QFrame" name="frame_6">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
        </property>
-       <property name="checked">
-        <bool>true</bool>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
        </property>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>5</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_42">
+          <item>
+           <widget class="QRadioButton" name="macro5_cr">
+            <property name="text">
+             <string>CR</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro5_lf">
+            <property name="text">
+             <string>LF</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro5_crlf">
+            <property name="text">
+             <string>CRLF</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro5_lf">
-       <property name="text">
-        <string>LF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro5_crlf">
-       <property name="text">
-        <string>CRLF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_8">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -522,7 +660,7 @@
      </item>
     </layout>
    </item>
-   <item row="5" column="3" colspan="2">
+   <item row="5" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_33">
      <item>
       <widget class="QCheckBox" name="macro_6_newline">
@@ -532,41 +670,59 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="macro6_cr">
-       <property name="text">
-        <string>CR</string>
+      <widget class="QFrame" name="frame_7">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
        </property>
-       <property name="checked">
-        <bool>true</bool>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
        </property>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>5</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_43">
+          <item>
+           <widget class="QRadioButton" name="macro6_cr">
+            <property name="text">
+             <string>CR</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro6_lf">
+            <property name="text">
+             <string>LF</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro6_crlf">
+            <property name="text">
+             <string>CRLF</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro6_lf">
-       <property name="text">
-        <string>LF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro6_crlf">
-       <property name="text">
-        <string>CRLF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_9">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -622,7 +778,7 @@
      </item>
     </layout>
    </item>
-   <item row="6" column="3" colspan="2">
+   <item row="6" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_30">
      <item>
       <widget class="QCheckBox" name="macro_7_newline">
@@ -632,41 +788,59 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="macro7_cr">
-       <property name="text">
-        <string>CR</string>
+      <widget class="QFrame" name="frame_8">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
        </property>
-       <property name="checked">
-        <bool>true</bool>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
        </property>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>5</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_44">
+          <item>
+           <widget class="QRadioButton" name="macro7_cr">
+            <property name="text">
+             <string>CR</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro7_lf">
+            <property name="text">
+             <string>LF</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro7_crlf">
+            <property name="text">
+             <string>CRLF</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro7_lf">
-       <property name="text">
-        <string>LF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro7_crlf">
-       <property name="text">
-        <string>CRLF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_10">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -722,7 +896,7 @@
      </item>
     </layout>
    </item>
-   <item row="7" column="3" colspan="2">
+   <item row="7" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_32">
      <item>
       <widget class="QCheckBox" name="macro_8_newline">
@@ -732,41 +906,59 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="macro8_cr">
-       <property name="text">
-        <string>CR</string>
+      <widget class="QFrame" name="frame_9">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
        </property>
-       <property name="checked">
-        <bool>true</bool>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
        </property>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>5</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_45">
+          <item>
+           <widget class="QRadioButton" name="macro8_cr">
+            <property name="text">
+             <string>CR</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro8_lf">
+            <property name="text">
+             <string>LF</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro8_crlf">
+            <property name="text">
+             <string>CRLF</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro8_lf">
-       <property name="text">
-        <string>LF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro8_crlf">
-       <property name="text">
-        <string>CRLF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_11">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -822,7 +1014,7 @@
      </item>
     </layout>
    </item>
-   <item row="8" column="3" colspan="2">
+   <item row="8" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_35">
      <item>
       <widget class="QCheckBox" name="macro_9_newline">
@@ -832,41 +1024,59 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="macro9_cr">
-       <property name="text">
-        <string>CR</string>
+      <widget class="QFrame" name="frame_10">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
        </property>
-       <property name="checked">
-        <bool>true</bool>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
        </property>
+       <layout class="QGridLayout" name="gridLayout_9">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>5</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_46">
+          <item>
+           <widget class="QRadioButton" name="macro9_cr">
+            <property name="text">
+             <string>CR</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro9_lf">
+            <property name="text">
+             <string>LF</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro9_crlf">
+            <property name="text">
+             <string>CRLF</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro9_lf">
-       <property name="text">
-        <string>LF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro9_crlf">
-       <property name="text">
-        <string>CRLF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_12">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -922,7 +1132,7 @@
      </item>
     </layout>
    </item>
-   <item row="9" column="3" colspan="2">
+   <item row="9" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_37">
      <item>
       <widget class="QCheckBox" name="macro_10_newline">
@@ -932,41 +1142,59 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="macro10_cr">
-       <property name="text">
-        <string>CR</string>
+      <widget class="QFrame" name="frame_11">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
        </property>
-       <property name="checked">
-        <bool>true</bool>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
        </property>
+       <layout class="QGridLayout" name="gridLayout_10">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>5</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_47">
+          <item>
+           <widget class="QRadioButton" name="macro10_cr">
+            <property name="text">
+             <string>CR</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro10_lf">
+            <property name="text">
+             <string>LF</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro10_crlf">
+            <property name="text">
+             <string>CRLF</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro10_lf">
-       <property name="text">
-        <string>LF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro10_crlf">
-       <property name="text">
-        <string>CRLF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_13">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -1022,7 +1250,7 @@
      </item>
     </layout>
    </item>
-   <item row="10" column="3" colspan="2">
+   <item row="10" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_34">
      <item>
       <widget class="QCheckBox" name="macro_11_newline">
@@ -1032,41 +1260,59 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="macro11_cr">
-       <property name="text">
-        <string>CR</string>
+      <widget class="QFrame" name="frame_12">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
        </property>
-       <property name="checked">
-        <bool>true</bool>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
        </property>
+       <layout class="QGridLayout" name="gridLayout_11">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>5</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_48">
+          <item>
+           <widget class="QRadioButton" name="macro11_cr">
+            <property name="text">
+             <string>CR</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro11_lf">
+            <property name="text">
+             <string>LF</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro11_crlf">
+            <property name="text">
+             <string>CRLF</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro11_lf">
-       <property name="text">
-        <string>LF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro11_crlf">
-       <property name="text">
-        <string>CRLF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_14">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -1122,7 +1368,7 @@
      </item>
     </layout>
    </item>
-   <item row="11" column="3" colspan="2">
+   <item row="11" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_36">
      <item>
       <widget class="QCheckBox" name="macro_12_newline">
@@ -1132,137 +1378,68 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="macro12_cr">
-       <property name="text">
-        <string>CR</string>
+      <widget class="QFrame" name="frame_13">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
        </property>
-       <property name="checked">
-        <bool>true</bool>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
        </property>
+       <layout class="QGridLayout" name="gridLayout_12">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>5</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_49">
+          <item>
+           <widget class="QRadioButton" name="macro12_cr">
+            <property name="text">
+             <string>CR</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro12_lf">
+            <property name="text">
+             <string>LF</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="macro12_crlf">
+            <property name="text">
+             <string>CRLF</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro12_lf">
-       <property name="text">
-        <string>LF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro12_crlf">
-       <property name="text">
-        <string>CRLF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_15">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
-   <item row="12" column="0">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>199</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="12" column="1" colspan="2">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>171</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
    <item row="12" column="3">
-    <spacer name="horizontalSpacer_3">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>190</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="12" column="4">
     <widget class="QDialogButtonBox" name="button_box">
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
-   </item>
-   <item row="0" column="3" colspan="2">
-    <layout class="QHBoxLayout" name="horizontalLayout_26">
-     <item>
-      <widget class="QCheckBox" name="macro_1_newline">
-       <property name="text">
-        <string>Newline</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro1_cr">
-       <property name="text">
-        <string>CR</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro1_lf">
-       <property name="text">
-        <string>LF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="macro1_crlf">
-       <property name="text">
-        <string>CRLF</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_4">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
    </item>
   </layout>
   <zorder>macro_4_content</zorder>
@@ -1278,9 +1455,6 @@
   <zorder>macro_11_content</zorder>
   <zorder>macro_12_content</zorder>
   <zorder>button_box</zorder>
-  <zorder>horizontalSpacer</zorder>
-  <zorder>horizontalSpacer_2</zorder>
-  <zorder>horizontalSpacer_3</zorder>
  </widget>
  <tabstops>
   <tabstop>macro_1_name</tabstop>
