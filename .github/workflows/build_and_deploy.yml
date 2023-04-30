@@ -22,6 +22,7 @@ jobs:
           echo 'bravo'    > bravo.html
           echo 'charlie'  > charlie.html
           cd ..
+          ls /root/mxe
     
       - name: Step 3 - Use the Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
