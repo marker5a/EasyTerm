@@ -173,6 +173,7 @@ void terminal_app::load_settings()
 		set_checked_radio(this->hex_ascii_tx,this->settings->value("hex_ascii_tx").toString());
 		set_checked_radio(this->newline_tx,this->settings->value("newline_tx").toString());
 		this->autoscroll_check->setChecked(this->settings->value("autoscroll").toBool());
+                this->newline_checkbox->setChecked(this->settings->value("newline_tx_enabled").toBool());
 		
 		// update the macro names
 		this->m1_button->setText(this->settings->value("macro_1_name").toString());
@@ -260,7 +261,9 @@ void terminal_app::group_radio_buttons(void)
 	connect(this->hex_ascii_tx		, SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
 	connect(this->newline_tx		, SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
 	connect(this->autoscroll_check 	, SIGNAL( stateChanged(int))	,	this, SLOT(save_gui_settings()));
-	
+	connect(this->newline_checkbox	, SIGNAL( stateChanged(int))    ,       this, SLOT(save_gui_settings()));	
+
+
 	// group up the radio buttons in the macro editor
 	this->editor->group_radio_buttons();
 	
@@ -833,6 +836,7 @@ void terminal_app::save_gui_settings()
 	this->settings->setValue("hex_ascii_tx" , this->get_checked_radio(this->hex_ascii_tx));
 	this->settings->setValue("newline_tx" , this->get_checked_radio(this->newline_tx));
 	this->settings->setValue("autoscroll"	, this->autoscroll_check->isChecked() );
+	this->settings->setValue("newline_tx_enabled"	,	this->newline_checkbox->isChecked() );
 
 	this->settings->sync();
 }
