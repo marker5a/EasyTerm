@@ -20,7 +20,7 @@ qt5_wrap_ui(UI_HEADERS ui/terminal.ui ui/macro.ui ui/about.ui)
 qt5_add_resources(UI_RESOURCES resources.qrc)
 
 # Tell CMake to create the helloworld executable
-add_executable(EasyTerm src/main.cpp src/terminal.cpp src/macro_editor.cpp src/status_bar.cpp src/about_dialog.cpp icon.rc ${UI_HEADERS} ${UI_RESOURCES})
+add_executable(EasyTerm WIN32 src/main.cpp src/terminal.cpp src/macro_editor.cpp src/status_bar.cpp src/about_dialog.cpp icon.rc ${UI_HEADERS} ${UI_RESOURCES})
 set(CMAKE_BUILD_TYPE "RELEASE")
 
 # Use the Widgets module from Qt 5.
