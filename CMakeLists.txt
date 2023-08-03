@@ -26,3 +26,6 @@ set(CMAKE_BUILD_TYPE "RELEASE")
 # Use the Widgets module from Qt 5.
 target_link_libraries(EasyTerm Qt5::Widgets Qt5::SerialPort ${QT_QTMAIN_LIBRARY} ${QT_LIBRARIES})
 
+
+install(TARGETS EasyTerm
+        RUNTIME DESTINATION /usr/bin)
