@@ -32,10 +32,6 @@ jobs:
         dpkg-buildpackage -us -uc
         cd ..
 
-    - name: Move Package to Artifacts
-      run: |
-        mv *.deb ..
-
     - name: Upload Debian Package
       uses: actions/upload-artifact@v2
       with:
