@@ -1,0 +1,12 @@
+Source: easyterm
+Section: devel
+Priority: optional
+Maintainer: Chris Hamilton <marker5a@gmail.com>
+Build-Depends: debhelper (>= 12)
+Standards-Version: 4.5.0
+Homepage: https://github.com/marker5a/easyterm
+
+Package: easyterm
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Easyterm
