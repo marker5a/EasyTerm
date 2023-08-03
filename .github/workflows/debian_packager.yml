@@ -29,7 +29,6 @@ jobs:
     - name: Create Debian Package
       run: |
         cd build
-        cd debian
         dpkg-buildpackage -us -uc
         cd ..
 
