@@ -1,0 +1,29 @@
+name: Compile Windows Exe
+
+jobs:
+       
+  build_exe:
+    runs-on: ubuntu-latest
+    container: marker5a/mxe:latest
+    steps:
+    
+      - name: Get that code
+        uses: actions/checkout@v3
+        
+      - name: Compile the code and strip it out
+        run: |
+          cmake .
+          make -j32
+
+  build_linux_binary:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Get that code
+        uses: actions/checkout@v3
+
+      - name: Compile the code and strip it out
+        run: |
+          apt-get update -y && apt-get install gcc make cmake
+          cmake .
+          make -j32
