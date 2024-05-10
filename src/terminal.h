@@ -56,7 +56,8 @@ public:
     void connect_widgets();
     void group_radio_buttons(void);
     void toggle_com_port_fields(bool disable);
-    void load_settings();
+    
+    void load_settings(void);
     void set_checked_radio(QButtonGroup *group,QString name);
    	void update_macro_button_names(void);
    	void write_to_port(QByteArray array);
@@ -74,6 +75,7 @@ public:
 public slots:
 	void connect_serial_port(void);
 	void rx_data_available(void);
+	void check_to_disable_custom_baud(void);
 	void populate_com_port(void);
 	void press_transmit_button(void);
 	void open_macro_editor(void);

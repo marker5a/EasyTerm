@@ -165,6 +165,7 @@ void terminal_app::load_settings()
 		
 		qDebug() << "Loading saved settings";
 		
+		this->baud_custom_text->setText(this->settings->value("baud_rate_custom").toString());
 		set_checked_radio(this->baud_rate_group,this->settings->value("baud_rate").toString());
 		set_checked_radio(this->data_bits_group,this->settings->value("data_bits").toString());
 		set_checked_radio(this->stop_bits_group,this->settings->value("stop_bits").toString());
@@ -191,12 +192,19 @@ void terminal_app::load_settings()
 		
 	}
 	
+	check_to_disable_custom_baud();
+	
 	// load the macro editor settings
 	this->editor->load_settings();
 	
 	return;
 }
 
+void terminal_app::check_to_disable_custom_baud(void)
+{
+	this->baud_custom_text->setDisabled(get_checked_radio(this->baud_rate_group) != "custom");
+		
+}
 void terminal_app::group_radio_buttons(void)
 {
 	// baud rate group
@@ -214,6 +222,7 @@ void terminal_app::group_radio_buttons(void)
 	this->baud_rate_group->addButton(this->baud_2400_radio);
 	this->baud_rate_group->addButton(this->baud_128000_radio);
 	this->baud_rate_group->addButton(this->baud_38400_radio);	
+	this->baud_rate_group->addButton(this->baud_custom_radio);
 	
 	// data bits group
 	this->data_bits_group = new QButtonGroup;
@@ -253,7 +262,9 @@ void terminal_app::group_radio_buttons(void)
 	this->newline_tx->addButton(this->lf_radio);
 	
 	// connect radio buttons to updating settings
+	connect(this->baud_custom_text	, SIGNAL(editingFinished())	, 	this, SLOT(save_gui_settings()));	
 	connect(this->baud_rate_group	, SIGNAL(buttonClicked(int))	, 	this, SLOT(save_gui_settings()));	
+	connect(this->baud_rate_group	, SIGNAL(buttonClicked(int))	, 	this, SLOT(check_to_disable_custom_baud()));	
 	connect(this->data_bits_group   , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
 	connect(this->stop_bits_group   , SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
 	connect(this->parity_group		, SIGNAL( buttonClicked(int))	, 	this, SLOT(save_gui_settings()));
@@ -413,8 +424,10 @@ void terminal_app::connect_serial_port()
 			return;
 		
 		// configure the port
-		
-		this->port->setBaudRate(get_checked_radio(this->baud_rate_group).toInt());
+		if( get_checked_radio(this->baud_rate_group) == "custom" )
+			this->port->setBaudRate(this->baud_custom_text->text().toInt());
+		else
+			this->port->setBaudRate(get_checked_radio(this->baud_rate_group).toInt());
 		this->port->setFlowControl(QSerialPort::NoFlowControl);
 		
 		// get the acutal enum for parity
@@ -602,6 +615,8 @@ void terminal_app::toggle_com_port_fields(bool disable)
 	this->baud_2400_radio->setDisabled(disable);
 	this->baud_128000_radio->setDisabled(disable);
 	this->baud_38400_radio->setDisabled(disable);	
+	this->baud_custom_radio->setDisabled(disable);	
+	this->baud_custom_text->setDisabled(disable);	
 	this->data_bits_5_radio->setDisabled(disable);
 	this->data_bits_6_radio->setDisabled(disable);
 	this->data_bits_7_radio->setDisabled(disable);
@@ -827,6 +842,7 @@ void terminal_app::update_macro_button_names(void)
 void terminal_app::save_gui_settings()
 {
 	
+	this->settings->setValue("baud_rate_custom" 	, this->baud_custom_text->text());
 	this->settings->setValue("baud_rate" 	, this->get_checked_radio(this->baud_rate_group));
 	this->settings->setValue("data_bits" 	, this->get_checked_radio(this->data_bits_group));
 	this->settings->setValue("stop_bits" 	, this->get_checked_radio(this->stop_bits_group));
