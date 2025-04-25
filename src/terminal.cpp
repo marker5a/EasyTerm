@@ -201,6 +201,7 @@ void terminal_app::group_radio_buttons(void)
 {
 	// baud rate group
 	this->baud_rate_group = new QButtonGroup;
+	this->baud_rate_group->addButton(this->baud_1000000_radio);
 	this->baud_rate_group->addButton(this->baud_256000_radio);
 	this->baud_rate_group->addButton(this->baud_9600_radio);
 	this->baud_rate_group->addButton(this->baud_56000_radio);
@@ -589,6 +590,7 @@ void terminal_app::toggle_com_port_fields(bool disable)
 	// toggle fields
 	this->rescan_button->setDisabled(disable);
 	this->com_port_combo->setDisabled(disable);
+	this->baud_1000000_radio->setDisabled(disable);
 	this->baud_256000_radio->setDisabled(disable);
 	this->baud_9600_radio->setDisabled(disable);
 	this->baud_56000_radio->setDisabled(disable);
