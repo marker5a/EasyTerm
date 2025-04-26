@@ -8,7 +8,7 @@ jobs:
   build:
     name: Build in MXE Docker
     runs-on: ubuntu-latest
-    container: marker5a/mxe-docker:latest
+    container: marker5a/mxe:latest
     outputs:
       artifact-path: ${{ steps.export.outputs.artifact-path }}
     steps:
