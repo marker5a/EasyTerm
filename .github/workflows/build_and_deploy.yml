@@ -7,7 +7,7 @@ jobs:
        
   archive-build-artifacts:
     runs-on: ubuntu-latest
-    container: marker5a/mxe:latest
+    container: marker5a/mxe-docker:latest
     steps:
     
       - name: Get that code
