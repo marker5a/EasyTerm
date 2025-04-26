@@ -59,11 +59,11 @@ public:
     void load_settings();
     void set_checked_radio(QButtonGroup *group,QString name);
    	void update_macro_button_names(void);
-   	void write_to_port(QByteArray array);
+   	void write_to_port(QByteArray array, bool from_macro);
    	int hex_qstring_to_hex_array(QString hex_qstring,QByteArray *result);
    	QByteArray array_to_hex_array(QByteArray array_in);
    	void setup_keybindings(void);
-   	Tx_Error_Type validate_and_send_tx_string(QString tx_string,Tx_Char_Type type);
+   	Tx_Error_Type validate_and_send_tx_string(QString tx_string,Tx_Char_Type type , bool from_macro);
    	
     QString get_checked_radio(QButtonGroup *);
    	QSettings *settings;
