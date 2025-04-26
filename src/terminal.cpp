@@ -633,7 +633,7 @@ void terminal_app::press_transmit_button()
 		tx_char_type = TX_ASCII;
 		
 	// try and validate the tx string and process any errors
-	switch( this->validate_and_send_tx_string( this->transmit_field->text() , tx_char_type ) , false )
+	switch( this->validate_and_send_tx_string( this->transmit_field->text() , tx_char_type , false ) )
 	{
 		case TX_NO_ERROR:	
 			
@@ -685,7 +685,7 @@ void terminal_app::press_macro_button(QString macro_name)
 	}
 	
 	// try and validate the tx string and process any errors
-	switch( this->validate_and_send_tx_string( this->settings->value(macro_name + "content").toString() + newline_str , tx_char_type ) , true)
+	switch( this->validate_and_send_tx_string( this->settings->value(macro_name + "content").toString() + newline_str , tx_char_type , true ) )
 	{
 		case TX_NO_ERROR:	
 			
