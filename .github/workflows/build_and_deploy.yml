@@ -4,12 +4,14 @@ on:
   push:
 
 jobs:
-       
-  archive-build-artifacts:
+
+  build:
+    name: Build in MXE Docker
     runs-on: ubuntu-latest
     container: marker5a/mxe-docker:latest
+    outputs:
+      artifact-path: ${{ steps.export.outputs.artifact-path }}
     steps:
-    
       - name: Get that code
         uses: actions/checkout@v3
         
@@ -18,11 +20,25 @@ jobs:
           cmake .
           make -j32
           strip EasyTerm.exe
-          mkdir downloads
-          mv EasyTerm.exe downloads
-    
+          mkdir -p /tmp/artifacts
+          mv EasyTerm.exe /tmp/artifacts/EasyTerm.exe
+
+      - name: Export artifact path
+        id: export
+        run: echo "artifact-path=/tmp/artifacts" >> $GITHUB_OUTPUT
+
+  upload:
+    name: Upload Artifact
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download artifact from build container
+        run: |
+          mkdir -p build_artifacts
+          cp -r /tmp/artifacts/* build_artifacts/
+
       - name: Upload to artifacts
-        uses: actions/upload-artifact@v2
-        with: 
+        uses: actions/upload-artifact@v4
+        with:
           name: assets-for-download
-          path: downloads
+          path: build_artifacts
