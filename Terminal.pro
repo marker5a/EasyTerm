@@ -8,6 +8,7 @@ QT += serialport
 RC_FILE = icon.rc
 TARGET = EasyTerm
 CONFIG += Release
+CONFIG += windows
 
 target.path = /usr/local/bin
 target.files = release/EasyTerm

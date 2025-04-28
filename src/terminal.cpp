@@ -201,6 +201,7 @@ void terminal_app::group_radio_buttons(void)
 {
 	// baud rate group
 	this->baud_rate_group = new QButtonGroup;
+	this->baud_rate_group->addButton(this->baud_1000000_radio);
 	this->baud_rate_group->addButton(this->baud_256000_radio);
 	this->baud_rate_group->addButton(this->baud_9600_radio);
 	this->baud_rate_group->addButton(this->baud_56000_radio);
@@ -491,18 +492,21 @@ void terminal_app::connect_serial_port()
 	this->connect_button->setText(this->comPortConnected?"Disconnect":"Connect");
 }
 
-void terminal_app::write_to_port(QByteArray array)
+void terminal_app::write_to_port(QByteArray array , bool from_macro)
 {
 	
 	// append cr and lf if indicated by gui
 	if( this->newline_checkbox->checkState() == Qt::Checked )
 	{
-		if( get_checked_radio(this->newline_tx) == "CR+LF" )
-			array.append("\r\n");
-		else if( get_checked_radio(this->newline_tx) == "CR" )
-			array.append("\r");
-		else if( get_checked_radio(this->newline_tx) == "LF" )
-			array.append("\n");
+		if( from_macro == false )
+		{
+			if( get_checked_radio(this->newline_tx) == "CR+LF" )
+				array.append("\r\n");
+			else if( get_checked_radio(this->newline_tx) == "CR" )
+				array.append("\r");
+			else if( get_checked_radio(this->newline_tx) == "LF" )
+				array.append("\n");
+		}
 	}
 	
 	// only allow sending when com port is connected
@@ -589,6 +593,7 @@ void terminal_app::toggle_com_port_fields(bool disable)
 	// toggle fields
 	this->rescan_button->setDisabled(disable);
 	this->com_port_combo->setDisabled(disable);
+	this->baud_1000000_radio->setDisabled(disable);
 	this->baud_256000_radio->setDisabled(disable);
 	this->baud_9600_radio->setDisabled(disable);
 	this->baud_56000_radio->setDisabled(disable);
@@ -628,7 +633,7 @@ void terminal_app::press_transmit_button()
 		tx_char_type = TX_ASCII;
 		
 	// try and validate the tx string and process any errors
-	switch( this->validate_and_send_tx_string( this->transmit_field->text() , tx_char_type ) )
+	switch( this->validate_and_send_tx_string( this->transmit_field->text() , tx_char_type , false ) )
 	{
 		case TX_NO_ERROR:	
 			
@@ -680,7 +685,7 @@ void terminal_app::press_macro_button(QString macro_name)
 	}
 	
 	// try and validate the tx string and process any errors
-	switch( this->validate_and_send_tx_string( this->settings->value(macro_name + "content").toString() + newline_str , tx_char_type ) )
+	switch( this->validate_and_send_tx_string( this->settings->value(macro_name + "content").toString() + newline_str , tx_char_type , true ) )
 	{
 		case TX_NO_ERROR:	
 			
@@ -709,7 +714,7 @@ void terminal_app::press_macro_button(QString macro_name)
 	}	
 }
 
-terminal_app::Tx_Error_Type terminal_app::validate_and_send_tx_string(QString tx_string,terminal_app::Tx_Char_Type tx_char_type)
+terminal_app::Tx_Error_Type terminal_app::validate_and_send_tx_string(QString tx_string,terminal_app::Tx_Char_Type tx_char_type , bool from_macro)
 {
 	QByteArray tx_array;
 	int hex_string_good=1;
@@ -761,7 +766,7 @@ terminal_app::Tx_Error_Type terminal_app::validate_and_send_tx_string(QString tx
 
 	
 	// write it out on the serial port and clear the error
-	this->write_to_port(tx_array);
+	this->write_to_port(tx_array,from_macro);
 	
 	// cleanly exit
 	return TX_NO_ERROR;

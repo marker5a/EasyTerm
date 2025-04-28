@@ -2,15 +2,14 @@ name: Compile Windows Exe
 
 on:
   push:
-    branches: [ master ]
 
 jobs:
-       
-  archive-build-artifacts:
+
+  build:
+    name: Build in MXE Docker
     runs-on: ubuntu-latest
     container: marker5a/mxe:latest
     steps:
-    
       - name: Get that code
         uses: actions/checkout@v3
         
@@ -19,11 +18,28 @@ jobs:
           cmake .
           make -j32
           strip EasyTerm.exe
-          mkdir downloads
-          mv EasyTerm.exe downloads
-    
-      - name: Upload to artifacts
-        uses: actions/upload-artifact@v2
-        with: 
-          name: assets-for-download
+          mkdir -p downloads
+          mv EasyTerm.exe downloads/
+
+      - name: Upload build output as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: easyterm-exe
           path: downloads
+
+  upload:
+    name: Upload Artifact to GitHub
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: easyterm-exe
+          path: build_artifacts
+
+      - name: Re-upload for GitHub Downloads (or use as needed)
+        uses: actions/upload-artifact@v4
+        with:
+          name: assets-for-download
+          path: build_artifacts
