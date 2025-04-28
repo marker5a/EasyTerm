@@ -28,7 +28,7 @@
 #include "about_dialog.h"
 #include "status_bar.h"
 
-#define _VERSION_NUMBER		"0.9.2"
+#define _VERSION_NUMBER		"0.9.3"
 
 class terminal_app : public QMainWindow, public Ui::EasyTerm
 {
